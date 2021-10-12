@@ -60,33 +60,36 @@ function App() {
 //Handlers
 
 
-//
+// Submit PLATO OG
+    function SubmitPlato(e) {
+      e.preventDefault();
+      // e.className = "butPurp"
+      newClassPlato('butPurp');
+      newClassOG('but');
+      var Plato = 'Plato'
+      return console.log(Plato);
+    };
 
-function SubmitPlato(e) {
-  e.preventDefault();
-  // e.className = "butPurp"
-  newClassPlato('butPurp');
-  newClassOG('but');
-  var Plato = 'Plato'
-  return console.log(Plato);
-};
-
-function SubmitOG(e) {
-  e.preventDefault();
-  newClassPlato('but');
-  newClassOG('butPurp');
-  var SG = 'SG'
-  return console.log(SG);
-};
-//
+    function SubmitOG(e) {
+      e.preventDefault();
+      newClassPlato('but');
+      newClassOG('butPurp');
+      var SG = 'SG'
+      return console.log(SG);
+    };
+// Submit PLATO OG
 
 
-//Submit
+
+
+//Handle Submit
     function handleSubmit(e){
       e.preventDefault();
-      setIbu('volume= ' + volume + ' plato =  ' + plato);
-    }
-//Submit
+      if(!volume.trim() || !plato.trim()){
+        setIbu('Введите поля корректно');
+      } else setIbu('volume= ' + volume + ' plato =  ' + plato);
+    };
+//Handle Submit
 
 
 
@@ -105,8 +108,9 @@ function SubmitOG(e) {
               <form onSubmit={handleSubmit}>
                 <LI/><H1 className="h1styleBlack" textContent="Введите параметры сусла"/>
                 <LI/><input name="volume" placeholder="Введите объем сусла, л" className="inPut inPut-design" type="text" value={volume} onChange={e=>volumeHandler(e)}/>
-                <LI/><input name="plato" placeholder="Введите плотность сусла, plato" className="inPut inPut-design" type="text" value={plato} onChange={e=>platoHandler(e)}/><button className={butPlato} onClick={SubmitPlato} type="radio">Plato</button>
-                <button className={butOG} onClick={SubmitOG} type="radio">SG</button>
+                <LI/><input name="plato" placeholder="Введите плотность сусла" className="inPut inPut-design PlatoSG" type="text" value={plato} onChange={e=>platoHandler(e)}/>
+                  <button className={butPlato} onClick={SubmitPlato} type="radio">Plato</button>
+                  <button className={butOG} onClick={SubmitOG} type="radio">SG</button>
                 <LI/><button className="inPut button1" id="buttonNEXT" type="submit">Посчитать IBU</button>  
               </form>
               <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibu} onChange={ibuHandler} />
