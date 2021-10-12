@@ -1,17 +1,63 @@
-import React from "react";
+import React,{useState} from "react";
 import LI from "./components/LI";
 import H1 from "./components/H1";
-import Input from "./components/Input";
+
 
 
 function App() {
+  
+  const [volume, setVolume] = useState("");
+  const [plato, setPlato] = useState("");
+  const [ibu, setIbu] = useState("");
 
-  function handlerSubmit(e){
-    e.preventDefault();
 
-  }
+//Контроль состояния инпута если был или не был осуществен в него вход: 
+    // const blurHandler = (e) => {
+    //   switch (e.target.name) {
+    //     case "volume": 
+    //     console.log("volume");
+    //     break //?
+    //     case "plato": 
+    //     console.log('plato');
+    //     break //?
+    //   };
+    // };
+// Через метод swith по атрибуту name в input определяем из какого именно input был выполнен выход.
+// Для активации расскоментировать и в input добавить  onBlur={e => blurHandler(e)}
 
 
+
+
+//Handlers. Ослеживание состояния ввода value для input
+    const volumeHandler = (e) => {
+      setVolume(e.target.value);
+      console.log(e.target.value);
+      // if (!volume.trim()){
+      //   console.log('некорректное поле');// можно создать состояние ошибки setlavueError
+      // } else console.log('корректное поле');
+    };
+
+    const platoHandler = (e) => {setPlato(e.target.value); console.log(e.target.value);};
+    function ibuHandler () {};
+//Handlers
+
+
+
+
+
+
+//Submit
+    function handleSubmit(e){
+      e.preventDefault();
+      setIbu('volume= ' + volume + ' plato =  ' + plato);
+    }
+//Submit
+
+
+
+
+
+//
   return (
   <div>
     <header className="navbarStyle">
@@ -21,13 +67,13 @@ function App() {
     <div className="frame">
         <div className="calculate-frame">
             <ul className="UL" id="ulFRAME">
-              <form onSubmit={handlerSubmit}>
+              <form onSubmit={handleSubmit}>
                 <LI/><H1 className="h1styleBlack" textContent="Введите параметры сусла"/>
-                <LI/><Input placeholder="Введите объем сусла, л" className="inPut inPut-design" type="text" id="input_V" />
-                <LI/>
-                    <button className="inPut button1" id="buttonNEXT" type="submit">Посчитать IBU</button>  
+                <LI/><input name="volume" placeholder="Введите объем сусла, л" className="inPut inPut-design" type="text" value={volume} onChange={e=>volumeHandler(e)}/>
+                <LI/><input name="plato" placeholder="Введите плотность сусла, plato" className="inPut inPut-design" type="text" value={plato} onChange={e=>platoHandler(e)}/>
+                <LI/><button className="inPut button1" id="buttonNEXT" type="submit">Посчитать IBU</button>  
               </form>
-              <LI/><input placeholder="IBU" className="inPut inPut-design"/>
+              <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibu} onChange={ibuHandler} />
             </ul>
         </div>
     </div>
@@ -36,18 +82,3 @@ function App() {
     
 
 export default App;
-
-
-
-// function handleSubmit(e) {
-//   e.preventDefault();//preventDefault - например при нажатии на флажок он появляется, а этот метод предотвращает это событие и флажок не будет появлятся, устанавливает событие на дефолтные настройки. В нашем конкретном случае значение по умолчанию(изначально) равно "" , но мы потом меняем состояние, нажимаем addTask и значение не возвращается к "" а покажет значение setNamee("")
-//   // console.log(name);// name это value={name} , значение вводимое в input
-//   if (!name.trim()) {
-//     // console.log(name.trim());// Если у значение value={name} удалены все пробелы, возвращаем true(name.trim()), если у значения value={name} удалены все пробелы, возвращаем false (name.trim()). true или false мы возвращаем в handLeSubmit и если это false, то функция дальше не будет работать. в сути ""+пробелы = false , "handlechange"=true
-//     console.log('Invalid value');
-//     return;//возвращаем !name.trim() которе равно true или false 
-//   }//(Логическое НЕ) Возвращает false, если операнд может быть преобразован в true; в противном случае возвращает true.Метод trim() удаляет пробельные символы с начала и конца строки. и мы постоянно возвращаемся в начало функции и повторяем её по кругу пока не получим else
-//   else {console.log('Valid Value');}
-//   props.addTask(name);//это и есть addTask(name)
-//   setName("")//этот вызов функции отвечает за то, что после обновления состояния значение input будет равно "", работает корректно, только при использовании preventDefault тк значение не перехоит к значению по умолчанию
-// };
