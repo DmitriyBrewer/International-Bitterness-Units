@@ -95,6 +95,12 @@
   height: 30px;
 }
 
+.inPut-hidden {
+  display: none;
+  width: 300px;
+  height: 30px;
+}
+
 .inPut-design {
   font-family: Roboto;
   font-size: 16px;
@@ -108,6 +114,8 @@
 .inPut-danger {
   border-color: brown;
 }
+
+
 
 .inPut-true {
   border-color: rgb(76, 235, 71);
@@ -176,6 +184,7 @@
   
 }
 
+
 .button1 {
   padding: 0px 0px;
   width: 310px;
@@ -190,6 +199,16 @@
 }
 .button1:active {
   background: #3b0cb3;
+}
+
+.buttongrey {
+  padding: 0px 0px;
+  width: 310px;
+  background: #666077;
+  color: white;
+  border-width: 0px;
+  border-radius: 4px;
+  display: inline-block;
 }
 
 
