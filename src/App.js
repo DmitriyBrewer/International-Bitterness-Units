@@ -8,49 +8,49 @@ import H1 from "./components/H1";
 function App() {
 
 
-//State input
-  const [volume, setVolume] = useState("");
-  const [plato, setPlato] = useState("");
-  const [ibu, setIbu] = useState("");
-//
-
-
-//State valid form 
+//State input Volume 
+  const [volume, setVolume] = useState(""); //State input volume
+  const [volumeClean, setvolumeClean] = useState(false); //State input Clean, состояние выхода из input
+  const [volumeError, setvolumeError] = useState("Введите корректный объём сусла");//State input Error состояние ошибки значения
+  const [volumeClass, setvolumeClass] = useState("inPut inPut-design");//State input Classchange состояние класса input
+  const [volumeh1, setvolumeH1] = useState('h1styleRed');//State valid form Состояние правильного текста h1 
 // const [validForm, setFormValid] = useState(false);
 //
+// const [volumePlaceholder, setvolumePlaceholder] = useState("Введите объем сусла, л"); //State input placeholder
+//State input Volume
 
-//Валидность формы
+
+
+
+//State input Plato
+  const [plato, setPlato] = useState("");
+  const [platoClean, setplatoClean] = useState(false); //State input Clean, состояние выхода из input
+  const [platoError, setplatoError] = useState("Введите корректную плотность сусла");//State input Error состояние ошибки значения
+  const [platoClass, setplatoClass] = useState("inPut inPut-design PlatoSG");//State input Classchange состояние класса input
+  const [platoh1, setplatoH1] = useState('h1styleRed');
+//State input Plato
+
+
+
+
+//State IBU
+const [ibu, setIbu] = useState("");
+///State IBU
+
+
+
+
+
+
+
+
+//Валидность формы (при неверных значениях Submi будет заблокирован)
 // useEffect(() => {
 //   if (volumeError || platoError){
 //     setFormValid(false)
 //   } else setFormValid(true)
 // }, [volumeError, platoError]);
-// чтобы установить форму нужно на button повесить disabled={!validForm};
-
-
-
-//State input Clean
-const [volumeClean, setvolumeClean] = useState(false);
-//
-
-
-//State input placeholder
-// const [volumePlaceholder, setvolumePlaceholder] = useState("Введите объем сусла, л");
-//
-
-
-
-//State input Error
-const [volumeError, setvolumeError] = useState("Введите корректный объём сусла");
-//
-
-
-
-//State input Classchange
-const [volumeClass, setvolumeClass] = useState("inPut inPut-design");
-//
-
-
+// чтобы установить форму нужно на button который отвечает за  Submit повесить disabled={!validForm};
 
 
 
@@ -61,42 +61,27 @@ const [volumeClass, setvolumeClass] = useState("inPut inPut-design");
 
 
 
-
-
-
-
-
-//Контроль состояния инпута если был или не был осуществен в него вход: 
-    // const blurHandler = (e) => {
-    //   switch (e.target.name) {
-    //     case "volume": 
-    //     console.log("volume");
-    //     break //?
-    //     case "plato": 
-    //     console.log('plato');
-    //     break //?
-    //   };
-    // };
-// Через метод swith по атрибуту name в input определяем из какого именно input был выполнен выход.
-// Для активации расскоментировать и в input добавить  onBlur={e => blurHandler(e)}
-
-
-
-
-
 //Blurhandlers. Ослеживание состояния выхода из input
 function blurHandler(e){
   switch (e.target.name){
     case 'volume':
       setvolumeClean(true);
-      if (!volume.trim()){
-    console.log('корректно');
-    setvolumeError('Некорректное значение');//Описываем состояние ошибки
-    setvolumeClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
+        if (!volume.trim() || volume > 100000){
+          console.log('корректно');
+          setvolumeError('Error Некорректное значение объёма');//Описываем состояние ошибки
+          setvolumeClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
+          setvolumeH1('h1styleRed');
   };
-      break;
+    break;
+
     case 'plato':
-      console.log('plato');
+      setplatoClean(true);
+      if (!plato.trim() || plato > 100000){
+        console.log('корректно');
+        setplatoError('Error Некорректное значение плотности');//Описываем состояние ошибки
+        setplatoClass('inPut inPut-design PlatoSG inPut-danger');//Описываем состояние ошибки
+        setplatoH1('h1styleRed');
+};
       break;
       default://иначе выдает Expected a default case default-case
   };
@@ -112,19 +97,39 @@ const volumeHandler = (e) => {
   setVolume(e.target.value);
   console.log(e.target.value);
     if (!volume.trim()){
-      console.log('корректно');// можно создать состояние ошибки setlavueError
+      //эту часть можно удалить
+      console.log('корректно');
       setvolumeError('Некорректное значение');
       setvolumeClass('inPut inPut-design inPut-danger');
-      
+      //эту часть можно удалить
       
     } else 
     console.log('корректное');
+    setvolumeH1('h1styleTrue');
     setvolumeError('Корректное значение');//Описываем состояние правильного ввода
     setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
 };
 
-const platoHandler = (e) => {setPlato(e.target.value); console.log(e.target.value);};
-function ibuHandler () {};
+const platoHandler = (e) => {
+  setPlato(e.target.value); 
+  console.log(e.target.value);
+  if (!plato.trim()){
+    //эту часть можно удалить
+    console.log('корректно');
+    setplatoError('Некорректное значение');
+    setplatoClass('inPut inPut-design PlatoSG inPut-danger');
+    //эту часть можно удалить
+    
+  } else 
+  console.log('корректное');
+  setplatoH1('h1styleTrue');
+  setplatoError('Корректное значение');//Описываем состояние правильного ввода
+  setplatoClass('inPut inPut-design PlatoSG inPut-true');//Описываем состояние правильного ввода
+};
+
+
+
+function ibuHandler () {};//разблокировка изменеия input
 //Handlers
 
 
@@ -153,14 +158,14 @@ function ibuHandler () {};
 
 
 
-//Handle Submit
+//Handle Submit IBU
     function handleSubmit(e){
       e.preventDefault();
       if(!volume.trim() || !plato.trim()){
         setIbu('Введите поля корректно');
       } else setIbu('volume= ' + volume + ' plato =  ' + plato);
     };
-//Handle Submit
+//Handle Submit IBU
 
 
 
@@ -178,11 +183,12 @@ function ibuHandler () {};
             <ul className="UL" id="ulFRAME">
               <form onSubmit={handleSubmit}>
                 <LI/><H1 className="h1styleBlack" textContent="Введите параметры сусла"/>
-                <LI/>{(volumeClean && volumeError) && <h1 className="h1styleRed" >{volumeError}</h1>}
                 <LI/><input name="volume" placeholder='Введите объем сусла, л' className={volumeClass} type="text" value={volume} onChange={e=>volumeHandler(e)} onBlur={blurHandler}/>
-                <LI/><input name="plato" placeholder="Введите плотность сусла" className="inPut inPut-design PlatoSG" type="text" value={plato} onChange={e=>platoHandler(e)} onBlur={blurHandler}/>
+                {(volumeClean && volumeError) && <h1 className={volumeh1} >{volumeError}</h1>}
+                <LI/><input name="plato" placeholder="Введите плотность сусла" className={platoClass} type="text" value={plato} onChange={e=>platoHandler(e)} onBlur={blurHandler}/>
                   <button className={butPlato} onClick={SubmitPlato} type="radio">Plato</button>
                   <button className={butOG} onClick={SubmitOG} type="radio">SG</button>
+                {(platoClean && platoError) && <h1 className={platoh1} >{platoError}</h1>}
                 <LI/><button className="inPut button1" id="buttonNEXT" type="submit">Посчитать IBU</button>  
               </form>
               <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibu} onChange={ibuHandler} />
