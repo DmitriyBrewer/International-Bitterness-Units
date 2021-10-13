@@ -98,6 +98,10 @@
   border-color: brown;
 }
 
+.inPut-true {
+  border-color: rgb(76, 235, 71);
+}
+
 .PlatoSG {
   width: 200px;
   border-radius: 4px 0px 0px 4px;

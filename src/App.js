@@ -41,13 +41,13 @@ const [volumeClean, setvolumeClean] = useState(false);
 
 
 //State input Error
-const [volumeError, setvolumeError] = useState("Введите объём сусла");
+const [volumeError, setvolumeError] = useState("Введите корректный объём сусла");
 //
 
 
 
 //State input Classchange
-// const [volumeClass, setvolumeClass] = useState("inPut inPut-design");
+const [volumeClass, setvolumeClass] = useState("inPut inPut-design");
 //
 
 
@@ -83,29 +83,17 @@ const [volumeError, setvolumeError] = useState("Введите объём сус
 
 
 
-//Handlers. Ослеживание состояния ввода value для input
-    const volumeHandler = (e) => {
-      setVolume(e.target.value);
-      console.log(e.target.value);
-      if (!volume.trim()){
-        console.log('корректно');// можно создать состояние ошибки setlavueError
-        setvolumeError('некоректтное знаечение !!!');
-      } else 
-      console.log('корректное');
-      setvolumeError('');
-    };
-
-    const platoHandler = (e) => {setPlato(e.target.value); console.log(e.target.value);};
-    function ibuHandler () {};
-//Handlers
-
-
 
 //Blurhandlers. Ослеживание состояния выхода из input
 function blurHandler(e){
   switch (e.target.name){
     case 'volume':
       setvolumeClean(true);
+      if (!volume.trim()){
+    console.log('корректно');
+    setvolumeError('Некорректное значение');//Описываем состояние ошибки
+    setvolumeClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
+  };
       break;
     case 'plato':
       console.log('plato');
@@ -114,6 +102,30 @@ function blurHandler(e){
   };
 };
 //Blurhandlers
+
+
+
+
+
+//Handlers. Ослеживание состояния ввода value для input
+const volumeHandler = (e) => {
+  setVolume(e.target.value);
+  console.log(e.target.value);
+    if (!volume.trim()){
+      console.log('корректно');// можно создать состояние ошибки setlavueError
+      setvolumeError('Некорректное значение');
+      setvolumeClass('inPut inPut-design inPut-danger');
+      
+      
+    } else 
+    console.log('корректное');
+    setvolumeError('Корректное значение');//Описываем состояние правильного ввода
+    setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
+};
+
+const platoHandler = (e) => {setPlato(e.target.value); console.log(e.target.value);};
+function ibuHandler () {};
+//Handlers
 
 
 
@@ -167,7 +179,7 @@ function blurHandler(e){
               <form onSubmit={handleSubmit}>
                 <LI/><H1 className="h1styleBlack" textContent="Введите параметры сусла"/>
                 <LI/>{(volumeClean && volumeError) && <h1 className="h1styleRed" >{volumeError}</h1>}
-                <LI/><input name="volume" placeholder='Введите объем сусла, л' className="inPut inPut-design" type="text" value={volume} onChange={e=>volumeHandler(e)} onBlur={blurHandler}/>
+                <LI/><input name="volume" placeholder='Введите объем сусла, л' className={volumeClass} type="text" value={volume} onChange={e=>volumeHandler(e)} onBlur={blurHandler}/>
                 <LI/><input name="plato" placeholder="Введите плотность сусла" className="inPut inPut-design PlatoSG" type="text" value={plato} onChange={e=>platoHandler(e)} onBlur={blurHandler}/>
                   <button className={butPlato} onClick={SubmitPlato} type="radio">Plato</button>
                   <button className={butOG} onClick={SubmitOG} type="radio">SG</button>
