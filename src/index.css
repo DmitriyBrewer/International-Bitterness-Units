@@ -35,6 +35,17 @@
   margin-inline-end: 0px;
 }
 
+.h1styleRed {
+  color: rgb(184, 3, 3);
+  font-family: Roboto;
+  font-weight: 900;
+  font-size: 12px;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
 .frame {
   background: rgb(255, 255, 255);
   display: flex;
@@ -81,6 +92,10 @@
   text-align:start; 
   border-width: 1px;
   border-radius: 4px;
+}
+
+.inPut-danger {
+  border-color: brown;
 }
 
 .PlatoSG {
@@ -139,7 +154,6 @@
   background-color: #ffffff;
   border-color: #40bd21;
 }
-
 
 
 .inputstyle {
