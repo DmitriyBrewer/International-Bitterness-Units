@@ -46,6 +46,18 @@
   margin-inline-end: 0px;
 }
 
+.h1styleHidden {
+  display: none;
+  color: rgb(184, 3, 3);
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 12px;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
 .h1styleTrue {
   color: rgb(18, 184, 3);
   font-family: Roboto;
@@ -63,14 +75,14 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 450px;
+  height: 630px;
 }
 
 
 .calculate-frame {
   background: #DDDDDD;
   width: 450px;
-  height: 400px;
+  height: 540px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +92,7 @@
   list-style-type: none;
   background: #DDDDDD;
   width: 350px;
-  height: 280px;
+  height: 500px;
   text-align: center;
   margin-block-start: 0em;
   margin-block-end: 0em;
@@ -222,4 +234,14 @@
   overflow: hidden;
   display: none;
   background-color: #DDDDDD;
+}
+
+.span {
+  display: block;
+  padding: 20px;
+}
+
+.span-hidden {
+  display: none;
+  padding: 20px;
 }
