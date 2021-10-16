@@ -1,5 +1,5 @@
-// import React,{ useState } from "react";
-import React,{useEffect, useState} from "react";
+import React,{ useState } from "react";
+// import React,{useEffect, useState} from "react";
 import LI from "./components/LI";
 import H1 from "./components/H1";
 
@@ -78,31 +78,29 @@ const [placeholderSG, setplaceholerSG] = useState('Введите плотнос
 
 
 //State IBU
-const [ibu, setIbu] = useState("");
-const [ibuSubmit, setibuSubmit] = useState(false);
+const [ibuSubmit, setibuSubmit] = useState('');
 const [classSubmit, setclassSubmit] = useState("inPut buttongrey")
-const [validForm, setFormValid] = useState(false); // разблокирова кнопки Посчитать IBU
+const [validForm, setFormValid] = useState(false);; // разблокирова кнопки Посчитать IBU
 //State IBU
 
 
-
+//setplatoError('Корректное значение');
 //!! Submit
-useEffect(() => {
-  if (volumeError || platoError){
-    setFormValid(true);
-    setclassSubmit("inPut button1");
-  } else setFormValid(false);
-}, [volumeError, platoError]);
-
+// useEffect(() => {
+//   if (volumeError){
+//     setFormValid(false);
+//     console.log('1');
+//     setclassSubmit("inPut buttongrey");
+//   } if (!volumeError){
+//     setFormValid(true);
+//     console.log('2');
+//     setclassSubmit("inPut button1");}
+// }, [volumeError]);
 //Handle Submit IBU
 function handleSubmit(e){
   e.preventDefault();
-  
-  if(!volume.trim() || !plato.trim() || !boil.trim() || !timeHops.trim()){
-    setIbu('Введите поля корректно');
-  } else 
-  setIbu('volume= ' + volume + ' plato =  ' + plato);
-};
+  setibuSubmit(IBU());}
+ 
 //Handle Submit IBU
 // чтобы установить форму нужно на button который отвечает за  Submit повесить disabled={!validForm};
 // Submit
@@ -242,9 +240,9 @@ const volumeHandler = (e) => {
   console.log(e.target.value);
     if (!volume.trim()){} else 
     console.log('корректное');
-    setvolumeH1('h1styleTrue');
-    setvolumeError('Корректное значение');//Описываем состояние правильного ввода
-    setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
+    // setvolumeH1('h1styleTrue');
+    // setvolumeError('Корректное значение');//Описываем состояние правильного ввода
+    // setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
 };
 
 const platoHandler = (e) => {
@@ -307,7 +305,8 @@ const timeHopsHandler = (e) => {
     settimeHopsClass('inPut inPut-design inPut-true');
 };
 
-function ibuHandler () {};//разблокировка изменеия input
+function ibuHandler(){};
+
 //Handlers
 
 
@@ -468,9 +467,9 @@ function KOEF (plato, timeHops) {
 
                 
 
-                <LI/><button className={classSubmit} id="buttonNEXT" type="submit" disabled={!validForm}>Посчитать IBU</button>  
+                <LI/><button className={classSubmit} id="buttonNEXT" type="submit">Посчитать IBU</button>  
               </form>
-              <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibuSubmit && IBU()}/>
+              <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibuSubmit} onChange={ibuHandler}/>
             </ul>
         </div>
     </div>
@@ -479,6 +478,3 @@ function KOEF (plato, timeHops) {
     
 
 export default App;
-
-
-//  var ibu = ((amount * alpha) / (volume * 0.1)) * 0.21
