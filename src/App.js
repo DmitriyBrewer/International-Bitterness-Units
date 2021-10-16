@@ -84,28 +84,15 @@ const [ibuSubmit, setibuSubmit] = useState('');
 //State IBU
 
 
-//setplatoError('Корректное значение');
-//!! Submit
-// useEffect(() => {
-//   if (volumeError){
-//     setFormValid(false);
-//     console.log('1');
-//     setclassSubmit("inPut buttongrey");
-//   } if (!volumeError){
-//     setFormValid(true);
-//     console.log('2');
-//     setclassSubmit("inPut button1");}
-// }, [volumeError]);
 //Handle Submit IBU
 function handleSubmit(e){
   e.preventDefault();
   if (volume === "" || plato === "" || nameHops === "" || boil === "" || amount === "" || alpha === "" || timeHops === ""){
-  }else 
+  } else 
   setibuSubmit(IBU());}
  
 //Handle Submit IBU
-// чтобы установить форму нужно на button который отвечает за  Submit повесить disabled={!validForm};
-// Submit
+
 
 
 
