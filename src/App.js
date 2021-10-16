@@ -317,7 +317,7 @@ function ibuHandler(){};
 function IBU(){
   var ibu = ((amount * alpha) / (volume * 0.1))*(KOEF(OGSG(plato), (boil - timeHops)));
   var parsIBU = parseFloat(ibu.toFixed(1));
-  return parsIBU
+  return "Хмель: " + nameHops + " IBU= " +  parsIBU
 };
 
 
@@ -466,8 +466,6 @@ function KOEF (plato, timeHops) {
                 <LI/><input name="timeHops" placeholder='Время внесения хмеля, мин' className={timeHopsClass} type="number" value={timeHops} onChange={e=>timeHopsHandler(e)} onBlur={blurHandler}/>
                 {(timeHopsClean && timeHopsError) && <h1 className={timeHopsh1} >{timeHopsError}</h1>}
 
-
-                
 
                 <LI/><button className='inPut button1' id="buttonNEXT" type="submit">Посчитать IBU</button>  
               </form>
