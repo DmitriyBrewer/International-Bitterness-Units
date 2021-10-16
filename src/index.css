@@ -75,14 +75,14 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 630px;
+  height: 750px;
 }
 
 
 .calculate-frame {
   background: #DDDDDD;
   width: 450px;
-  height: 540px;
+  height: 700px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +92,7 @@
   list-style-type: none;
   background: #DDDDDD;
   width: 350px;
-  height: 500px;
+  height: 650px;
   text-align: center;
   margin-block-start: 0em;
   margin-block-end: 0em;

@@ -79,8 +79,8 @@ const [placeholderSG, setplaceholerSG] = useState('Введите плотнос
 
 //State IBU
 const [ibuSubmit, setibuSubmit] = useState('');
-const [classSubmit, setclassSubmit] = useState("inPut buttongrey")
-const [validForm, setFormValid] = useState(false);; // разблокирова кнопки Посчитать IBU
+// const [classSubmit, setclassSubmit] = useState("inPut button1")
+// const [validForm, setFormValid] = useState(false);; // разблокирова кнопки Посчитать IBU
 //State IBU
 
 
@@ -99,6 +99,8 @@ const [validForm, setFormValid] = useState(false);; // разблокирова 
 //Handle Submit IBU
 function handleSubmit(e){
   e.preventDefault();
+  if (volume === "" || plato === "" || nameHops === "" || boil === "" || amount === "" || alpha === "" || timeHops === ""){
+  }else 
   setibuSubmit(IBU());}
  
 //Handle Submit IBU
@@ -240,9 +242,9 @@ const volumeHandler = (e) => {
   console.log(e.target.value);
     if (!volume.trim()){} else 
     console.log('корректное');
-    // setvolumeH1('h1styleTrue');
-    // setvolumeError('Корректное значение');//Описываем состояние правильного ввода
-    // setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
+    setvolumeH1('h1styleTrue');
+    setvolumeError('Корректное значение');//Описываем состояние правильного ввода
+    setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
 };
 
 const platoHandler = (e) => {
@@ -442,7 +444,7 @@ function KOEF (plato, timeHops) {
                 <LI/><input name="volume" placeholder='Введите объем сусла, л' className={volumeClass} type="number" value={volume} onChange={e=>volumeHandler(e)} onBlur={blurHandler}/>
                 {(volumeClean && volumeError) && <h1 className={volumeh1} >{volumeError}</h1>}
 
-                <span className={span}><LI/><input name="plato" placeholder="Введите плотность сусла" className={platoClass} type="number" value={plato} onChange={e=>platoHandler(e)} onBlur={blurHandler}/></span>
+                <span className={span}><LI/><input name="plato" placeholder="Введите плотность" className={platoClass} type="number" value={plato} onChange={e=>platoHandler(e)} onBlur={blurHandler}/></span>
                 <span className={span2}><LI/><input name="sg" placeholder={placeholderSG} className={platoClass} type="number" value={plato} onChange={e=>platoHandler(e)} onBlur={blurHandler}/></span>
                   <button name='PLATO' className={butPlato} onClick={Submit} type="radio">Plato</button>
                   <button name='SG' className={butOG} onClick={Submit} type="radio">SG</button>
@@ -467,7 +469,7 @@ function KOEF (plato, timeHops) {
 
                 
 
-                <LI/><button className={classSubmit} id="buttonNEXT" type="submit">Посчитать IBU</button>  
+                <LI/><button className='inPut button1' id="buttonNEXT" type="submit">Посчитать IBU</button>  
               </form>
               <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibuSubmit} onChange={ibuHandler}/>
             </ul>
