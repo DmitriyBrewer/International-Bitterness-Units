@@ -33,6 +33,14 @@ const [nameHopsClass, setnameHopsClass] = useState("inPut inPut-design");//State
 const [nameHopsh1, setnameHopsH1] = useState('h1styleRed');//State valid form Состояние правильного текста h1 
 //State input nameHops
 
+//State input amount 
+const [amount, setamount] = useState(""); //State input amount
+const [amountClean, setamountClean] = useState(false); //State input Clean, состояние выхода из input
+const [amountError, setamountError] = useState("Введите корректный объём сусла");//State input Error состояние ошибки значения
+const [amountClass, setamountClass] = useState("inPut inPut-design");//State input Classchange состояние класса input
+const [amounth1, setamountH1] = useState('h1styleRed');//State valid form Состояние правильного текста h1 
+//State input amount
+
 
 //State input timeHops 
 const [timeHops, settimeHops] = useState(""); //State input timeHops
@@ -50,6 +58,14 @@ const [boilError, setboilError] = useState("Введите корректный 
 const [boilClass, setboilClass] = useState("inPut inPut-design");//State input Classchange состояние класса input
 const [boilh1, setboilH1] = useState('h1styleRed');//State valid 
 //State input boil
+
+//State input alpha 
+const [alpha, setalpha] = useState(""); //State input alpha
+const [alphaClean, setalphaClean] = useState(false); //State input Clean, состояние выхода из input
+const [alphaError, setalphaError] = useState("Введите корректный объём сусла");//State input Error состояние ошибки значения
+const [alphaClass, setalphaClass] = useState("inPut inPut-design");//State input Classchange состояние класса input
+const [alphah1, setalphaH1] = useState('h1styleRed');//State valid form Состояние правильного текста h1 
+//State input alpha
 
 
 //State - Button Og, Plato
@@ -170,6 +186,27 @@ function blurHandler(e){
   };
     break;
 
+      case 'amount':
+        setamountClean(true);
+        //Как сделать чтобы выражение g12g213 тоже не валидировалась. || !amount.replace(/[^\d.]/g, '') || !amount.replace(/[^+\d]/g, '') || !amount.replace(/[a-zA-Z]/) || amount.replace(/[a-zA-Zа-яА-Я]/)
+          if (!amount.trim() || amount <= 0.00001 || amount >= 100000 || !amount.replace(/[^\d.]/g, '') || !amount.replace(/[^+\d]/g, '')){
+            setamountError('Error Некорректное значение объёма');//Описываем состояние ошибки
+            setamountClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
+            setamountH1('h1styleRed');
+  };
+    break;
+
+
+    case 'alpha':
+      setalphaClean(true);
+      //Как сделать чтобы выражение g12g213 тоже не валидировалась. || !alpha.replace(/[^\d.]/g, '') || !alpha.replace(/[^+\d]/g, '') || !alpha.replace(/[a-zA-Z]/) || alpha.replace(/[a-zA-Zа-яА-Я]/)
+        if (!alpha.trim() || alpha <= 0.00001 || alpha >= 100000 || !alpha.replace(/[^\d.]/g, '') || !alpha.replace(/[^+\d]/g, '')){
+          setalphaError('Error Некорректное значение объёма');//Описываем состояние ошибки
+          setalphaClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
+          setalphaH1('h1styleRed');
+  };
+    break;
+
       case 'boil':
         setboilClean(true);
           if (!boil.trim() || boil <= 0.00001 || boil >= 201 || !boil.replace(/[^\d.]/g, '') || !boil.replace(/[^+\d]/g, '')){
@@ -228,6 +265,26 @@ const nameHopsHandler = (e) => {
     setnameHopsClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
 };
 
+const alphaHandler = (e) => {
+  setalpha(e.target.value);
+  console.log(e.target.value);
+    if (!alpha.trim()){} else 
+    console.log('корректное');
+    setalphaH1('h1styleTrue');
+    setalphaError('Корректное значение');//Описываем состояние правильного ввода
+    setalphaClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
+};
+
+const amountHandler = (e) => {
+  setamount(e.target.value);
+  console.log(e.target.value);
+    if (!amount.trim()){} else 
+    console.log('корректное');
+    setamountH1('h1styleTrue');
+    setamountError('Корректное значение');//Описываем состояние правильного ввода
+    setamountClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
+};
+
 const boilHandler = (e) => {
   setboil(e.target.value);
   console.log(e.target.value);
@@ -250,6 +307,24 @@ const timeHopsHandler = (e) => {
 
 function ibuHandler () {};//разблокировка изменеия input
 //Handlers
+
+
+
+function Calculate(volume, plato, nameHops, boil, alpha, amount, timeHops){
+  // if (plato >= 1.09){
+  //   var sg = (1 + (plato / (258.6 - (((plato) / 258.2) * 227.1))));
+  //       var parsSG = parseFloat(sg.toFixed(2));
+  //       return parsSG
+  // } //рабочее выражение
+  var object ={
+  // og : [1.030, 1.040, 1.050, 1.060, 1.070],
+  // boil : [5, 10, 15, 20, 30, 40, 60, 80, 90, 120],
+  // numstring : ["00", 10, 20, 30, 40, "01", 11, 21, 31, 41, "02", 12, 22, 32, 42, "03", 13, 23, 33, 34, "04", 14, 24, 34, 44, "05", 15, 25, 35, 45, "06", 16, 26, 36, 46, "07", 17, 27, 37, 47, "08", 18, 28, 38, 48, "09", 19, 29, 39, 49],
+  // string1 : [0.055, 0.050, 0.045, 0.042, 0.038,0.1, 0.091, 0.084, 0.076, 0.070, 0.137, 0.125, 0.114, 0.105, 0.096, 0.167, 0.153, 0.14, 0.128, 0.117, 0.212, 0.194, 0.177, 0.162, 0.148, 0.242, 0.221, 0.202, 0.185, 0.169, 0.276, 0.252, 0.231, 0.211, 0.193, 0.291, 0.266, 0.243, 0.222, 0.203, 0.295, 0.27, 0.247, 0.226, 0.206, 0.301, 0.275, 0.252, 0.23, 0.21]
+}
+ var ibu = ((amount * alpha) / (volume * 0.1)) * 0.21
+  return ibu
+}
 
   return (
   <div>
@@ -277,6 +352,13 @@ function ibuHandler () {};//разблокировка изменеия input
                 <LI/><input name="boil" placeholder='Кипячение, мин' className={boilClass} type="number" value={boil} onChange={e=>boilHandler(e)} onBlur={blurHandler}/>
                 {(boilClean && boilError) && <h1 className={boilh1} >{boilError}</h1>}
 
+                <LI/><input name="alpha" placeholder='Альфа кислота, %' className={alphaClass} type="number" value={alpha} onChange={e=>alphaHandler(e)} onBlur={blurHandler}/>
+                {(alphaClean && alphaError) && <h1 className={alphah1} >{alphaError}</h1>}
+
+                <LI/><input name="amount" placeholder='Кол-во, г' className={amountClass} type="number" value={amount} onChange={e=>amountHandler(e)} onBlur={blurHandler}/>
+                {(amountClean && amountError) && <h1 className={amounth1} >{amountError}</h1>}
+
+
                 <LI/><input name="timeHops" placeholder='Время внесения' className={timeHopsClass} type="number" value={timeHops} onChange={e=>timeHopsHandler(e)} onBlur={blurHandler}/>
                 {(timeHopsClean && timeHopsError) && <h1 className={timeHopsh1} >{timeHopsError}</h1>}
 
@@ -285,7 +367,7 @@ function ibuHandler () {};//разблокировка изменеия input
 
                 <LI/><button className={classSubmit} id="buttonNEXT" type="submit" disabled={!validForm}>Посчитать IBU</button>  
               </form>
-              <LI/><input placeholder="IBU" className="inPut inPut-design" value={ibu} onChange={ibuHandler} />
+              <LI/><input placeholder="IBU" className="inPut inPut-design" value={Calculate(volume, plato, nameHops, boil, alpha, amount, timeHops)} onChange={ibuHandler} />
             </ul>
         </div>
     </div>
