@@ -152,8 +152,7 @@
 }
 @media all and (max-width: 700px) {
   .but {
-    height: 35px;
-    font-size: 15px;
+    height: 100%;
   }
 }
 .butSG {
