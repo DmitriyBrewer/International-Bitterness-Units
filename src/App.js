@@ -146,7 +146,7 @@ function App() {
           case 'volume':
             setvolumeClean(true);
               if (!volume.trim() || volume <= 0.00001 || volume >= 100000 || !volume.replace(/[^\d.]/g, '') || !volume.replace(/[^+\d]/g, '')){
-                setvolumeError('Error Некорректное значение объёма');//Описываем состояние ошибки
+                setvolumeError('Введите корректное значение объёма');//Описываем состояние ошибки
                 setvolumeClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
                 setvolumeH1('h1styleRed');
         };
@@ -155,7 +155,7 @@ function App() {
           case 'plato':
             setplatoClean(true);
             if (!plato.trim() || plato>=36 || plato<=5){
-              setplatoError('Error Некорректное значение плотности');//Описываем состояние ошибки
+              setplatoError('Введите корректное значение плотности Plato');//Описываем состояние ошибки
               setplatoClass('inPut inPut-design PlatoSG inPut-danger');//Описываем состояние ошибки
               setplatoH1('h1styleRed');
       };
@@ -164,7 +164,7 @@ function App() {
             case 'sg':
               setplatoClean(true);
               if (!plato.trim() || plato>=1.09 || plato<=1){
-                setplatoError('ErrAr Некорректное значение плотности');//Описываем состояние ошибки
+                setplatoError('Введите корректное значение плотности Specific Gravity');//Описываем состояние ошибки
                 setplatoClass('inPut inPut-design PlatoSG inPut-danger');//Описываем состояние ошибки
                 setplatoH1('h1styleRed');
         };
@@ -173,7 +173,7 @@ function App() {
             case 'nameHops':
               setnameHopsClean(true);
               if (!nameHops.trim()){
-                setnameHopsError('Error Некорректное наименование');//Описываем состояние ошибки
+                setnameHopsError('Введите название хмеля');//Описываем состояние ошибки
                 setnameHopsClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
                 setnameHopsH1('h1styleRed');
         };
@@ -182,7 +182,7 @@ function App() {
             case 'amount':
               setamountClean(true);
                 if (!amount.trim() || amount <= 0.00001 || amount >= 100000 || !amount.replace(/[^\d.]/g, '') || !amount.replace(/[^+\d]/g, '')){
-                  setamountError('Error Некорректное значение объёма');//Описываем состояние ошибки
+                  setamountError('Введите корректное кол-во хмеля в г');//Описываем состояние ошибки
                   setamountClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
                   setamountH1('h1styleRed');
         };
@@ -192,7 +192,7 @@ function App() {
           case 'alpha':
             setalphaClean(true);
               if (!alpha.trim() || alpha <= 0.00001 || alpha >= 100000 || !alpha.replace(/[^\d.]/g, '') || !alpha.replace(/[^+\d]/g, '')){
-                setalphaError('Error Некорректное значение объёма');//Описываем состояние ошибки
+                setalphaError('Введите корректное значение альфа-кислоты');//Описываем состояние ошибки
                 setalphaClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
                 setalphaH1('h1styleRed');
         };
@@ -201,7 +201,7 @@ function App() {
             case 'boil':
               setboilClean(true);
                 if (!boil.trim() || boil <= 0.00001 || boil >= 201 || !boil.replace(/[^\d.]/g, '') || !boil.replace(/[^+\d]/g, '')){
-                  setboilError('Error Некорректное значение объёма');//Описываем состояние ошибки
+                  setboilError('Введите корректное общее время кипячения сусла');//Описываем состояние ошибки
                   setboilClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
                   setboilH1('h1styleRed');
         };
@@ -209,8 +209,8 @@ function App() {
 
             case 'timeHops':
               settimeHopsClean(true);
-                if (!timeHops.trim() || timeHops <= 0.00001 || timeHops >= 100000 || !timeHops.replace(/[^\d.]/g, '') || !timeHops.replace(/[^+\d]/g, '')){
-                  settimeHopsError('Error Некорректное значение объёма');//Описываем состояние ошибки
+                if (!timeHops.trim() || timeHops >= 100000 || !timeHops.replace(/[^\d.]/g, '') || !timeHops.replace(/[^+\d]/g, '')){
+                  settimeHopsError('Введите корректное время внесения хмеля от кипячения');//Описываем состояние ошибки
                   settimeHopsClass('inPut inPut-design inPut-danger');//Описываем состояние ошибки
                   settimeHopsH1('h1styleRed');
         };
@@ -230,7 +230,6 @@ function App() {
         setVolume(e.target.value);
         console.log(e.target.value);
           if (!volume.trim()){} else 
-          console.log('корректное');
           setvolumeH1('h1styleTrue');
           setvolumeError('Корректное значение');//Описываем состояние правильного ввода
           setvolumeClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
@@ -239,7 +238,6 @@ function App() {
       const platoHandler = (e) => {
         setPlato(e.target.value);
         if (!plato.trim()){} else 
-          console.log('корректное');
           setplatoH1('h1styleTrue');
           setplatoError('Корректное значение');//Описываем состояние правильного ввода
           setplatoClass('inPut inPut-design PlatoSG inPut-true');//Описываем состояние правильного ввода
@@ -249,7 +247,6 @@ function App() {
         setnameHops(e.target.value);
         console.log(e.target.value);
           if (!nameHops.trim()){} else 
-          console.log('корректное');
           setnameHopsH1('h1styleTrue');
           setnameHopsError('Корректное значение');//Описываем состояние правильного ввода
           setnameHopsClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
@@ -259,7 +256,6 @@ function App() {
         setalpha(e.target.value);
         console.log(e.target.value);
           if (!alpha.trim()){} else 
-          console.log('корректное');
           setalphaH1('h1styleTrue');
           setalphaError('Корректное значение');//Описываем состояние правильного ввода
           setalphaClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
@@ -269,7 +265,6 @@ function App() {
         setamount(e.target.value);
         console.log(e.target.value);
           if (!amount.trim()){} else 
-          console.log('корректное');
           setamountH1('h1styleTrue');
           setamountError('Корректное значение');//Описываем состояние правильного ввода
           setamountClass('inPut inPut-design inPut-true');//Описываем состояние правильного ввода
@@ -279,7 +274,6 @@ function App() {
         setboil(e.target.value);
         console.log(e.target.value);
           if (!boil.trim()){} else 
-          console.log('корректное');
           setboilH1('h1styleTrue');
           setboilError('Корректное значение');
           setboilClass('inPut inPut-design inPut-true');
@@ -289,7 +283,6 @@ function App() {
         settimeHops(e.target.value);
         console.log(e.target.value);
           if (!timeHops.trim()){} else 
-          console.log('корректное');
           settimeHopsH1('h1styleTrue');
           settimeHopsError('Корректное значение');
           settimeHopsClass('inPut inPut-design inPut-true');
@@ -436,7 +429,7 @@ function App() {
                   <button name='SG' className={butOG} onClick={Submit} type="radio">SG</button>
                   {(platoClean && platoError) && <h1 className={platoh1} >{platoError}</h1>}
 
-                  <LI/><input name="nameHops" placeholder='Наименование хмеля' className={nameHopsClass} type="text" value={nameHops} onChange={e=>nameHopsHandler(e)} onBlur={blurHandler}/>
+                  <LI/><input name="nameHops" placeholder='Название хмеля' className={nameHopsClass} type="text" value={nameHops} onChange={e=>nameHopsHandler(e)} onBlur={blurHandler}/>
                 {(nameHopsClean && nameHopsError) && <h1 className={nameHopsh1} >{nameHopsError}</h1>}
 
                 <LI/><input name="boil" placeholder='Кипячение сусла, мин' className={boilClass} type="number" value={boil} onChange={e=>boilHandler(e)} onBlur={blurHandler}/>
