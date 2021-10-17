@@ -150,12 +150,7 @@
   border-width: 1px;
   background: white;
 }
-/* @media all and (max-width: 500px) {
-  .but {
-    color: rgb(226, 0, 0);
-    height: 44px;
-  }
-} */
+
 .butSG {
   border-radius: 0px 4px 4px 0px;
   
