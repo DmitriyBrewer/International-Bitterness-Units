@@ -419,7 +419,7 @@ function App() {
         <div className="calculate-frame">
             <ul className="UL" id="ulFRAME">
               <form onSubmit={handleSubmit}>
-                <LI/><H1 className="h1styleBlack" textContent="Введите параметры сусла"/>
+                <LI/><H1 className="h1styleBlack" textContent="Введите параметры пивного сусла"/>
                 <LI/><input name="volume" placeholder='Введите объем сусла, л' className={volumeClass} type="number" value={volume} onChange={e=>volumeHandler(e)} onBlur={blurHandler}/>
                 {(volumeClean && volumeError) && <h1 className={volumeh1} >{volumeError}</h1>}
 
