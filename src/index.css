@@ -150,15 +150,13 @@
   border-width: 1px;
   background: white;
 }
-@media all and (max-width: 700px) {
-  .but {
-    height: 100%;
-  }
-}
+
 .butSG {
   border-radius: 0px 4px 4px 0px;
   
 }
+
+
 
 .but:hover, .butSG:hover, .buttonDrop:hover {
   color: #6E41E2;
@@ -175,6 +173,17 @@
   color: #ffffff;
   border-color: #6E41E2;
   background-color: #6E41E2;
+}
+
+@media all and (max-width: 700px) {
+  .but {
+    width: 30px;
+    height: 100%;
+  }
+  .butPurp {
+    width: 30px;
+    height: 100%;
+  }
 }
 
 .but:active, .butSG:active, .buttonDrop:active {
