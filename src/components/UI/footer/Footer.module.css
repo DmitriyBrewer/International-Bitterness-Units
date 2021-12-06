@@ -1,0 +1,12 @@
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    height: 80px;
+    background: rgb(0, 0, 0);
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+}
+
