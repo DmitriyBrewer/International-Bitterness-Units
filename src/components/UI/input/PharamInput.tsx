@@ -7,13 +7,15 @@ interface PharamInputProps {
   value: string | undefined;
   onChange: (event: any) => void;
   onBlur: (event: any) => void;
+  type: string;
 }
 const PharamInput: React.FC<PharamInputProps> = ({
   placeholder,
   onChange,
   value,
   id,
-  onBlur
+  onBlur,
+  type
 }) => {
   return (
     <div style={{ margin: "10px", display: "inline-flex" }}>
@@ -22,7 +24,7 @@ const PharamInput: React.FC<PharamInputProps> = ({
         variant="outlined"
         size="small"
         color="secondary"
-        // placeholder={placeholder}
+        type={type}
         onChange={onChange}
         value={value}
         id={id}

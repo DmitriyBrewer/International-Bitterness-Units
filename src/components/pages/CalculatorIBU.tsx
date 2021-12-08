@@ -1,9 +1,11 @@
 import Wort from "../../components/Wort";
 import HopList from "../../components/HopList";
 import HopsButton from "../../components/UI/button/HopsButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container } from "@mui/material";
-// import { Slider } from "@mui/material";
+import { Slider } from "@mui/material";
+import { CircularProgress } from "@mui/material";
+
 export interface IHop {
   id: string;
 }
@@ -13,6 +15,15 @@ const CalculatorIBU: React.FC = () => {
   const [volume, setVolume] = useState<string>("");
   const [destiny, setDestiny] = useState<string>("");
   const [boil, setBoil] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
+
+
+
+    //loader test
+    setTimeout(() => {
+      setLoading(false)
+    }, 500);
+    //loader test
 
   const addHop = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (hops.length <= 3) {
@@ -60,6 +71,8 @@ const CalculatorIBU: React.FC = () => {
     setBoil(boil);
   };
 
+  
+
   console.log(hops);
   //concat IBU
   var initialValue = 0;
@@ -71,9 +84,12 @@ const CalculatorIBU: React.FC = () => {
 
   return (
     <div style={{ textAlign: "center" }}>
+      {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container>
         <Wort getwort={getInputWort} />
+        <div style={{ margin: "10px", display: "flex", justifyContent:'center', flexWrap:'wrap' }}>
         <HopsButton onClick={addHop}>Добавить хмель</HopsButton>
+        </div>
         <HopList
           hops={hops}
           remove={removeHop}
@@ -93,7 +109,7 @@ const CalculatorIBU: React.FC = () => {
         >
           Общее ibu: {parsConcatIbu || 0}
         </h1>
-        {/* <Slider
+        <Slider
           disabled
           defaultValue={0}
           min={0}
@@ -105,8 +121,9 @@ const CalculatorIBU: React.FC = () => {
             width: "50%",
             color: "success.secondary"
           }}
-        /> */}
+        />
       </Container>
+        }
     </div>
   );
 };

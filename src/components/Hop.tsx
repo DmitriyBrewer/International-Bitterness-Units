@@ -2,7 +2,7 @@ import React from "react";
 import DeleteButton from "./UI/button/DeleteButton";
 import PharamInput from "./UI/input/PharamInput";
 import Calculate from "../components/Calculate";
-// import { Slider } from "@mui/material";
+import SliderMUI from "../components/UI/slider/SliderMUI";
 
 export interface IHop {
   name: string;
@@ -64,24 +64,28 @@ const Hop: React.FC<HopProps> = ({
         value={value?.name}
         onChange={nameHandler}
         onBlur={Blur}
+        type="string"
       />
       <PharamInput
         placeholder="Альфа кислота"
         value={value?.alpha}
         onChange={alphaHandler}
         onBlur={Blur}
+        type="number"
       />
       <PharamInput
         placeholder="Кол-во, г"
         value={value?.amount}
         onChange={amountHandler}
         onBlur={Blur}
+        type="number"
       />
       <PharamInput
         placeholder="Время внесения, мин"
         value={value?.time}
         onChange={timeHandler}
         onBlur={Blur}
+        type="number"
       />
       <DeleteButton onClick={() => remove(hop)} children={"удалить"} />
       <Calculate
@@ -95,20 +99,11 @@ const Hop: React.FC<HopProps> = ({
         getibu={getibu}
         id={id}
       />
-      {/* <Slider
-        color="secondary"
-        min={0}
-        max={15000}
-        aria-label="Default"
-        valueLabelDisplay="auto"
-        sx={{
-          width: "50%",
-          color: "success.purple"
-        }}
-        defaultValue={value?.amount}
+      <SliderMUI
         value={value?.amount}
         onChange={amountHandler}
-      /> */}
+        color="secondary"
+      />
     </div>
   );
 };

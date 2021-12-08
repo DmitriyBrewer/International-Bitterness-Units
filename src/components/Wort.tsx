@@ -10,6 +10,7 @@ interface IWort {
 interface WortProps {
   getwort: any;
 }
+
 const Wort: React.FC<WortProps> = ({ getwort }) => {
   const [value, setValue] = React.useState<IWort>({
     volume: "",
@@ -43,6 +44,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         value={value?.volume}
         onChange={volumeHandler}
         onBlur={Blur}
+        type="number"
       />
       <PharamInput
         placeholder="Плотность сусла"
@@ -50,6 +52,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         value={value?.destiny}
         onChange={destinyHandler}
         onBlur={Blur}
+        type="number"
       />
       <PharamInput
         placeholder="Время кипячения"
@@ -57,6 +60,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         value={value?.boil}
         onChange={boilHandler}
         onBlur={Blur}
+        type="number"
       />
     </div>
   );
