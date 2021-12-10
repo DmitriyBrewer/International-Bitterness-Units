@@ -14,22 +14,21 @@ export interface IHop {
 interface HopProps {
   id: number;
   hop: any;
-  remove: any;
   gethop: any;
   getibu: any;
   volume: string;
   destiny: string;
   boil: string;
+  onClick: any;
 }
 const Hop: React.FC<HopProps> = ({
-  remove,
-  hop,
   gethop,
   getibu,
   id,
   volume,
   destiny,
-  boil
+  boil,
+  onClick
 }) => {
   const [value, setValue] = React.useState<IHop>({
     name: "",
@@ -87,7 +86,7 @@ const Hop: React.FC<HopProps> = ({
         onBlur={Blur}
         type="number"
       />
-      <DeleteButton onClick={() => remove(hop)} children={"удалить"} />
+      <DeleteButton onClick={onClick} children={"удалить"} />
       <Calculate
         name={value.name}
         alpha={value.alpha}

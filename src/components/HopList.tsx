@@ -1,10 +1,13 @@
 import React from "react";
 import Hop from "./Hop";
+import {  useDispatch } from "react-redux";
+import {  AppDispatch } from "../../src/store/store";
+import todoSlice from "../../src/store/reducer/hopSlice";
+
 interface HopListProps {
-  hops: any[];
+  Hops: any[];
   id?: number;
   hop?: any;
-  remove: any;
   key?: any;
   gethop: any;
   getibu: any;
@@ -14,21 +17,22 @@ interface HopListProps {
 }
 
 const HopList: React.FC<HopListProps> = ({
-  hops,
-  remove,
   gethop,
   getibu,
   volume,
   destiny,
-  boil
+  boil,
+  Hops
 }) => {
+  const dispatch: AppDispatch = useDispatch();
+
   return (
     <div>
-      {hops.map((hop) => (
+      {Hops.map((hop) => (
         <Hop
           id={hop.id}
           hop={hop}
-          remove={remove}
+          onClick={() => dispatch(todoSlice.actions.deleteTodo(hop.id))}
           key={hop.id}
           gethop={gethop}
           getibu={getibu}

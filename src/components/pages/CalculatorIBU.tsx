@@ -1,21 +1,28 @@
 import Wort from "../../components/Wort";
 import HopList from "../../components/HopList";
 import HopsButton from "../../components/UI/button/HopsButton";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Container } from "@mui/material";
 import { Slider } from "@mui/material";
 import { CircularProgress } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux";
+import HOPS from "../../store/reducer/hopSlice";
+import { AppDispatch, AppState } from "../../store/store";
+
 
 export interface IHop {
   id: string;
 }
 
 const CalculatorIBU: React.FC = () => {
-  const [hops, setHops] = useState<any>([]);
+  // const [hops, setHops] = useState<any>([]);
   const [volume, setVolume] = useState<string>("");
   const [destiny, setDestiny] = useState<string>("");
   const [boil, setBoil] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
+  const dispatch: AppDispatch = useDispatch();
+  const Hops = useSelector((state: AppState) => state.hops);
+
 
 
 
@@ -25,19 +32,8 @@ const CalculatorIBU: React.FC = () => {
     }, 500);
     //loader test
 
-  const addHop = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (hops.length <= 3) {
-      event.preventDefault();
-      setHops([...hops, { id: Date.now() }]);
-    }
-  };
-
-  const removeHop = (hop: any) => {
-    setHops(hops.filter((p: any) => p.id !== hop.id));
-  };
-
   const getInputHop = (id: any, newValueArray: any) => {
-    const valueChange = hops.map((hop: any) => {
+    const valueChange = Hops.map((hop: any) => {
       if (id === hop.id) {
         return {
           ...hop,
@@ -49,11 +45,12 @@ const CalculatorIBU: React.FC = () => {
       }
       return hop;
     });
-    setHops(valueChange);
+    // setHops(valueChange);
+    dispatch(HOPS.actions.saveAction(valueChange));
   };
 
   const getAllIbu = (id: any, ibuValue: any) => {
-    const allIBU = hops.map((hop: any) => {
+    const allIBU = Hops.map((hop: any) => {
       if (id === hop.id) {
         return {
           ...hop,
@@ -62,7 +59,9 @@ const CalculatorIBU: React.FC = () => {
       }
       return hop;
     });
-    setHops(allIBU);
+    // setHops(allIBU);
+    dispatch(HOPS.actions.saveAction(allIBU));
+
   };
 
   const getInputWort = (volume: string, destiny: string, boil: string) => {
@@ -73,10 +72,10 @@ const CalculatorIBU: React.FC = () => {
 
   
 
-  console.log(hops);
+  console.log(Hops);
   //concat IBU
   var initialValue = 0;
-  var concatIbu = hops.reduce((accumulator: any, currentValue: any) => {
+  var concatIbu = Hops.reduce((accumulator: any, currentValue: any) => {
     return accumulator + currentValue.allibu;
   }, initialValue);
   var parsConcatIbu = parseFloat(concatIbu.toFixed(2));
@@ -88,11 +87,17 @@ const CalculatorIBU: React.FC = () => {
       <Container>
         <Wort getwort={getInputWort} />
         <div style={{ margin: "10px", display: "flex", justifyContent:'center', flexWrap:'wrap' }}>
-        <HopsButton onClick={addHop}>Добавить хмель</HopsButton>
+        <HopsButton
+            onClick={(event) => {
+              event.preventDefault();
+              dispatch(HOPS.actions.addTodo(Date.now()));
+            }}
+          >
+            Добавить хмель
+          </HopsButton>
         </div>
         <HopList
-          hops={hops}
-          remove={removeHop}
+          Hops={Hops}
           gethop={getInputHop}
           volume={volume}
           destiny={destiny}
