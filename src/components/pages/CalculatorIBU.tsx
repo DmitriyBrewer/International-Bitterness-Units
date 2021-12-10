@@ -72,7 +72,6 @@ const CalculatorIBU: React.FC = () => {
 
   
 
-  console.log(Hops);
   //concat IBU
   var initialValue = 0;
   var concatIbu = Hops.reduce((accumulator: any, currentValue: any) => {
