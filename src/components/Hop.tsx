@@ -53,7 +53,6 @@ const Hop: React.FC<HopProps> = ({
   const Blur = () => {
     gethop(id, { ...value });
     setValue(value);
-    console.log(value);
   };
 
   return (

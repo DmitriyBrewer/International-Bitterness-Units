@@ -13,7 +13,6 @@ export interface Hops {
 
 const HOPS = createSlice({
   name: "hops",
-  // initialState: [] as Hops[],
   initialState: [] as Hops[],
   reducers: {
     addTodo: (state, action: PayloadAction<number>) => {
