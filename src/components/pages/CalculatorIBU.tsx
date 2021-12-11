@@ -83,7 +83,7 @@ const CalculatorIBU: React.FC = () => {
   return (
     <div style={{ textAlign: "center" }}>
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
-      <Container>
+      <Container  maxWidth="sm">
         <Wort getwort={getInputWort} />
         <div style={{ margin: "10px", display: "flex", justifyContent:'center', flexWrap:'wrap' }}>
         <HopsButton
