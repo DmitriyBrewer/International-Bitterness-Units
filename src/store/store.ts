@@ -1,5 +1,5 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import hops from "../store/reducer/hopSlice";
+import hops from "./reducer/hopSlice";
 
 const rootReducer = combineReducers({
   hops: hops.reducer
