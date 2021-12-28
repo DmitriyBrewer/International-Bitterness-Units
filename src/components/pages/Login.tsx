@@ -1,28 +1,25 @@
 import React, { useEffect } from "react";
 import DeleteButton from "../UI/button/DeleteButton";
 import PharamInput from "../UI/input/PharamInput";
-import { useSelector, useDispatch } from "react-redux";
-// import fetchUsers from "../../store/reducer/userSlice";
-import { AppDispatch, AppState } from "../../store/store";
+import { useDispatch } from "react-redux";
 
+// import {login} from "../../api/user";
 
 interface ILogin {
-    login: string;
+    email: string;
     password: string;
   }
   
   interface LoginProps {
   }
 
-
 const Login = () => {
   const [value, setValue] = React.useState<ILogin>({
-    login: "",
+    email: "",
     password: ""
   });
 
   const dispatch = useDispatch();
-  // const User = useSelector((state: AppState) => state.users);
 
   const Blur = () => {
     setValue(value);
@@ -30,7 +27,7 @@ const Login = () => {
   };
 
   const loginHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, login: event.target.value });
+    setValue({ ...value, email: event.target.value });
   };
 
   const passwordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +38,7 @@ const Login = () => {
     <form onSubmit={Blur} style={{ textAlign: "center" }}>
       <PharamInput
         placeholder="Введите email"
-        value={value?.login}
+        value={value?.email}
         onChange={loginHandler}
         onBlur={Blur}
         type="string"
@@ -54,10 +51,8 @@ const Login = () => {
         type="number"
       />
       <DeleteButton
-        onClick={(event) => {
-          event.preventDefault();
-          // dispatch(USERS.actions.SETUSER(false));
-        }}
+      onClick={()=>{}}
+        // onClick={()=>dispatch(login(value?.email, value?.password))}
         children={"отправить"}
       />
     </form>
