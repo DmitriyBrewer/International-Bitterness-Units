@@ -1,20 +1,24 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {login} from '../../api/user'
+import {createSlice} from '@reduxjs/toolkit'
 
-
-const USERS = createSlice({
-    name: "users",
-    initialState: {
-      currentUser: {},
-      isAuth: false
+export const userReducer = createSlice({
+  name:'users',
+  initialState: {
+    currentUser: {},
+    isAuth: false
+  },
+  reducers: {
+    setUser: (state,action) => {
+      state.currentUser = action.payload
+      state.isAuth = true
     },
-    reducers: {
-      SETUSER: (state, action) => {
-        state.currentUser = action.payload;
-        state.isAuth = true;
-        return state;
-      }
+    logout: (state,action) => {
+    localStorage.removeItem('token')
+    state.currentUser = {}
+    state.isAuth = false
     }
-  });
+  }
+})
 
-  export default USERS;
+export const {setUser} = userReducer.actions
+export const {logout} = userReducer.actions
+export default userReducer.reducer

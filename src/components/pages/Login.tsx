@@ -3,7 +3,7 @@ import DeleteButton from "../UI/button/DeleteButton";
 import PharamInput from "../UI/input/PharamInput";
 import { useDispatch } from "react-redux";
 
-// import {login} from "../../api/user";
+import {login} from "../../api/user";
 
 interface ILogin {
     email: string;
@@ -51,8 +51,7 @@ const Login = () => {
         type="number"
       />
       <DeleteButton
-      onClick={()=>{}}
-        // onClick={()=>dispatch(login(value?.email, value?.password))}
+        onClick={()=>dispatch(login(value?.email, value?.password))}
         children={"отправить"}
       />
     </form>

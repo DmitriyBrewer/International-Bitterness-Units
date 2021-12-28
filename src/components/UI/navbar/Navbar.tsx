@@ -24,7 +24,7 @@ export default function Navbar() {
           <Link to="/calc" className={cl.header_text_content}>
             Калькулятор
           </Link>
-          <Link to="/registration" className={cl.header_text_content}>
+          <Link to="/signup " className={cl.header_text_content}>
             зарегистрироваться
           </Link>
           <Link to="/login" className={cl.header_text_content}>
