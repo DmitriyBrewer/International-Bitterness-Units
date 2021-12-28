@@ -13,3 +13,4 @@ export type AppDispatch = typeof store.dispatch;
 export type AppState = ReturnType<typeof rootReducer>;
 
 export default store;
+
