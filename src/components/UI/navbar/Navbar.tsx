@@ -5,16 +5,19 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 import cl from "./Navbar.module.css";
-import Logo from "../navbar/Logo";
+import Logo from "./Logo";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from "../../../store/store";
 import { logout } from '../../../store/reducer/userSlice';
-
+import AvatarMenu from './AvatarMenu'
 
 
 export default function Navbar() {
+
+
   const isAuth = useSelector((state:RootState) => state.user.isAuth)
   const dispatch = useDispatch()
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -29,6 +32,7 @@ export default function Navbar() {
               Пивная платформа
             </Link>
           </Typography>
+          
           <Link to="/calc" className={cl.header_text_content}>
             Калькулятор
           </Link>
@@ -41,7 +45,13 @@ export default function Navbar() {
             Войти
           </Link>
           </div>}
-          {isAuth && <div className={cl.header_text_content} onClick={()=>dispatch(logout({}))}>Выход</div>}
+          {isAuth && 
+          <div 
+          className={cl.header_text_content} onClick={()=>dispatch(logout({}))}>
+            Выход
+          </div>
+          }
+           {isAuth &&<AvatarMenu/>}
         </Toolbar>
       </AppBar>
     </Box>
