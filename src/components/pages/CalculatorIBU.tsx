@@ -7,7 +7,8 @@ import { Slider } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
-import { AppDispatch, AppState } from "../../store/store";
+import { AppDispatch, AppState, RootState } from "../../store/store";
+
 
 
 export interface IHop {
@@ -22,6 +23,7 @@ const CalculatorIBU: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
+  const isAuth = useSelector((state:RootState) => state.user.isAuth)
 
 
 
@@ -81,6 +83,8 @@ const CalculatorIBU: React.FC = () => {
   //concat IBU
 
   return (
+    <div>
+      {isAuth &&
     <div style={{ textAlign: "center" }}>
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
@@ -126,8 +130,18 @@ const CalculatorIBU: React.FC = () => {
             color: "success.secondary"
           }}
         />
+        <HopsButton
+        onClick={(event) => {
+          event.preventDefault();
+        }}
+    >
+      сохранить расчёт
+    </HopsButton>
       </Container>
+      
         }
+    </div>
+    }
     </div>
   );
 };

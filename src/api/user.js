@@ -1,6 +1,6 @@
 //это api
 import axios from "axios";
-import { setUser } from "../reducer/userSlice";
+import { setUser } from "../store/reducer/userSlice";
 
 export const registration = async (email, password) => {
   try {

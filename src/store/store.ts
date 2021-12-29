@@ -14,6 +14,7 @@ const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState> // для useSelector на state: RootState
 export type AppDispatch = typeof store.dispatch
+export type AppState = ReturnType<typeof rootReducer>;
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export default store
