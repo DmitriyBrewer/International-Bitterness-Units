@@ -15,7 +15,7 @@ import { Switch, Slider } from "@mui/material";
 const About = () => {
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Container maxWidth="md">
         <Box sx={{ bgcolor: "none" }}>
           <div style={{ marginTop: "25px" }}>
