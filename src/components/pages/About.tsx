@@ -11,11 +11,12 @@ import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Switch, Slider } from "@mui/material";
+import BulletedList from "../UI/list/BulletedList";
 
 const About = () => {
   return (
     <React.Fragment>
-      {/* <CssBaseline /> */}
+      <CssBaseline />
       <Container maxWidth="md">
         <Box sx={{ bgcolor: "none" }}>
           <div style={{ marginTop: "25px" }}>
@@ -53,36 +54,11 @@ const About = () => {
           </Typography>
           <Grid item xs={12} md={6}>
             <List>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Получение расчётной горечи пива" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Возможность добавлять до 5 хмелей на варку, каждый хмель имеет своё IBU" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Возможность редактировать IBU. С помощью инструмента Slider можно легко в  реальном времени изменить кол-во добавляемого хмеля, тем самым меня горечь которую даст конкретный хмель и увидеть как хмель изменит общее IBU" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Возможность удалять хмель" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Возможность настраивать максимальное значение инструмента Slider" />
-              </ListItem>
+              <BulletedList textContent="Получение расчётной горечи пива"/>
+              <BulletedList textContent="Возможность добавлять до 5 хмелей на варку, каждый хмель имеет своё IBU"/>
+              <BulletedList textContent="Возможность редактировать IBU. С помощью инструмента Slider можно легко в  реальном времени изменить кол-во добавляемого хмеля, тем самым меня горечь которую даст конкретный хмель и увидеть как хмель изменит общее IBU"/>
+              <BulletedList textContent="Возможность удалять хмель"/>
+              <BulletedList textContent="Возможность настраивать максимальное значение инструмента Slider"/>
             </List>
             <Typography variant="h4" component="h2" gutterBottom>
               Инструкция
@@ -107,53 +83,18 @@ const About = () => {
               1. Сусло:
             </Typography>
             <List>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Объём получаемого сусла, л ⚠️" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Ожидаемая/рачётная плотсность сусла, Plato ⚠️" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Общее время кипячения сусла, мин ⚠️" />
-              </ListItem>
+            <BulletedList textContent="Объём получаемого сусла, л ⚠️"/>
+            <BulletedList textContent="Ожидаемая/рачётная плотсность сусла, Plato ⚠️"/>
+            <BulletedList textContent="Общее время кипячения сусла, мин ⚠️"/>
             </List>
             <Typography variant="subtitle1" component="h3" gutterBottom>
               2. Хмель:
             </Typography>
             <List>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Наименование хмеля ✅" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Альфа кислота(см. на упаковке или уточняйте у производителя хмеля) ⚠️" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Количество данного хмеля на варку, г ⚠️" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Время внесения хмеля, от начала кипячения, мин ⚠️" />
-              </ListItem>
+            <BulletedList textContent="Наименование хмеля ✅"/>
+            <BulletedList textContent="Альфа кислота(см. на упаковке или уточняйте у производителя хмеля) ⚠️"/>
+            <BulletedList textContent="Количество данного хмеля на варку, г ⚠️"/>
+            <BulletedList textContent="Время внесения хмеля, от начала кипячения, мин ⚠️"/>
             </List>
             <Typography variant="h5" component="h2" gutterBottom>
               Дополнительные поля:{" "}
@@ -184,41 +125,16 @@ const About = () => {
               Февраль 2022:{" "}
             </Typography>
             <List>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Выбор вводимой плотности SG или Plato" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Валидация полей" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Расчёт горечи для Virpul/Hopstand" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Расчёт горечи для DryHop" />
-              </ListItem>
+            <BulletedList textContent="Выбор вводимой плотности SG или Plato"/>
+            <BulletedList textContent="Валидация полей"/>
+            <BulletedList textContent="Расчёт горечи для Virpul/Hopstand"/>
+            <BulletedList textContent="Расчёт горечи для DryHop"/>
             </List>
             <Typography variant="h5" component="h2" gutterBottom>
               Июль 2022:
             </Typography>
             <List>
-              <ListItem>
-                <ListItemIcon>
-                  <CircleIcon style={{ width: "10px" }} />
-                </ListItemIcon>
-                <ListItemText primary="Личный кабинет пивовара, где будут хранится калькуляции" />
-              </ListItem>
+            <BulletedList textContent="Личный кабинет пивовара, где будут хранится калькуляции"/>
             </List>
           </Grid>
         </Box>

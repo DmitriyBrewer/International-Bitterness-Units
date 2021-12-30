@@ -4,6 +4,7 @@ import HopsButton from "../../components/UI/button/HopsButton";
 import { useState } from "react";
 import { Container } from "@mui/material";
 import { Slider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 import { CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
@@ -84,6 +85,7 @@ const CalculatorIBU: React.FC = () => {
 
   return (
     <div>
+      <CssBaseline />
       {/* {isAuth && */}
     <div style={{ textAlign: "center" }}>
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
