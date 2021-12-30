@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PharamInput from "../components/UI/input/PharamInput";
 
 interface IWort {
@@ -13,9 +13,9 @@ interface WortProps {
 
 const Wort: React.FC<WortProps> = ({ getwort }) => {
   const [value, setValue] = React.useState<IWort>({
-    volume: "",
-    destiny: "",
-    boil: ""
+    volume: "1000",
+    destiny: "12",
+    boil: "60"
   });
 
   const volumeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +32,12 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
     setValue(value);
     getwort(value.volume, value.destiny, value.boil);
   };
+
+  //при монтировании орабатывает
+  useEffect(()=>{
+    setValue(value);
+    getwort(value.volume, value.destiny, value.boil);
+  })
 
   return (
     <div>

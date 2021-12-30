@@ -84,7 +84,7 @@ const CalculatorIBU: React.FC = () => {
 
   return (
     <div>
-      {isAuth &&
+      {/* {isAuth && */}
     <div style={{ textAlign: "center" }}>
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
@@ -121,7 +121,7 @@ const CalculatorIBU: React.FC = () => {
           disabled
           defaultValue={0}
           min={0}
-          max={250}
+          max={100}
           value={parsConcatIbu || 0}
           aria-label="Default"
           valueLabelDisplay="auto"
@@ -141,7 +141,7 @@ const CalculatorIBU: React.FC = () => {
       
         }
     </div>
-    }
+    {/* } */}
     </div>
   );
 };

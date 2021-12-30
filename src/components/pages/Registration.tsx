@@ -32,6 +32,7 @@ const Registration = () => {
 
   return (
     <form onSubmit={Blur} style={{ textAlign: "center" }}>
+      <h1 style={{fontFamily:'roboto'}}>Регистрация</h1>
       <PharamInput
         placeholder="Введите email"
         value={value?.email}

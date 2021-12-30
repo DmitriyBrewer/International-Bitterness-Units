@@ -23,12 +23,12 @@ export default function Navbar() {
       <AppBar position="static">
         <Toolbar style={{ background: "black" }}>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/calc">
+            <Link to="/main">
               <Logo />
             </Link>
           </Typography>
           <Typography variant="h6" component="div" sx={{ flexGrow: 30 }}>
-            <Link to="/calc" className={cl.header_text_content}>
+            <Link to="/main" className={cl.header_text_content}>
               Пивная платформа
             </Link>
           </Typography>
@@ -39,10 +39,10 @@ export default function Navbar() {
           {!isAuth &&
           <div>
           <Link to="/signup " className={cl.header_text_content}>
-            зарегистрироваться
+            Регистрация
           </Link>
           <Link to="/login" className={cl.header_text_content}>
-            Войти
+            Вход
           </Link>
           </div>}
           {isAuth && 
@@ -51,7 +51,9 @@ export default function Navbar() {
             Выход
           </div>
           }
-           {isAuth &&<AvatarMenu/>}
+          {isAuth &&
+          <div><AvatarMenu/></div>
+          }
         </Toolbar>
       </AppBar>
     </Box>

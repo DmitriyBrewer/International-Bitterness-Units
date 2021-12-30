@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DeleteButton from "./UI/button/DeleteButton";
 import PharamInput from "./UI/input/PharamInput";
 import Calculate from "../components/Calculate";
@@ -31,10 +31,10 @@ const Hop: React.FC<HopProps> = ({
   onClick
 }) => {
   const [value, setValue] = React.useState<IHop>({
-    name: "",
-    alpha: "",
-    amount: "",
-    time: ""
+    name: "Cascade",
+    alpha: "7.1",
+    amount: "2500",
+    time: "10"
   });
 
   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
