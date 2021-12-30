@@ -4,6 +4,8 @@ import CalculatorIBU from "./pages/CalculatorIBU";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Main from "./pages/Main";
+import About from "./pages/About";
+
 
 
 
@@ -15,6 +17,8 @@ function AppRouter() {
       <Route path="/calc" element={<CalculatorIBU />} />
       <Route path="/login" element={<Login />}/>
       <Route path="/main" element={<Main />}/>
+      <Route path="/about" element={<About />}/>
+
       {/* <Route
         path="/lala"
         element={<Navigate to="/calc" />}
