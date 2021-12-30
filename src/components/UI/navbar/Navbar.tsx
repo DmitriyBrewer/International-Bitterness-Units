@@ -36,6 +36,9 @@ export default function Navbar() {
           <Link to="/calc" className={cl.header_text_content}>
             Калькулятор
           </Link>
+          <Link to="/calc" className={cl.header_text_content}>
+            About
+          </Link>
           {/* {!isAuth &&
           <div>
           <Link to="/signup " className={cl.header_text_content}>
