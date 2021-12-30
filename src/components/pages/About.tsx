@@ -26,18 +26,17 @@ const About = () => {
           </div>
           <Typography variant="subtitle1" component="h3" gutterBottom>
             Калькулятор IBU предназначен для калькуляции расчётной горечи пива.В
-            основу калькуляции заложена формула Тинсета. 
+            основу калькуляции заложена формула Тинсета.
           </Typography>
           <Typography variant="h4" component="h2" gutterBottom>
             Кому подойдёт калькулятор
           </Typography>
           <Typography variant="subtitle1" component="h3" gutterBottom>
-          
-            Меня зовут Дмитрий Яненко, я являюсь практикующим пивоваром,
-            часто сталкиваюсь с расчётом IBU, поэтому и принял решения
-            разработать удобный с точки зрения UI и практичный с точки зрения
-            пивоварения калькулятор. Калькулятор подойдёт
-            как и промышленному пивовару так и для домашнего пивоварения.{" "}
+            Меня зовут Дмитрий Яненко, я являюсь практикующим пивоваром, часто
+            сталкиваюсь с расчётом IBU, поэтому и принял решения разработать
+            удобный с точки зрения UI и практичный с точки зрения пивоварения
+            калькулятор. Калькулятор подойдёт как и промышленному пивовару так и
+            для домашнего пивоварения.{" "}
           </Typography>
           <img
             src="https://avatars.githubusercontent.com/u/91193945?v=4"
@@ -54,11 +53,11 @@ const About = () => {
           </Typography>
           <Grid item xs={12} md={6}>
             <List>
-              <BulletedList textContent="Получение расчётной горечи пива"/>
-              <BulletedList textContent="Возможность добавлять до 5 хмелей на варку, каждый хмель имеет своё IBU"/>
-              <BulletedList textContent="Возможность редактировать IBU. С помощью инструмента Slider можно легко в  реальном времени изменить кол-во добавляемого хмеля, тем самым меня горечь которую даст конкретный хмель и увидеть как хмель изменит общее IBU"/>
-              <BulletedList textContent="Возможность удалять хмель"/>
-              <BulletedList textContent="Возможность настраивать максимальное значение инструмента Slider"/>
+              <BulletedList textContent="Получение расчётной горечи пива" />
+              <BulletedList textContent="Возможность добавлять до 5 хмелей на варку, каждый хмель имеет своё IBU" />
+              <BulletedList textContent="Возможность редактировать IBU. С помощью инструмента Slider можно легко в  реальном времени изменить кол-во добавляемого хмеля, тем самым меня горечь которую даст конкретный хмель и увидеть как хмель изменит общее IBU" />
+              <BulletedList textContent="Возможность удалять хмель" />
+              <BulletedList textContent="Возможность настраивать максимальное значение инструмента Slider" />
             </List>
             <Typography variant="h4" component="h2" gutterBottom>
               Инструкция
@@ -83,18 +82,18 @@ const About = () => {
               1. Сусло:
             </Typography>
             <List>
-            <BulletedList textContent="Объём получаемого сусла, л ⚠️"/>
-            <BulletedList textContent="Ожидаемая/рачётная плотсность сусла, Plato ⚠️"/>
-            <BulletedList textContent="Общее время кипячения сусла, мин ⚠️"/>
+              <BulletedList textContent="Объём получаемого сусла, л ⚠️" />
+              <BulletedList textContent="Ожидаемая/рачётная плотсность сусла, Plato ⚠️" />
+              <BulletedList textContent="Общее время кипячения сусла, мин ⚠️" />
             </List>
             <Typography variant="subtitle1" component="h3" gutterBottom>
               2. Хмель:
             </Typography>
             <List>
-            <BulletedList textContent="Наименование хмеля ✅"/>
-            <BulletedList textContent="Альфа кислота(см. на упаковке или уточняйте у производителя хмеля) ⚠️"/>
-            <BulletedList textContent="Количество данного хмеля на варку, г ⚠️"/>
-            <BulletedList textContent="Время внесения хмеля, от начала кипячения, мин ⚠️"/>
+              <BulletedList textContent="Наименование хмеля ✅" />
+              <BulletedList textContent="Альфа кислота(см. на упаковке или уточняйте у производителя хмеля) ⚠️" />
+              <BulletedList textContent="Количество данного хмеля на варку, г ⚠️" />
+              <BulletedList textContent="Время внесения хмеля, от начала кипячения, мин ⚠️" />
             </List>
             <Typography variant="h5" component="h2" gutterBottom>
               Дополнительные поля:{" "}
@@ -125,16 +124,16 @@ const About = () => {
               Февраль 2022:{" "}
             </Typography>
             <List>
-            <BulletedList textContent="Выбор вводимой плотности SG или Plato"/>
-            <BulletedList textContent="Валидация полей"/>
-            <BulletedList textContent="Расчёт горечи для Virpul/Hopstand"/>
-            <BulletedList textContent="Расчёт горечи для DryHop"/>
+              <BulletedList textContent="Выбор вводимой плотности SG или Plato" />
+              <BulletedList textContent="Валидация полей" />
+              <BulletedList textContent="Расчёт горечи для Virpul/Hopstand" />
+              <BulletedList textContent="Расчёт горечи для DryHop" />
             </List>
             <Typography variant="h5" component="h2" gutterBottom>
               Июль 2022:
             </Typography>
             <List>
-            <BulletedList textContent="Личный кабинет пивовара, где будут хранится калькуляции"/>
+              <BulletedList textContent="Личный кабинет пивовара, где будут хранится калькуляции" />
             </List>
           </Grid>
         </Box>
