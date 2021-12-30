@@ -1,8 +1,7 @@
 import React from "react";
-import { Slider } from "@mui/material";
 import { TextField } from "@mui/material";
 // import { Checkbox } from '@mui/material';
-import { Switch } from '@mui/material';
+import { Switch, Slider } from '@mui/material';
 
 
 
