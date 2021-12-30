@@ -130,13 +130,13 @@ const CalculatorIBU: React.FC = () => {
             color: "success.secondary"
           }}
         />
-        <HopsButton
+        {/* <HopsButton
         onClick={(event) => {
           event.preventDefault();
         }}
     >
       сохранить расчёт
-    </HopsButton>
+    </HopsButton> */}
       </Container>
       
         }
