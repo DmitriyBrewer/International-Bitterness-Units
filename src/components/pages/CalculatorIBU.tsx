@@ -119,7 +119,7 @@ const CalculatorIBU: React.FC = () => {
         >
           Общее ibu: {parsConcatIbu || 0}
         </h1>
-        <Slider
+        {/* <Slider
           disabled
           defaultValue={0}
           min={0}
@@ -131,7 +131,7 @@ const CalculatorIBU: React.FC = () => {
             width: "50%",
             color: "success.secondary"
           }}
-        />
+        /> */}
         {/* <HopsButton
         onClick={(event) => {
           event.preventDefault();
