@@ -90,7 +90,7 @@ const CalculatorIBU: React.FC = () => {
       <CssBaseline />
       {/* {isAuth && */}
     <div style={{ textAlign: "center"}}>
-    <div style={{background:'darkred', textAlign:"center", color:'white'}}>Заполнить полей</div>
+    <div style={{background:'darkred', textAlign:"center", color:'white'}}>Заполнение полей</div>
     {/* <div style={{ textAlign: "center", border:'solid',borderWidth:'2px',borderColor:'black', marginLeft:'30%', marginRight:'30%', marginTop:'1%', marginBottom:'1%'}}> */}
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
