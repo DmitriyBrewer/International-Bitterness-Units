@@ -87,7 +87,8 @@ const CalculatorIBU: React.FC = () => {
     <div>
       <CssBaseline />
       {/* {isAuth && */}
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center"}}>
+    {/* <div style={{ textAlign: "center", border:'solid',borderWidth:'2px',borderColor:'black', marginLeft:'30%', marginRight:'30%', marginTop:'1%', marginBottom:'1%'}}> */}
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
         <Wort getwort={getInputWort} />
