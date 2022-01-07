@@ -41,6 +41,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
 
   return (
     <div>
+      
       <h1 style={{ textAlign: "center", fontFamily: "roboto" }}>
         Калькулятор IBU
       </h1>
