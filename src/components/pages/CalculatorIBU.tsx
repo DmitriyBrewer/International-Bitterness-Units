@@ -24,7 +24,7 @@ const CalculatorIBU: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
-  const isAuth = useSelector((state:RootState) => state.user.isAuth)
+  const isAuth = useSelector((state:RootState) => state.user.isAuth);
 
     //loader test
     setTimeout(() => {
@@ -80,11 +80,9 @@ const CalculatorIBU: React.FC = () => {
 
   return (
     <div>
-      
       <CssBaseline />
       {/* {isAuth && */}
     <div style={{ textAlign: "center"}}>
-    {/* <div style={{ textAlign: "center", border:'solid',borderWidth:'2px',borderColor:'black', marginLeft:'30%', marginRight:'30%', marginTop:'1%', marginBottom:'1%'}}> */}
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
         <Alert variant="filled" severity="info" style={{marginTop:'20px'}}>
@@ -140,7 +138,6 @@ const CalculatorIBU: React.FC = () => {
       сохранить расчёт
     </HopsButton> */}
       </Container>
-      
         }
     </div>
     {/* } */}

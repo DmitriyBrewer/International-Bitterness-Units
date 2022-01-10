@@ -33,7 +33,7 @@ const Hop: React.FC<HopProps> = ({
 }) => {
   const [value, setValue] = React.useState<IHop>({
     name: "Sabro",
-    alpha: "13.5",
+    alpha: "13",
     amount: "2500",
     time: "25"
   });
