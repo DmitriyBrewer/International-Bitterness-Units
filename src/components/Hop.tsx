@@ -104,7 +104,7 @@ const Hop: React.FC<HopProps> = ({
         onBlur={Blur}
         type="number"
         error={error.amount}
-        helperText={'Введите кол-во хмеля, г'}
+        helperText={''}
       />
       <PharamInput
         placeholder="Время внесения, мин"
