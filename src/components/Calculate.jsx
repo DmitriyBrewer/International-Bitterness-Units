@@ -11,8 +11,10 @@ const Calculate = ({
   getibu,
   id
 }) => {
+  console.log(wortdestiny);
   const volume = parseInt(wortvolume, 10);
   const destiny = parseInt(wortdestiny, 10);
+  console.log(destiny);
   const boil = parseInt(wortboil, 10);
 
   const name1 = name;
@@ -33,11 +35,17 @@ const Calculate = ({
   }, [alpha, amount, time, wortvolume, wortdestiny, wortboil]);
 
   function OGSG(plato) {
-    if (plato >= 1.09) {
+    console.log(plato);
+    if (plato <= 1000) {
       var sg = 1 + plato / (258.6 - (plato / 258.2) * 227.1);
       var parsSG = parseFloat(sg.toFixed(2));
+      // console.log(parsSG);
       return parsSG;
-    } else return plato;
+      //
+    } else var pl = plato / 1000;
+    //
+    console.log(pl);
+    return pl;
   }
 
   function KOEF(plato, timeHops) {

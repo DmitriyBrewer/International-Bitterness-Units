@@ -1,10 +1,17 @@
 import React, { useEffect } from "react";
 import PharamInput from "../components/UI/input/PharamInput";
+//radioButton MUI
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
+//radioButton MUI
 
 
 interface IWort {
   volume: string;
-  destiny: string;
+  destiny: any;
   boil: string;
 }
 
@@ -25,6 +32,12 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
     boil: false
   });
 
+  //хук ogsg
+  const [switchDestiny, setSwitchDestiny] = React.useState("SG");
+  const handleChangeDestiny = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSwitchDestiny((event.target as HTMLInputElement).value);
+  };
+  //хук ogsg
 
   const volumeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, volume: event.target.value });
@@ -42,18 +55,31 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
   // };
 
   const BlurVolume = () => {
-    if (!value.volume.trim() || parseInt(value.volume, 10) >= 100001) {
+    if (!value.volume.trim() || parseInt(value.volume, 10) > 100000) {
       setError({ ...error, volume: true });
     } else setError({ ...error, volume: false });
     setValue(value);
     getwort(value.volume, value.destiny, value.boil);
   };
 
-  const BlurDestiny = () => {
+  //Blur Destiny разделим на два
+  // const BlurDestiny = () => {
+  //   if (
+  //     !value.destiny.trim() ||
+  //     parseInt(value.destiny, 10) < 5 ||
+  //     parseInt(value.destiny, 10) > 35
+  //   ) {
+  //     setError({ ...error, destiny: true });
+  //   } else setError({ ...error, destiny: false });
+  //   setValue(value);
+  //   getwort(value.volume, value.destiny, value.boil);
+  // };
+
+  const BlurDestinySG = () => {
     if (
       !value.destiny.trim() ||
-      parseInt(value.destiny, 10) <= 4 ||
-      parseInt(value.destiny, 10) >= 36
+      parseInt(value.destiny, 10) < 7.56 ||
+      parseInt(value.destiny, 10) > 35
     ) {
       setError({ ...error, destiny: true });
     } else setError({ ...error, destiny: false });
@@ -61,8 +87,23 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
     getwort(value.volume, value.destiny, value.boil);
   };
 
+  const BlurDestinyOG = () => {
+    if (!value.destiny.trim() || parseInt(value.destiny, 10) < 1.03 ||
+    parseInt(value.destiny, 10) > 1.09) {
+      setError({ ...error, destiny: true });
+    } else setError({ ...error, destiny: false });
+    setValue(value);
+    //
+    getwort(value.volume, value.destiny * 1000, value.boil);
+    //
+  };
+    //Blur Destiny разделим на два
+
+//helperText={boil ? !error.time ? "" : "❌ от 0 до Время кипячения":
+// !error.time ? "⚠️Введите время кипячения" : "❌Введите Время Кипячения"
+// }
   const BlurBoil = () => {
-    if (!value.boil.trim() || parseInt(value.boil, 10) >= 201) {
+    if (!value.boil.trim() || parseInt(value.boil, 10) > 200) {
       setError({ ...error, boil: true });
     } else setError({ ...error, boil: false });
     setValue(value);
@@ -72,8 +113,8 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
   //при монтировании орабатывает
   useEffect(()=>{
     setValue(value);
-    getwort(value.volume, value.destiny, value.boil);
-  })
+       getwort(value.volume, value.destiny, value.boil);
+  },[])
 
   return (
     <div>
@@ -92,16 +133,28 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
           !error.volume ? "" : "❌ Объём от 0 до 100 000, л"
         }
       />
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Введите плотность</FormLabel>
+        <RadioGroup
+          aria-label="gravity"
+          name="controlled-radio-buttons-group"
+          value={switchDestiny}
+          onChange={handleChangeDestiny}
+        >
+          <FormControlLabel value="SG" control={<Radio  size="small"/>} label="SG" />
+          <FormControlLabel value="OG" control={<Radio  size="small"/>} label="OG" />
+        </RadioGroup>
+      </FormControl>
       <PharamInput
-        placeholder="Плотность сусла"
+        placeholder={switchDestiny}
         id="destiny"
         value={value?.destiny}
         onChange={destinyHandler}
-        onBlur={BlurDestiny }
+        onBlur={switchDestiny === "SG" ? BlurDestinySG : BlurDestinyOG }
         type="number"
         error={error.destiny}
-        helperText={
-          !error.destiny ? "" : "❌ Plato от 5 до 35"
+        helperText={switchDestiny === "SG" ?
+          !error.destiny ? "" : "❌ SG от 7.56 до 35" : !error.destiny ? "" : "❌ OG от 1.03 до 1.09"
         }
       />
       <PharamInput
