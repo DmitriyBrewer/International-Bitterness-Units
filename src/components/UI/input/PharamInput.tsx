@@ -2,6 +2,8 @@ import React from "react";
 import { TextField } from "@mui/material";
 
 interface PharamInputProps {
+  helperText?: string;
+  error?: boolean;
   placeholder: string;
   id?: string;
   value: string | undefined;
@@ -10,6 +12,8 @@ interface PharamInputProps {
   type: string;
 }
 const PharamInput: React.FC<PharamInputProps> = ({
+  helperText,
+  error,
   placeholder,
   onChange,
   value,
@@ -20,6 +24,8 @@ const PharamInput: React.FC<PharamInputProps> = ({
   return (
     <div style={{ margin: "10px", display: "inline-flex" }}>
       <TextField
+        error={error}
+        helperText={helperText}
         label={placeholder}
         variant="outlined"
         size="small"
