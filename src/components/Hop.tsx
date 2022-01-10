@@ -70,7 +70,7 @@ const Hop: React.FC<HopProps> = ({
   };
 
   const BlurTime = () => {
-    if (!value.time.trim() || parseInt(value.time, 10) >= parseInt(boil, 10) + 1) {
+    if (!value.time.trim() || !boil.trim() || parseInt(value.time, 10) >= parseInt(boil, 10) + 1) {
       setError({ ...error, time: true });
     } else setError({ ...error, time: false });
     gethop(id, { ...value });
@@ -94,7 +94,7 @@ const Hop: React.FC<HopProps> = ({
         type="number"
         error={error.alpha}
         helperText={
-          !error.alpha ? "Введите альфа кислота" : "❌ Не корректное значение"
+          !error.alpha ? "" : "❌ Альфа кислота от 0 до ∞"
         }
       />
       <PharamInput
@@ -114,7 +114,7 @@ const Hop: React.FC<HopProps> = ({
         type="number"
         error={error.time}
         helperText={
-          !error.time ? "Введите время внесения" : "❌ Не корректное значение"
+          !error.time ? "" : "❌ от 0 до время кипячения"
         }
       />
       <DeleteButton onClick={onClick} children={"удалить"} />

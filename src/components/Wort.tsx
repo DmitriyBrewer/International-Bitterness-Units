@@ -89,7 +89,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         type="number"
         error={error.volume}
         helperText={
-          !error.volume ? "Введите объём сусла. л" : "❌ Объём от 0 до 100 000"
+          !error.volume ? "" : "❌ Объём от 0 до 100 000, л"
         }
       />
       <PharamInput
@@ -101,7 +101,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         type="number"
         error={error.destiny}
         helperText={
-          !error.destiny ? "Введите плотность сусла" : "❌ Plato от 5 до 35"
+          !error.destiny ? "" : "❌ Plato от 5 до 35"
         }
       />
       <PharamInput
@@ -114,7 +114,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         error={error.boil}
         helperText={
           !error.boil
-            ? "Введите время кипячения"
+            ? ""
             : "❌ Кипячение от 0 до 200 мин"
         }
 
