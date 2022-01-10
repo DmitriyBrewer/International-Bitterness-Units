@@ -83,13 +83,12 @@ const Hop: React.FC<HopProps> = ({
 
   //disabled TimeInput
   const BOILTRIM = () => {
-    if(!boil.trim()){
+    if(!boil.trim()||parseInt(value.time, 10) >= parseInt(boil, 10) + 1){
       setDisableTime(true)
     } else setDisableTime(false)
   }
   useEffect(()=>{
     BOILTRIM()
-    BlurTime()
   },[boil])
   //disabled TimeInput
 
