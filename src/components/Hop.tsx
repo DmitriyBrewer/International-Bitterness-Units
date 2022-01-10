@@ -32,10 +32,10 @@ const Hop: React.FC<HopProps> = ({
   onClick
 }) => {
   const [value, setValue] = React.useState<IHop>({
-    name: "Cascade",
-    alpha: "",
-    amount: "",
-    time: ""
+    name: "Sabro",
+    alpha: "13.5",
+    amount: "2500",
+    time: "25"
   });
   const [error, setError] = React.useState({
     alpha: false,

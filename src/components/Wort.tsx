@@ -14,9 +14,9 @@ interface WortProps {
 
 const Wort: React.FC<WortProps> = ({ getwort }) => {
   const [value, setValue] = React.useState<IWort>({
-    volume: "",
-    destiny: "",
-    boil: ""
+    volume: "1000",
+    destiny: "12",
+    boil: "60"
   });
 
   const [error, setError] = React.useState({
