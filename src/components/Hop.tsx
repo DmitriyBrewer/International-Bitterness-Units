@@ -129,7 +129,7 @@ const Hop: React.FC<HopProps> = ({
         onBlur={BlurTime}
         type="number"
         error={error.time}
-        helperText={boil ? !error.time ? "" : "❌ от 0 до время кипячения":
+        helperText={boil ? !error.time ? "" : "❌ от 0 до Время кипячения":
           !error.time ? "⚠️Введите время кипячения" : "❌Время кипячения не введено"
         }
         disable={disableTime}
