@@ -11,8 +11,6 @@ import HOPS from "../../store/reducer/hopSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 
 
-
-
 export interface IHop {
   id: string;
 }
@@ -26,9 +24,6 @@ const CalculatorIBU: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
   const isAuth = useSelector((state:RootState) => state.user.isAuth)
-
-
-
 
     //loader test
     setTimeout(() => {
@@ -73,8 +68,6 @@ const CalculatorIBU: React.FC = () => {
     setDestiny(destiny);
     setBoil(boil);
   };
-
-  
 
   //concat IBU
   var initialValue = 0;

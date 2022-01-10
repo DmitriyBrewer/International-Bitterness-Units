@@ -116,6 +116,7 @@ const Hop: React.FC<HopProps> = ({
         helperText={
           !error.time ? "" : "❌ от 0 до время кипячения"
         }
+        disable={false}
       />
       <DeleteButton onClick={onClick} children={"удалить"} />
       <Calculate
