@@ -21,6 +21,7 @@ interface HopProps {
   boil: string;
   onClick: any;
 }
+
 const Hop: React.FC<HopProps> = ({
   gethop,
   getibu,
@@ -32,9 +33,14 @@ const Hop: React.FC<HopProps> = ({
 }) => {
   const [value, setValue] = React.useState<IHop>({
     name: "Cascade",
-    alpha: "7.1",
-    amount: "2500",
-    time: "10"
+    alpha: "",
+    amount: "",
+    time: ""
+  });
+  const [error, setError] = React.useState({
+    alpha: false,
+    amount: false,
+    time: false
   });
 
   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,6 +61,22 @@ const Hop: React.FC<HopProps> = ({
     setValue(value);
   };
 
+  const BlurAlpha = () => {
+    if (!value.alpha.trim() || parseInt(value.alpha, 10) === 0) {
+      setError({ ...error, alpha: true });
+    } else setError({ ...error, alpha: false });
+    gethop(id, { ...value });
+    setValue(value);
+  };
+
+  const BlurTime = () => {
+    if (!value.time.trim() || parseInt(value.time, 10) >= parseInt(boil, 10) + 1) {
+      setError({ ...error, time: true });
+    } else setError({ ...error, time: false });
+    gethop(id, { ...value });
+    setValue(value);
+  };
+
   return (
     <div>
       <PharamInput
@@ -68,8 +90,12 @@ const Hop: React.FC<HopProps> = ({
         placeholder="Альфа кислота"
         value={value?.alpha}
         onChange={alphaHandler}
-        onBlur={Blur}
+        onBlur={BlurAlpha}
         type="number"
+        error={error.alpha}
+        helperText={
+          !error.alpha ? "Введите альфа кислота" : "❌ Не корректное значение"
+        }
       />
       <PharamInput
         placeholder="Кол-во, г"
@@ -77,13 +103,19 @@ const Hop: React.FC<HopProps> = ({
         onChange={amountHandler}
         onBlur={Blur}
         type="number"
+        error={error.amount}
+        helperText={'Введите кол-во хмеля, г'}
       />
       <PharamInput
         placeholder="Время внесения, мин"
         value={value?.time}
         onChange={timeHandler}
-        onBlur={Blur}
+        onBlur={BlurTime}
         type="number"
+        error={error.time}
+        helperText={
+          !error.time ? "Введите время внесения" : "❌ Не корректное значение"
+        }
       />
       <DeleteButton onClick={onClick} children={"удалить"} />
       <Calculate
