@@ -43,6 +43,10 @@ const Hop: React.FC<HopProps> = ({
     time: false
   });
 
+  //disabled TimeInput
+  const [disableTime, setDisableTime] = React.useState(false);
+  //disabled TimeInput
+
   const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, name: event.target.value });
   };
@@ -76,6 +80,18 @@ const Hop: React.FC<HopProps> = ({
     gethop(id, { ...value });
     setValue(value);
   };
+
+  //disabled TimeInput
+  const BOILTRIM = () => {
+    if(!boil.trim()){
+      setDisableTime(true)
+    } else setDisableTime(false)
+  }
+  useEffect(()=>{
+    BOILTRIM()
+    BlurTime()
+  },[boil])
+  //disabled TimeInput
 
   return (
     <div>
@@ -113,10 +129,10 @@ const Hop: React.FC<HopProps> = ({
         onBlur={BlurTime}
         type="number"
         error={error.time}
-        helperText={
-          !error.time ? "" : "❌ от 0 до время кипячения"
+        helperText={boil ? !error.time ? "" : "❌ от 0 до время кипячения":
+          !error.time ? "⚠️Введите время кипячения" : "❌Время кипячения не введено"
         }
-        disable={false}
+        disable={disableTime}
       />
       <DeleteButton onClick={onClick} children={"удалить"} />
       <Calculate

@@ -2,7 +2,7 @@ import React from "react";
 import { TextField } from "@mui/material";
 
 interface PharamInputProps {
-  disable?: boolean;
+  disable?: any;
   helperText?: string;
   error?: boolean;
   placeholder: string;
