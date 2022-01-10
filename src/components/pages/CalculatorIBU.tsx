@@ -86,7 +86,7 @@ const CalculatorIBU: React.FC = () => {
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
         <Alert variant="filled" severity="info" style={{marginTop:'20px'}}>
-          Для наглядной работы калькулятора, поля были заблаговременно заполнены
+          Для наглядной работы калькулятора, поля были заблаговременно заполнены, нажмите добавить хмель
         </Alert>
         <Wort getwort={getInputWort} />
         <div style={{ margin: "10px", display: "flex", justifyContent:'center', flexWrap:'wrap' }}>
