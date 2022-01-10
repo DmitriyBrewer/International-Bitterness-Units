@@ -9,6 +9,7 @@ import { CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
+import Alert from '@mui/material/Alert';
 
 
 export interface IHop {
@@ -86,6 +87,9 @@ const CalculatorIBU: React.FC = () => {
     {/* <div style={{ textAlign: "center", border:'solid',borderWidth:'2px',borderColor:'black', marginLeft:'30%', marginRight:'30%', marginTop:'1%', marginBottom:'1%'}}> */}
       {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
+        <Alert variant="filled" severity="info" style={{marginTop:'20px'}}>
+          Поля заполненны для наглядного примера, каждое поле можно изменять
+        </Alert>
         <Wort getwort={getInputWort} />
         <div style={{ margin: "10px", display: "flex", justifyContent:'center', flexWrap:'wrap' }}>
         <HopsButton

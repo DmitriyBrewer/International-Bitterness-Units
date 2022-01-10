@@ -130,7 +130,7 @@ const Hop: React.FC<HopProps> = ({
         type="number"
         error={error.time}
         helperText={boil ? !error.time ? "" : "❌ от 0 до Время кипячения":
-          !error.time ? "⚠️Введите время кипячения" : "❌Время кипячения не введено"
+          !error.time ? "⚠️Введите время кипячения" : "❌Введите Время Кипячения"
         }
         disable={disableTime}
       />
