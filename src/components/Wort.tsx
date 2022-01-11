@@ -165,7 +165,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
           name="controlled-radio-buttons-group"
           value={switchDestiny}
           onChange={handleChangeDestiny}
-          style={{marginRight:"30%",marginLeft:"30%"}}
+          style={{marginRight:"35%",marginLeft:"35%"}}
         >
           <FormControlLabel 
           style={{margin:'0px'}}
