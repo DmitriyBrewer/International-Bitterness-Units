@@ -22,7 +22,7 @@ interface WortProps {
 const Wort: React.FC<WortProps> = ({ getwort }) => {
   const [value, setValue] = React.useState<IWort>({
     volume: "1000",
-    destiny: "12",
+    destiny:"12",
     boil: "60"
   });
 
@@ -121,7 +121,6 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
       <h1 style={{ textAlign: "center", fontFamily: "roboto" }}>
         Калькулятор IBU
       </h1>
-      
       <PharamInput
         placeholder="Объем сусла, л"
         id="wort"
@@ -134,19 +133,6 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
           !error.volume ? "" : "❌ Объём от 0 до 100 000, л"
         }
       />
-      <PharamInput
-        placeholder={switchDestiny}
-        id="destiny"
-        value={value?.destiny}
-        onChange={destinyHandler}
-        onBlur={switchDestiny === "Plato" ? BlurDestinyPlato : BlurDestinySG }
-        type="number"
-        error={error.destiny}
-        helperText={switchDestiny === "Plato" ?
-          !error.destiny ? "" : "❌ Plato от 7.56 до 35" : !error.destiny ? "" : "❌ SG от 1.03 до 1.09"
-        }
-      />
-        
       <PharamInput
         placeholder="Время кипячения"
         id="boil"
@@ -161,19 +147,38 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
             : "❌ Кипячение от 0 до 200 мин"
         }
       />
-      <FormControl component="fieldset">
-        <FormLabel component="legend" style={{fontSize:'12px'}}>Введите плотность</FormLabel>
+      <FormControl component="fieldset" style={{ display:'flex', flexDirection:'column', justifyContent:'center'}}>
+        <FormLabel component="legend" style={{fontSize:'12px'}}>Выберите плотность</FormLabel>
         <RadioGroup
         row
           aria-label="gravity"
           name="controlled-radio-buttons-group"
           value={switchDestiny}
           onChange={handleChangeDestiny}
+          style={{marginRight:"35%",marginLeft:"35%"}}
         >
-          <FormControlLabel value="Plato" control={<Radio  size="small"/>} label="Plato" />
-          <FormControlLabel value="SG" control={<Radio  size="small"/>} label="SG" />
+          <FormControlLabel 
+          style={{margin:'0px'}}
+          value="Plato" control={<Radio  size="small"  />} label="Plato" />
+          <FormControlLabel 
+          style={{margin:'0px'}}
+          value="SG" control={<Radio  size="small"/>} label="SG" />
         </RadioGroup>
       </FormControl>
+      <PharamInput
+        placeholder={switchDestiny}
+        id="destiny"
+        value={value?.destiny}
+        onChange={destinyHandler}
+        onBlur={switchDestiny === "Plato" ? BlurDestinyPlato : BlurDestinySG }
+        type="number"
+        error={error.destiny}
+        helperText={switchDestiny === "Plato" ?
+          !error.destiny ? "" : "❌ Plato от 7.56 до 35" : !error.destiny ? "" : "❌ SG от 1.03 до 1.09"
+        }
+      />
+      
+      
     </div>
   );
 };
