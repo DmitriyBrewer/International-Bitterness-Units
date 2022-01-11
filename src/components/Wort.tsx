@@ -94,7 +94,8 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
     } else setError({ ...error, destiny: false });
     setValue(value);
     //
-    getwort(value.volume, value.destiny * 1000, value.boil);
+    // getwort(value.volume, value.destiny * 1000, value.boil);
+    getwort(value.volume, value.destiny, value.boil);
     //
   };
     //Blur Destiny разделим на два
@@ -177,8 +178,6 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
           !error.destiny ? "" : "❌ Plato от 7.56 до 35" : !error.destiny ? "" : "❌ SG от 1.03 до 1.09"
         }
       />
-      
-      
     </div>
   );
 };
