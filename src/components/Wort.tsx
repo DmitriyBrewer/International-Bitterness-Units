@@ -108,16 +108,10 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
       setError({ ...error, destiny: true });
     } else setError({ ...error, destiny: false });
     setValue(value);
-    //
-    // getwort(value.volume, value.destiny * 1000, value.boil);
     getwort(value.volume, value.destiny, value.boil);
-    //
   };
     //Blur Destiny разделим на два
 
-//helperText={boil ? !error.time ? "" : "❌ от 0 до Время кипячения":
-// !error.time ? "⚠️Введите время кипячения" : "❌Введите Время Кипячения"
-// }
   const BlurBoil = () => {
     if (!value.boil.trim() || parseInt(value.boil, 10) > 200) {
       setError({ ...error, boil: true });
@@ -202,10 +196,10 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         helperText={switchDestiny === "Plato" ?
           !gravity ?
           !error.destiny ? "" : "❌ Plato от 7.56 до 35" :
-          !error.destiny ? "" : "⚠️ Вновь введите PLATO":
+          !error.destiny ? "" : "⚠️ Заново введите PLATO":
           gravity ?
           !error.destiny ? "" : "❌ SG от 1.03 до 1.09" :
-          !error.destiny ? "" : "⚠️ Вновь введите SG"
+          !error.destiny ? "" : "⚠️ Заново введите SG"
         }
       />
     </div>
