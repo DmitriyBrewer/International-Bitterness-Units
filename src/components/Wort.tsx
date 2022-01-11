@@ -39,12 +39,27 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
   };
   //хук ogsg
 
+  //хук выбора value для gravity plato/sg
+    const [gravity, setGravity] = React.useState(false);
+  //хук выбора value для gravity plato/sg
+
+
   const volumeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, volume: event.target.value });
   };
-  const destinyHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //Разделим destinyHandler на 2
+  // const destinyHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   setValue({ ...value, destiny: event.target.value });
+  // };
+  const destinyHandlerPlato = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGravity(false);
     setValue({ ...value, destiny: event.target.value });
   };
+  const destinyHandlerSG = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGravity(true);
+    setValue({ ...value, destiny: event.target.value });
+  };
+  //Разделим destinyHandler на 2
   const boilHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue({ ...value, boil: event.target.value });
   };
@@ -169,13 +184,28 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
       <PharamInput
         placeholder={switchDestiny}
         id="destiny"
-        value={value?.destiny}
-        onChange={destinyHandler}
+        value={
+          switchDestiny === "Plato"
+            ? gravity
+              ? (parseFloat(value?.destiny) * 1000 - 1000) / 4
+              : value?.destiny
+            : gravity
+            ? value?.destiny
+            : !value?.destiny
+            ? ""
+            : "1.0" + parseFloat(value?.destiny) * 4
+        }
+        onChange={switchDestiny === "Plato" ? destinyHandlerPlato  : destinyHandlerSG }
         onBlur={switchDestiny === "Plato" ? BlurDestinyPlato : BlurDestinySG }
         type="number"
         error={error.destiny}
         helperText={switchDestiny === "Plato" ?
-          !error.destiny ? "" : "❌ Plato от 7.56 до 35" : !error.destiny ? "" : "❌ SG от 1.03 до 1.09"
+          !gravity ?
+          !error.destiny ? "" : "❌ Plato от 7.56 до 35" :
+          !error.destiny ? "" : "⚠️ Вновь введите PLATO":
+          gravity ?
+          !error.destiny ? "" : "❌ SG от 1.03 до 1.09" :
+          !error.destiny ? "" : "⚠️ Вновь введите SG"
         }
       />
     </div>
