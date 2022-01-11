@@ -35,28 +35,12 @@ const Calculate = ({
     IBUVALUE();
   }, [alpha, amount, time, wortvolume, wortdestiny, wortboil]);
 
-  // function OGSG(plato) {
-  //   console.log(plato);
-  //   if (plato <= 1000) {
-  //     var sg = 1 + plato / (258.6 - (plato / 258.2) * 227.1);
-  //     var parsSG = parseFloat(sg.toFixed(2));
-  //     // console.log(parsSG);
-  //     return parsSG;
-  //     //
-  //   } else var pl = plato / 1000;
-  //   //
-  //   console.log(pl);
-  //   return pl;
-  // }
-
   function OGSG(plato) {
     console.log(plato);
     if (plato > parseFloat('1.09')) {
       var sg = 1 + plato / (258.6 - (plato / 258.2) * 227.1);
       var parsSG = parseFloat(sg.toFixed(2));
-      // console.log(parsSG);
       return parsSG;
-      //
     } else return plato
   }
 
