@@ -33,7 +33,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
   });
 
   //хук ogsg
-  const [switchDestiny, setSwitchDestiny] = React.useState("SG");
+  const [switchDestiny, setSwitchDestiny] = React.useState("Plato");
   const handleChangeDestiny = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSwitchDestiny((event.target as HTMLInputElement).value);
   };
@@ -75,7 +75,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
   //   getwort(value.volume, value.destiny, value.boil);
   // };
 
-  const BlurDestinySG = () => {
+  const BlurDestinyPlato = () => {
     if (
       !value.destiny.trim() ||
       parseInt(value.destiny, 10) < 7.56 ||
@@ -87,7 +87,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
     getwort(value.volume, value.destiny, value.boil);
   };
 
-  const BlurDestinyOG = () => {
+  const BlurDestinySG = () => {
     if (!value.destiny.trim() || parseInt(value.destiny, 10) < 1.03 ||
     parseInt(value.destiny, 10) > 1.09) {
       setError({ ...error, destiny: true });
@@ -121,6 +121,7 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
       <h1 style={{ textAlign: "center", fontFamily: "roboto" }}>
         Калькулятор IBU
       </h1>
+      
       <PharamInput
         placeholder="Объем сусла, л"
         id="wort"
@@ -133,30 +134,19 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
           !error.volume ? "" : "❌ Объём от 0 до 100 000, л"
         }
       />
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Введите плотность</FormLabel>
-        <RadioGroup
-          aria-label="gravity"
-          name="controlled-radio-buttons-group"
-          value={switchDestiny}
-          onChange={handleChangeDestiny}
-        >
-          <FormControlLabel value="SG" control={<Radio  size="small"/>} label="SG" />
-          <FormControlLabel value="OG" control={<Radio  size="small"/>} label="OG" />
-        </RadioGroup>
-      </FormControl>
       <PharamInput
         placeholder={switchDestiny}
         id="destiny"
         value={value?.destiny}
         onChange={destinyHandler}
-        onBlur={switchDestiny === "SG" ? BlurDestinySG : BlurDestinyOG }
+        onBlur={switchDestiny === "Plato" ? BlurDestinyPlato : BlurDestinySG }
         type="number"
         error={error.destiny}
-        helperText={switchDestiny === "SG" ?
-          !error.destiny ? "" : "❌ SG от 7.56 до 35" : !error.destiny ? "" : "❌ OG от 1.03 до 1.09"
+        helperText={switchDestiny === "Plato" ?
+          !error.destiny ? "" : "❌ Plato от 7.56 до 35" : !error.destiny ? "" : "❌ SG от 1.03 до 1.09"
         }
       />
+        
       <PharamInput
         placeholder="Время кипячения"
         id="boil"
@@ -170,8 +160,20 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
             ? ""
             : "❌ Кипячение от 0 до 200 мин"
         }
-
       />
+      <FormControl component="fieldset">
+        <FormLabel component="legend" style={{fontSize:'12px'}}>Введите плотность</FormLabel>
+        <RadioGroup
+        row
+          aria-label="gravity"
+          name="controlled-radio-buttons-group"
+          value={switchDestiny}
+          onChange={handleChangeDestiny}
+        >
+          <FormControlLabel value="Plato" control={<Radio  size="small"/>} label="Plato" />
+          <FormControlLabel value="SG" control={<Radio  size="small"/>} label="SG" />
+        </RadioGroup>
+      </FormControl>
     </div>
   );
 };
