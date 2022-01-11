@@ -88,8 +88,8 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
   };
 
   const BlurDestinySG = () => {
-    if (!value.destiny.trim() || parseInt(value.destiny, 10) < 1.03 ||
-    parseInt(value.destiny, 10) > 1.09) {
+    if (!value.destiny.trim() || parseFloat(value.destiny) < parseFloat('1.03')||
+    parseFloat(value.destiny) > parseFloat('1.09')) {
       setError({ ...error, destiny: true });
     } else setError({ ...error, destiny: false });
     setValue(value);
