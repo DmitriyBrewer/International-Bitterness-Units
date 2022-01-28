@@ -11,9 +11,7 @@ const Calculate = ({
   getibu,
   id
 }) => {
-  console.log(wortdestiny);
   const volume = parseInt(wortvolume, 10);
-  // const destiny = parseInt(wortdestiny, 10);
   const destiny = parseFloat(wortdestiny);
   console.log(destiny);
   const boil = parseInt(wortboil, 10);
