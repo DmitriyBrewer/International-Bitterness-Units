@@ -34,7 +34,6 @@ const CalculatorIBU: React.FC = () => {
       }
       return hop;
     });
-    // setHops(valueChange);
     dispatch(HOPS.actions.saveAction(valueChange));
   };
 
@@ -48,7 +47,6 @@ const CalculatorIBU: React.FC = () => {
       }
       return hop;
     });
-    // setHops(allIBU);
     dispatch(HOPS.actions.saveAction(allIBU));
 
   };
