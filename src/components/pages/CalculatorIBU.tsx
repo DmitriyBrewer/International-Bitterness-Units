@@ -15,11 +15,18 @@ export interface IHop {
 }
 
 const CalculatorIBU: React.FC = () => {
+  //BL
+  //Три хука получения значений из Wort.tsx
   const [volume, setVolume] = useState<string>("");
   const [destiny, setDestiny] = useState<string>("");
   const [boil, setBoil] = useState<string>("");
-  const dispatch: AppDispatch = useDispatch();
-  const Hops = useSelector((state: AppState) => state.hops);
+  //Три хука получения значений из Wort.tsx
+
+  //Redux
+  const dispatch: AppDispatch = useDispatch(); 
+  const Hops = useSelector((state: AppState) => state.hops); // достаём массив из hopSlice
+  //Redux
+
 
   const getInputHop = (id: any, newValueArray: any) => {
     const valueChange = Hops.map((hop: any) => {
@@ -37,6 +44,7 @@ const CalculatorIBU: React.FC = () => {
     dispatch(HOPS.actions.saveAction(valueChange));
   };
 
+  
   const getAllIbu = (id: any, ibuValue: any) => {
     const allIBU = Hops.map((hop: any) => {
       if (id === hop.id) {
