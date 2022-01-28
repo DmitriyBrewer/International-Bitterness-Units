@@ -3,9 +3,7 @@ import HopList from "../../components/HopList";
 import HopsButton from "../../components/UI/button/HopsButton";
 import { useState } from "react";
 import { Container } from "@mui/material";
-import { Slider } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
-import { CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
@@ -17,20 +15,11 @@ export interface IHop {
 }
 
 const CalculatorIBU: React.FC = () => {
-  // const [hops, setHops] = useState<any>([]);
   const [volume, setVolume] = useState<string>("");
   const [destiny, setDestiny] = useState<string>("");
   const [boil, setBoil] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
-  const isAuth = useSelector((state:RootState) => state.user.isAuth);
-
-    //loader test
-    setTimeout(() => {
-      setLoading(false)
-    }, 500);
-    //loader test
 
   const getInputHop = (id: any, newValueArray: any) => {
     const valueChange = Hops.map((hop: any) => {
@@ -81,9 +70,7 @@ const CalculatorIBU: React.FC = () => {
   return (
     <div>
       <CssBaseline />
-      {/* {isAuth && */}
     <div style={{ textAlign: "center"}}>
-      {loading? <CircularProgress color="inherit" style={{margin:'30px'}}/> : 
       <Container  maxWidth="sm">
         <Alert variant="filled" severity="info" style={{marginTop:'20px'}}>
           Для наглядной работы калькулятора, поля были заблаговременно заполнены, нажмите добавить хмель
@@ -117,30 +104,8 @@ const CalculatorIBU: React.FC = () => {
         >
           Общее ibu: {parsConcatIbu || 0}
         </h1>
-        {/* <Slider
-          disabled
-          defaultValue={0}
-          min={0}
-          max={100}
-          value={parsConcatIbu || 0}
-          aria-label="Default"
-          valueLabelDisplay="auto"
-          sx={{
-            width: "50%",
-            color: "success.secondary"
-          }}
-        /> */}
-        {/* <HopsButton
-        onClick={(event) => {
-          event.preventDefault();
-        }}
-    >
-      сохранить расчёт
-    </HopsButton> */}
       </Container>
-        }
     </div>
-    {/* } */}
     </div>
   );
 };
