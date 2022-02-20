@@ -3,8 +3,8 @@ import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 interface DeleteButtonProps {
-  onClick: (event: any) => void;
-  children: string;
+  onClick?: (event: any) => void;
+  children?: string;
 }
 const DeleteButton: React.FC<DeleteButtonProps> = ({ onClick, children }) => {
   return (

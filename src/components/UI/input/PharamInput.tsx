@@ -5,12 +5,18 @@ interface PharamInputProps {
   disable?: any;
   helperText?: string;
   error?: boolean;
-  placeholder: string;
+  placeholder?: string;
   id?: string;
-  value: string | undefined;
-  onChange: (event: any) => void;
-  onBlur: (event: any) => void;
-  type: string;
+  value?: string | undefined;
+  onChange?: (event: any) => void;
+  onBlur?: (event: any) => void;
+  onClick?: (event: any) => void;
+  onMouseOver?: (event: any) => void;
+  onMouseOut?: (event: any) => void;
+  autoFocus?:boolean;
+  type?: string;
+  required?:boolean;
+  InputLabelProps?:any;
 }
 const PharamInput: React.FC<PharamInputProps> = ({
   disable,
@@ -21,7 +27,13 @@ const PharamInput: React.FC<PharamInputProps> = ({
   value,
   id,
   onBlur,
-  type
+  onClick,
+  onMouseOver,
+  onMouseOut,
+  autoFocus,
+  required,
+  type,
+  InputLabelProps
 }) => {
   return (
     <div style={{ margin: "10px", display: "inline-flex" }}>
@@ -35,9 +47,15 @@ const PharamInput: React.FC<PharamInputProps> = ({
         color="secondary"
         type={type}
         onChange={onChange}
+        onClick={onClick}
         value={value}
         id={id}
         onBlur={onBlur}
+        onMouseOver={onMouseOver}
+        onMouseOut={onMouseOut}
+        autoFocus={autoFocus}
+        required={required}
+        InputLabelProps={InputLabelProps}
       />
     </div>
   );

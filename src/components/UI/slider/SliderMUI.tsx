@@ -9,6 +9,7 @@ import { Switch, Slider } from '@mui/material';
 interface SliderProps {
   value: any;
   onChange: (event: any) => void;
+  onClick?: (event: any) => void;
   color: any;
 }
 
@@ -18,7 +19,7 @@ export interface ISlider {
 }
 
 
-const SliderMUI: React.FC<SliderProps> = ({ value, onChange, color }) => {
+const SliderMUI: React.FC<SliderProps> = ({ value, onChange,onClick, color }) => {
 
   const [amount,setAmount] = React.useState<ISlider>({AMOUNT: '5000'})
 
@@ -62,7 +63,7 @@ const SliderMUI: React.FC<SliderProps> = ({ value, onChange, color }) => {
       <div>
       <Slider
         color={color}
-        min={0}
+        min={0.1}
         // max={5000}
         max={Number(amount?.AMOUNT)}
         aria-label="Default"
@@ -74,6 +75,7 @@ const SliderMUI: React.FC<SliderProps> = ({ value, onChange, color }) => {
         defaultValue={0}
         value={value}
         onChange={onChange}
+        onClick={onClick}
       />
       </div>
     </div>

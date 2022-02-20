@@ -15,6 +15,7 @@ function AppRouter() {
   return (
     <Routes>
       <Route path="/calc" element={<CalculatorIBU />} />
+
       <Route path="/login" element={<Login />}/>
       <Route path="/main" element={<Main />}/>
       <Route path="/about" element={<About />}/>

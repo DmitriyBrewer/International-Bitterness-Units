@@ -82,7 +82,7 @@ const About = () => {
             </Typography>
             <List>
               <BulletedList textContent="Объём получаемого сусла, л ⚠️" />
-              <BulletedList textContent="Ожидаемая/рачётная плотсность сусла, Plato ⚠️" />
+              <BulletedList textContent="Ожидаемая/расчётная плотность сусла, Plato ⚠️" />
               <BulletedList textContent="Общее время кипячения сусла, мин ⚠️" />
             </List>
             <Typography variant="subtitle1" component="h3" gutterBottom>

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PharamInput from "../components/UI/input/PharamInput";
+
 //radioButton MUI
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -8,123 +9,93 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 //radioButton MUI
 
+//redux
+import HOPS from "../store/reducer/hopSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, AppState } from "../store/store";
+//redux
 
-interface IWort {
-  volume: string;
-  destiny: any;
-  boil: string;
-}
+const Wort: React.FC = () => {
+      //redux value
+      const dispatch: AppDispatch = useDispatch();
+      const Hops = useSelector((state: AppState) => state.hops);
+      //redux value
+    //wort redux
+    let ReduxValueWort = {
+      volume: "",
+      volumeValidation:undefined,
+      destiny: "",
+      destinyValidation:undefined,
+      boil: "",
+      boilValidation:undefined,
+      concatIBU: "",
+      reduceIBU: "",
+      plato:undefined
+    };
 
-interface WortProps {
-  getwort: any;
-}
+    Hops.forEach((element: any, index:any) => {
+      if (index===0)
+   {   ReduxValueWort = {
+        volume: element.volume,
+        destiny: element.destiny,
+        boil: element.boil,
+        concatIBU: element.concatIBU,
+        reduceIBU: element.reduceIBU,
+        volumeValidation:element.volumeValidation,
+        destinyValidation:element.destinyValidation,
+        boilValidation:element.boilValidation,
+        plato:element.plato
+      }}
+    });
+//wort redux
+    //state radio button
+    const [value, setValue] = React.useState({radioButton:'plato'})
+    console.log(value.radioButton);
+    //state
 
-const Wort: React.FC<WortProps> = ({ getwort }) => {
-  const [value, setValue] = React.useState<IWort>({
-    volume: "1000",
-    destiny:"12",
-    boil: "60"
-  });
+    //handlers
+    const radioHandler = (event: any) => {
+      setValue({...value, radioButton:event.target.value})
+      dispatch(HOPS.actions.selectDestiny(value.radioButton));
+      if(value.radioButton !== 'plato')
+        {
+          dispatch(HOPS.actions.toPlato());} 
+        if(value.radioButton !== 'sg')
+        {
+          dispatch(HOPS.actions.toSG());}
+    };
 
-  const [error, setError] = React.useState({
-    volume: false,
-    destiny: false,
-    boil: false
-  });
+    const volumeHandler = (event: any) => {
+      dispatch(HOPS.actions.addVolume(event.target.value));
+    };
+    const volumeBlurValidation = () => {
+      dispatch(HOPS.actions.calcIBU());
+      dispatch(HOPS.actions.concatIBU());
+      dispatch(HOPS.actions.volumeValidation());
+    }
 
-  //хук ogsg
-  const [switchDestiny, setSwitchDestiny] = React.useState("Plato");
-  const handleChangeDestiny = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSwitchDestiny((event.target as HTMLInputElement).value);
-  };
-  //хук ogsg
+    const destinyHandler = (event: any) => {
+      dispatch(HOPS.actions.addDestiny(event.target.value));
+    };
+    const destinyBlurValidation = () => {
+      dispatch(HOPS.actions.calcIBU());
+      dispatch(HOPS.actions.concatIBU());
+      dispatch(HOPS.actions.destinyValidation());
+    }
 
-  //хук выбора value для gravity plato/sg
-    const [gravity, setGravity] = React.useState(false);
-  //хук выбора value для gravity plato/sg
+    const boilHandler = (event: any) => {
+      dispatch(HOPS.actions.addBoil(event.target.value));
+    };
+    const boilBlurValidation = () => {
+      dispatch(HOPS.actions.calcIBU());
+      dispatch(HOPS.actions.concatIBU());
+      dispatch(HOPS.actions.boilValidation());
+    }
 
+    //handlers
 
-  const volumeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, volume: event.target.value });
-  };
-  //Разделим destinyHandler на 2
-  // const destinyHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   setValue({ ...value, destiny: event.target.value });
-  // };
-  const destinyHandlerPlato = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGravity(false);
-    setValue({ ...value, destiny: event.target.value });
-  };
-  const destinyHandlerSG = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setGravity(true);
-    setValue({ ...value, destiny: event.target.value });
-  };
-  //Разделим destinyHandler на 2
-  const boilHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, boil: event.target.value });
-  };
+console.log(value);
 
-  // const Blur = () => {
-  //   setValue(value);
-  //   getwort(value.volume, value.destiny, value.boil);
-  // };
-
-  const BlurVolume = () => {
-    if (!value.volume.trim() || parseInt(value.volume, 10) > 100000) {
-      setError({ ...error, volume: true });
-    } else setError({ ...error, volume: false });
-    setValue(value);
-    getwort(value.volume, value.destiny, value.boil);
-  };
-
-  //Blur Destiny разделим на два
-  // const BlurDestiny = () => {
-  //   if (
-  //     !value.destiny.trim() ||
-  //     parseInt(value.destiny, 10) < 5 ||
-  //     parseInt(value.destiny, 10) > 35
-  //   ) {
-  //     setError({ ...error, destiny: true });
-  //   } else setError({ ...error, destiny: false });
-  //   setValue(value);
-  //   getwort(value.volume, value.destiny, value.boil);
-  // };
-
-  const BlurDestinyPlato = () => {
-    if (
-      !value.destiny.trim() ||
-      parseInt(value.destiny, 10) < 7.56 ||
-      parseInt(value.destiny, 10) > 35
-    ) {
-      setError({ ...error, destiny: true });
-    } else setError({ ...error, destiny: false });
-    setValue(value);
-    getwort(value.volume, value.destiny, value.boil);
-  };
-
-  const BlurDestinySG = () => {
-    if (!value.destiny.trim() || parseFloat(value.destiny) < parseFloat('1.03')||
-    parseFloat(value.destiny) > parseFloat('1.09')) {
-      setError({ ...error, destiny: true });
-    } else setError({ ...error, destiny: false });
-    setValue(value);
-    getwort(value.volume, value.destiny, value.boil);
-  };
-    //Blur Destiny разделим на два
-
-  const BlurBoil = () => {
-    if (!value.boil.trim() || parseInt(value.boil, 10) > 200) {
-      setError({ ...error, boil: true });
-    } else setError({ ...error, boil: false });
-    setValue(value);
-    getwort(value.volume, value.destiny, value.boil);
-  };
-
-  //при монтировании орабатывает
-  useEffect(()=>{
-    setValue(value);
-       getwort(value.volume, value.destiny, value.boil);
-  },[])
 
   return (
     <div>
@@ -134,28 +105,34 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
       <PharamInput
         placeholder="Объем сусла, л"
         id="wort"
-        value={value?.volume}
-        onChange={volumeHandler}
-        onBlur={BlurVolume }
         type="number"
-        error={error.volume}
+        error={ReduxValueWort.volumeValidation===undefined?false:!ReduxValueWort.volumeValidation}
         helperText={
-          !error.volume ? "" : "❌ Объём от 0 до 100 000, л"
+          ReduxValueWort.volumeValidation===undefined?
+          "Введите объём от 0 до 100 000, л"
+          :
+          !ReduxValueWort.volumeValidation? 
+           "❌ Объём от 0 до 100 000, л" :"✅ Верное значение" 
         }
+        value={ReduxValueWort.volume}
+        onChange={volumeHandler}
+        onBlur={volumeBlurValidation}
       />
       <PharamInput
         placeholder="Время кипячения"
         id="boil"
-        value={value?.boil}
-        onChange={boilHandler}
-        onBlur={BlurBoil }
         type="number"
-        error={error.boil}
+        error={ReduxValueWort.boilValidation===undefined?false:!ReduxValueWort.boilValidation}
         helperText={
-          !error.boil
-            ? ""
-            : "❌ Кипячение от 0 до 200 мин"
+          ReduxValueWort.boilValidation===undefined?
+          "Введите кипячение от 0 до 200 мин"
+          :
+          !ReduxValueWort.boilValidation?
+          "❌ Кипячение от 0 до 200 мин" : "✅ Верное значение"
         }
+        value={ReduxValueWort.boil}
+        onChange={boilHandler}
+        onBlur={boilBlurValidation}
       />
       <FormControl component="fieldset" style={{ display:'flex', flexDirection:'column', justifyContent:'center'}}>
         <FormLabel component="legend" style={{fontSize:'12px'}}>Выберите плотность</FormLabel>
@@ -163,44 +140,42 @@ const Wort: React.FC<WortProps> = ({ getwort }) => {
         row
           aria-label="gravity"
           name="controlled-radio-buttons-group"
-          value={switchDestiny}
-          onChange={handleChangeDestiny}
+          value={value.radioButton}
+          onChange={radioHandler}
           style={{marginRight:"35%",marginLeft:"35%"}}
         >
           <FormControlLabel 
           style={{margin:'0px'}}
-          value="Plato" control={<Radio  size="small"  />} label="Plato" />
+          value="plato" 
+          control={<Radio  size="small"  />} label="Plato"
+          />
           <FormControlLabel 
           style={{margin:'0px'}}
-          value="SG" control={<Radio  size="small"/>} label="SG" />
+          value="sg" 
+          control={<Radio  size="small"/>} label="SG" 
+          />
         </RadioGroup>
       </FormControl>
       <PharamInput
-        placeholder={switchDestiny}
+        placeholder={'Плотность'}
         id="destiny"
-        value={
-          switchDestiny === "Plato"
-            ? gravity
-              ? (parseFloat(value?.destiny) * 1000 - 1000) / 4
-              : value?.destiny
-            : gravity
-            ? value?.destiny
-            : !value?.destiny
-            ? ""
-            : "1.0" + parseFloat(value?.destiny) * 4
-        }
-        onChange={switchDestiny === "Plato" ? destinyHandlerPlato  : destinyHandlerSG }
-        onBlur={switchDestiny === "Plato" ? BlurDestinyPlato : BlurDestinySG }
         type="number"
-        error={error.destiny}
-        helperText={switchDestiny === "Plato" ?
-          !gravity ?
-          !error.destiny ? "" : "❌ Plato от 7.56 до 35" :
-          !error.destiny ? "" : "⚠️ Заново введите PLATO":
-          gravity ?
-          !error.destiny ? "" : "❌ SG от 1.03 до 1.09" :
-          !error.destiny ? "" : "⚠️ Заново введите SG"
+        error={ReduxValueWort.destinyValidation===undefined?false:!ReduxValueWort.destinyValidation}
+        helperText={
+          value.radioButton === 'plato' ?
+            ReduxValueWort.destinyValidation===undefined?
+              "Введите Plato от 0.5 до 40"
+              :
+              !ReduxValueWort.destinyValidation?"❌ Plato от 0.5 до 40":"✅ Верное значение"
+        :
+              ReduxValueWort.destinyValidation===undefined?
+              "Введите Plato от 1.002 до 1.179"
+              :
+              !ReduxValueWort.destinyValidation?"❌ Plato от 1.002 до 1.179":"✅ Верное значение"
         }
+        value={ReduxValueWort.destiny}
+        onChange={destinyHandler}
+        onBlur={destinyBlurValidation}
       />
     </div>
   );

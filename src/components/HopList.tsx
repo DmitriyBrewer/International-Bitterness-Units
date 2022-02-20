@@ -1,46 +1,19 @@
 import React from "react";
 import Hop from "./Hop";
-import {  useDispatch } from "react-redux";
-import {  AppDispatch } from "../../src/store/store";
-import todoSlice from "../../src/store/reducer/hopSlice";
+import {  useSelector } from "react-redux";
+import {  AppState } from "../../src/store/store";
 
-interface HopListProps {
-  Hops: any[];
-  id?: number;
-  hop?: any;
-  key?: any;
-  gethop: any;
-  getibu: any;
-  volume: string;
-  destiny: string;
-  boil: string;
-}
 
-const HopList: React.FC<HopListProps> = ({
-  gethop,
-  getibu,
-  volume,
-  destiny,
-  boil,
-  Hops
-}) => {
-  const dispatch: AppDispatch = useDispatch();
-
+const HopList: React.FC = () => {
+  const Hops = useSelector((state: AppState) => state.hops);  
   return (
     <div>
-      {Hops.map((hop) => (
-        <Hop
-          id={hop.id}
-          hop={hop}
-          onClick={() => dispatch(todoSlice.actions.deleteTodo(hop.id))}
-          key={hop.id}
-          gethop={gethop}
-          getibu={getibu}
-          volume={volume}
-          destiny={destiny}
-          boil={boil}
-        />
-      ))}
+      {/* начинаем map не с 0 а с 1 */}
+      {Hops.map((element: any, index: any) => {
+        if (index === 0) {
+          //return ? Что вернуть ?
+        } else return <Hop id={element.id} key={element.id} />;
+      })}
     </div>
   );
 };

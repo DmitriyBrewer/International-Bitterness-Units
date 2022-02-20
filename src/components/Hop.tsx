@@ -3,151 +3,186 @@ import DeleteButton from "./UI/button/DeleteButton";
 import PharamInput from "./UI/input/PharamInput";
 import Calculate from "../components/Calculate";
 import SliderMUI from "../components/UI/slider/SliderMUI";
+import { Switch, Slider } from "@mui/material";
+import { TextField } from "@mui/material";
 
-export interface IHop {
-  name: string;
-  alpha: string;
-  amount: string;
-  time: string;
+//redux
+import HOPS from "../store/reducer/hopSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, AppState } from "../store/store";
+//redux
+
+interface IHop {
+  id:any
 }
 
-interface HopProps {
-  id: number;
-  hop: any;
-  gethop: any;
-  getibu: any;
-  volume: string;
-  destiny: string;
-  boil: string;
-  onClick: any;
-}
 
-const Hop: React.FC<HopProps> = ({
-  gethop,
-  getibu,
-  id,
-  volume,
-  destiny,
-  boil,
-  onClick
+const Hop: React.FC<IHop> = ({id
 }) => {
-  const [value, setValue] = React.useState<IHop>({
-    name: "Sabro",
-    alpha: "13",
-    amount: "2500",
-    time: "25"
+    //redux value
+  const dispatch: AppDispatch = useDispatch();
+  const Hops = useSelector((state: AppState) => state.hops);
+  //redux value
+  //redux value
+  //wort
+  const boilValidation = Hops.length > 0 ? Hops[0].boilValidation : "";
+
+  let ReduxValueWort = { volume: "", destiny: "", boil: "", boilValidation:undefined,
+};
+  Hops.forEach((element: any, index:any) => {
+    if (index===0)
+    {ReduxValueWort = {
+        volume: element.volume,
+        destiny: element.destiny,
+        boil: element.boil,
+        boilValidation:undefined,
+      };
+    }
   });
-  const [error, setError] = React.useState({
-    alpha: false,
-    amount: false,
-    time: false
+  //wort
+  //hop
+  let ReduxValueHop = { name: "", alpha: "", amount: '0', time: "", ibu: "", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined  };
+  Hops.forEach((element: any) => {
+    if (element.id === id) {
+      ReduxValueHop = {
+        name: element.name,
+        alpha: element.alpha,
+        alphaValidation: element.alphaValidation,
+        amount: element.amount,
+        amountValidation: element.amountValidation,
+        time: element.time,
+        timeValidation: element.timeValidation,
+        ibu: element.ibu
+      };
+    }
   });
+  //hop
 
-  //disabled TimeInput
-  const [disableTime, setDisableTime] = React.useState(false);
-  //disabled TimeInput
-
-  const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, name: event.target.value });
+  //selectIDHop
+  const selectHopId = (event:any) => {
+    // event.target.select(); //при нажатии на инпут выделяется всё содержимое инпута
+    dispatch(HOPS.actions.selectedHop(id));
   };
-  const alphaHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, alpha: event.target.value });
+  //selectIDHop
+  //handlers
+  const nameHandler = (event: any) => {
+    dispatch(HOPS.actions.addName(event.target.value));
   };
-  const amountHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, amount: event.target.value });
+  const alphaHandler = (event: any) => {
+    dispatch(HOPS.actions.addAlpha(event.target.value));
   };
-  const timeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue({ ...value, time: event.target.value });
-  };
-
-  const Blur = () => {
-    gethop(id, { ...value });
-    setValue(value);
-  };
-
-  const BlurAlpha = () => {
-    if (!value.alpha.trim() || parseInt(value.alpha, 10) === 0) {
-      setError({ ...error, alpha: true });
-    } else setError({ ...error, alpha: false });
-    gethop(id, { ...value });
-    setValue(value);
-  };
-
-  const BlurTime = () => {
-    if (!value.time.trim() || !boil.trim() || parseInt(value.time, 10) >= parseInt(boil, 10) + 1) {
-      setError({ ...error, time: true });
-    } else setError({ ...error, time: false });
-    gethop(id, { ...value });
-    setValue(value);
-  };
-
-  //disabled TimeInput
-  const BOILTRIM = () => {
-    if(!boil.trim()||parseInt(value.time, 10) >= parseInt(boil, 10) + 1){
-      setDisableTime(true)
-    } else setDisableTime(false)
+  const alphaBlurValidation = () => {
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.alphaValidation());
   }
-  useEffect(()=>{
-    BOILTRIM()
-  },[boil])
-  //disabled TimeInput
-
+  const amountHandler = (event: any) => {
+    dispatch(HOPS.actions.addAmount(event.target.value));
+  };
+  const amountBlurValidation = (e:any) => {
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.amountValidation());
+  }
+  const timeHandler = (event: any) => {
+    dispatch(HOPS.actions.addTime(event.target.value));
+  };
+  const timeBlurValidation = () => {
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.timeValidation());
+  }
+  const ibuBlur = () => {
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.timeValidation());
+    dispatch(HOPS.actions.alphaValidation());
+    dispatch(HOPS.actions.amountValidation());
+  };
+  //handlers
+  //redux value
   return (
     <div>
       <PharamInput
+      required={true}
         placeholder="Название хмеля"
-        value={value?.name}
+        value={ReduxValueHop.name}
+        onClick={selectHopId}
         onChange={nameHandler}
-        onBlur={Blur}
         type="string"
       />
       <PharamInput
         placeholder="Альфа кислота"
-        value={value?.alpha}
+        value={ReduxValueHop.alpha}
+        onClick={selectHopId}
         onChange={alphaHandler}
-        onBlur={BlurAlpha}
+        onBlur={alphaBlurValidation}
         type="number"
-        error={error.alpha}
+        error={ReduxValueHop.alphaValidation===undefined?false:!ReduxValueHop.alphaValidation}
         helperText={
-          !error.alpha ? "" : "❌ Альфа кислота от 0 до ∞"
+          ReduxValueHop.alphaValidation===undefined?
+          "Введите Альфа кислоту от 0.1 до ∞"
+          :
+          !ReduxValueHop.alphaValidation? 
+           "❌ Альфа кислота от 0.1 до ∞" :"✅ Верное значение" 
         }
       />
       <PharamInput
+        // placeholder={ReduxValueHop.amount?"":"Кол-во, г"}
         placeholder="Кол-во, г"
-        value={value?.amount}
+        value={ReduxValueHop.amount}
+        onClick={selectHopId}
         onChange={amountHandler}
-        onBlur={Blur}
+        onBlur={amountBlurValidation}
         type="number"
-        error={error.amount}
-        helperText={''}
+        error={ReduxValueHop.amountValidation===undefined?false:!ReduxValueHop.amountValidation}
+        helperText={
+          ReduxValueHop.amountValidation===undefined?
+          "Введите от 0 до ∞"
+          :
+          !ReduxValueHop.amountValidation? 
+           "❌ от 0 до ∞" :"✅ Верное значение" 
+        }
+        InputLabelProps={{
+          shrink: ReduxValueHop.amount ? true : false
+        }}
       />
+
       <PharamInput
         placeholder="Время внесения, мин"
-        value={value?.time}
+        value={ReduxValueHop.time}
+        onClick={selectHopId}
         onChange={timeHandler}
-        onBlur={BlurTime}
+        onBlur={timeBlurValidation}
         type="number"
-        error={error.time}
-        helperText={boil ? !error.time ? "" : "❌ от 0 до Время кипячения":
-          !error.time ? "⚠️Введите время кипячения" : "❌Введите Время Кипячения"
+        disable={!boilValidation}
+        error={ReduxValueHop.timeValidation===undefined?false:!ReduxValueHop.timeValidation}
+        helperText={
+          ReduxValueHop.timeValidation===undefined?
+          "Введите от 0 до Время кипячения"
+          :
+          !ReduxValueHop.timeValidation? 
+           "❌ от 0 до Время кипячения" :"✅ Верное значение" 
         }
-        disable={disableTime}
       />
-      <DeleteButton onClick={onClick} children={"удалить"} />
-      <Calculate
-        name={value.name}
-        alpha={value.alpha}
-        amount={value.amount}
-        time={value.time}
-        wortvolume={volume}
-        wortdestiny={destiny}
-        wortboil={boil}
-        getibu={getibu}
-        id={id}
-      />
+      <DeleteButton children={"удалить"} onClick={()=>{
+      dispatch(HOPS.actions.deleteHop(id));
+      }} />
+      <h1 style={{
+          fontSize: "16px",
+          color: "purple",
+          margin: "10px",
+          fontFamily: "roboto"
+        }}>ibu {ReduxValueHop.name}: {ReduxValueHop.ibu}</h1>
       <SliderMUI
-        value={value?.amount}
-        onChange={amountHandler}
+        value={ReduxValueHop.amount}
+        onChange={(event: any) => {
+          dispatch(HOPS.actions.calcIBU());
+          dispatch(HOPS.actions.concatIBU());
+          dispatch(HOPS.actions.selectedHop(id));
+          dispatch(HOPS.actions.addAmount(event.target.value));
+          dispatch(HOPS.actions.amountValidation());
+        }}
         color="secondary"
       />
     </div>
