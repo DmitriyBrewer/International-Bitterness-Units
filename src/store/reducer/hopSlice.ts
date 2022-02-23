@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { IHop } from "../../interface/IHop";
 import nextId from "react-id-generator";
-import { Calc } from "../../CalcFunc";
+import { Calc } from "../../pages/CalculatorIBU/CalcFunc";
 
 export interface IHop {
   id?: any;
@@ -243,6 +243,26 @@ const HOPS = createSlice({
       });
       return state;
     },
+    //hops
+    //hopsStand
+    addNameHopStand: (state, action: PayloadAction<any>) => {
+      state.map((element: any) => {
+        if (element.selectedHop === element.id) {
+          return (element.nameHopStand = action.payload);
+        } else return element;
+      });
+      return state;
+    },
+    addAlphaHopStand: (state, action: PayloadAction<any>) => {
+      state.map((element: any) => {
+        if (element.selectedHop === element.id) {
+          return (element.alphaHopStand = action.payload);
+        } else return element;
+      });
+      return state;
+    },
+    //hopsStand
+
     addIBU: (state, action: PayloadAction<any>) => {
       state.map((element: any) => {
         if (element.selectedHop === element.id) {

@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
-import DeleteButton from "./UI/button/DeleteButton";
-import PharamInput from "./UI/input/PharamInput";
-import Calculate from "../components/Calculate";
-import SliderMUI from "../components/UI/slider/SliderMUI";
+import DeleteButton from "../../components/UI/button/DeleteButton";
+import PharamInput from "../../components/UI/input/PharamInput";
+// import Calculate from "../components/Calculate";
+import SliderMUI from "../../components/UI/slider/SliderMUI";
 import { Switch, Slider } from "@mui/material";
 import { TextField } from "@mui/material";
 
 //redux
-import HOPS from "../store/reducer/hopSlice";
+import HOPS from "../../store/reducer/hopSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppState } from "../store/store";
+import { AppDispatch, AppState } from "../../store/store";
 //redux
+
 
 interface IHop {
   id:any
 }
 
 
-const Hop: React.FC<IHop> = ({id
+
+
+export const Hop: React.FC<IHop> = ({id
 }) => {
     //redux value
   const dispatch: AppDispatch = useDispatch();
@@ -92,31 +95,37 @@ const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.timeValidation());
   }
-  const ibuBlur = () => {
-    dispatch(HOPS.actions.calcIBU());
-    dispatch(HOPS.actions.concatIBU());
-    dispatch(HOPS.actions.timeValidation());
-    dispatch(HOPS.actions.alphaValidation());
-    dispatch(HOPS.actions.amountValidation());
-  };
   //handlers
   //redux value
   return (
     <div>
+      <h1 style={{
+          fontSize: "16px",
+          color: "black",
+          margin: "10px",
+          fontFamily: "roboto"
+        }}>Хмель на варку : {ReduxValueHop.name}</h1>
       <PharamInput
       required={true}
         placeholder="Название хмеля"
         value={ReduxValueHop.name}
         onClick={selectHopId}
+        onFocus={selectHopId} 
         onChange={nameHandler}
+        onMouseDown={selectHopId}
         type="string"
       />
       <PharamInput
         placeholder="Альфа кислота"
         value={ReduxValueHop.alpha}
         onClick={selectHopId}
+        onFocus={selectHopId} 
+
         onChange={alphaHandler}
         onBlur={alphaBlurValidation}
+        // onMouseUp={selectHopId}
+        onMouseDown={selectHopId}
+
         type="number"
         error={ReduxValueHop.alphaValidation===undefined?false:!ReduxValueHop.alphaValidation}
         helperText={
@@ -134,6 +143,10 @@ const Hop: React.FC<IHop> = ({id
         onClick={selectHopId}
         onChange={amountHandler}
         onBlur={amountBlurValidation}
+        onMouseDown={selectHopId}
+        //
+        onFocus={selectHopId} 
+        //
         type="number"
         error={ReduxValueHop.amountValidation===undefined?false:!ReduxValueHop.amountValidation}
         helperText={
@@ -147,19 +160,20 @@ const Hop: React.FC<IHop> = ({id
           shrink: ReduxValueHop.amount ? true : false
         }}
       />
-
       <PharamInput
         placeholder="Время внесения, мин"
         value={ReduxValueHop.time}
         onClick={selectHopId}
         onChange={timeHandler}
         onBlur={timeBlurValidation}
+        // onMouseUp={selectHopId}
+        onMouseDown={selectHopId}
         type="number"
         disable={!boilValidation}
         error={ReduxValueHop.timeValidation===undefined?false:!ReduxValueHop.timeValidation}
         helperText={
           ReduxValueHop.timeValidation===undefined?
-          "Введите от 0 до Время кипячения"
+          "⚠️ Введите от 0 до Время кипячения"
           :
           !ReduxValueHop.timeValidation? 
            "❌ от 0 до Время кипячения" :"✅ Верное значение" 
@@ -183,7 +197,7 @@ const Hop: React.FC<IHop> = ({id
           dispatch(HOPS.actions.addAmount(event.target.value));
           dispatch(HOPS.actions.amountValidation());
         }}
-        color="secondary"
+        color="primary"
       />
     </div>
   );

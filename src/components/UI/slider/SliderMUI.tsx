@@ -3,7 +3,24 @@ import { TextField } from "@mui/material";
 // import { Checkbox } from '@mui/material';
 import { Switch, Slider } from '@mui/material';
 
+//theme
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { orange } from '@mui/material/colors';
+import { green, purple } from '@mui/material/colors';
 
+
+//theme
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#000000',
+    },
+    secondary: {
+      main: green[500],
+    },
+  },
+});
+//theme
 
 
 interface SliderProps {
@@ -12,10 +29,8 @@ interface SliderProps {
   onClick?: (event: any) => void;
   color: any;
 }
-
 export interface ISlider {
   AMOUNT: string;
-
 }
 
 
@@ -37,17 +52,12 @@ const SliderMUI: React.FC<SliderProps> = ({ value, onChange,onClick, color }) =>
 
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <Switch 
       checked={checked}       
       onChange={handleCheckbox}
-      color='info'
+      color='primary'
       />
-
-      {/* <Checkbox  
-      checked={checked}       
-      onChange={handleCheckbox}
-      inputProps={{ 'aria-label': 'controlled' }}
-/> */}
       <TextField 
       style={{width:'150px'}}
       disabled = {!checked}
@@ -55,7 +65,7 @@ const SliderMUI: React.FC<SliderProps> = ({ value, onChange,onClick, color }) =>
       label="Max-IBU" 
       variant="outlined"
       size="small"
-      color="info"
+      color="primary"
       placeholder="max"
       value={amount?.AMOUNT}
       onChange={amountHandler}
@@ -70,7 +80,6 @@ const SliderMUI: React.FC<SliderProps> = ({ value, onChange,onClick, color }) =>
         valueLabelDisplay="auto"
         sx={{
           width: "50%",
-          color: "success.purple"
         }}
         defaultValue={0}
         value={value}
@@ -78,6 +87,7 @@ const SliderMUI: React.FC<SliderProps> = ({ value, onChange,onClick, color }) =>
         onClick={onClick}
       />
       </div>
+      </ThemeProvider>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PharamInput from "../components/UI/input/PharamInput";
+import PharamInput from "../../components/UI/input/PharamInput";
 
 //radioButton MUI
 import Radio from "@mui/material/Radio";
@@ -10,9 +10,9 @@ import FormLabel from "@mui/material/FormLabel";
 //radioButton MUI
 
 //redux
-import HOPS from "../store/reducer/hopSlice";
+import HOPS from "../../store/reducer/hopSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, AppState } from "../store/store";
+import { AppDispatch, AppState } from "../../store/store";
 //redux
 
 const Wort: React.FC = () => {
@@ -117,6 +117,7 @@ console.log(value);
         value={ReduxValueWort.volume}
         onChange={volumeHandler}
         onBlur={volumeBlurValidation}
+        autoFocus={true}
       />
       <PharamInput
         placeholder="Время кипячения"

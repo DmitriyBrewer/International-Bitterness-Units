@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 //Components
-import Wort from "../../components/Wort";
-import HopList from "../../components/HopList";
+import Wort from "./Wort";
+import HopList from "./HopList";
+import HopStandList from "./HopStandList";
 import HopsButton from "../../components/UI/button/HopsButton";
 //Components
 
@@ -14,6 +15,7 @@ import Alert from "@mui/material/Alert";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
+import HOPSSTAND from "../../store/reducer/hopStandSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 //redux
 
@@ -21,7 +23,10 @@ const CalculatorIBU: React.FC = () => {
   //Redux
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
+  const HopsStand = useSelector((state: AppState) => state.hopStand);
   console.log(Hops);
+  console.log(HopsStand);
+
   //Redux
 
   //wort redux
@@ -90,8 +95,19 @@ const CalculatorIBU: React.FC = () => {
             >
               Добавить хмель
             </HopsButton>
+            <HopsButton
+              onClick={()=>{
+                dispatch(HOPS.actions.volumeValidation());
+                dispatch(HOPS.actions.destinyValidation());
+                dispatch(HOPS.actions.boilValidation());
+                dispatch(HOPSSTAND.actions.addHop())
+              }}
+            >
+              Добавить hopstand
+            </HopsButton>
           </div>
           <HopList />
+          <HopStandList />
           <h1 style={{
             fontSize: "20px",
             color: "purple",

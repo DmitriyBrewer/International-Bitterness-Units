@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import DeleteButton from "../UI/button/DeleteButton";
-import PharamInput from "../UI/input/PharamInput";
-import {registration} from "../../api/user";
+import DeleteButton from "../components/UI/button/DeleteButton";
+import PharamInput from "../components/UI/input/PharamInput";
+import {registration} from "../api/user";
 
 
 

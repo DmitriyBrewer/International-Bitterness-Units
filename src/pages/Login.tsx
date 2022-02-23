@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import DeleteButton from "../UI/button/DeleteButton";
-import PharamInput from "../UI/input/PharamInput";
+import DeleteButton from "../components/UI/button/DeleteButton";
+import PharamInput from "../components/UI/input/PharamInput";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 
-import {login} from "../../api/user";
-import { RootState } from "../../store/store";
+import {login} from "../api/user";
+import { RootState } from "../store/store";
 
 interface ILogin {
     email: string;

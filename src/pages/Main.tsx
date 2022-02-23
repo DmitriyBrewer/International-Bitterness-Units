@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
-import '../../styles.css'
+import '../styles.css'
 
 
 const Main = () => {

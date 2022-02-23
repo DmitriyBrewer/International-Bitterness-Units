@@ -10,7 +10,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Switch, Slider } from "@mui/material";
-import BulletedList from "../UI/list/BulletedList";
+import BulletedList from "../components/UI/list/BulletedList";
 
 const About = () => {
   return (
