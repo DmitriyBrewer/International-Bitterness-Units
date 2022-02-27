@@ -1,16 +1,21 @@
+import * as React from "react";
 import { useEffect } from "react";
 //Components
 import Wort from "./Wort";
 import HopList from "./HopList";
 import HopStandList from "./HopStandList";
 import HopsButton from "../../components/UI/button/HopsButton";
+import SplitButton from "../../components/UI/button/SelectButton";
 //Components
 
-//UI
+//MUI
 import { Container } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import Alert from "@mui/material/Alert";
-//UI
+import Grid from "@mui/material/Grid";
+import { Typography } from "@mui/material";
+
+//MUI
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -26,9 +31,7 @@ const CalculatorIBU: React.FC = () => {
   const HopsStand = useSelector((state: AppState) => state.hopStand);
   console.log(Hops);
   console.log(HopsStand);
-
   //Redux
-
   //wort redux
   let ReduxValueWort = {
     volume: "",
@@ -73,9 +76,28 @@ const CalculatorIBU: React.FC = () => {
   }, []);
 
   return (
-    <div>
+    <React.Fragment>
       <CssBaseline />
-      <div style={{ textAlign: "center" }}>
+      <Grid
+        container
+        spacing={2}
+        direction="column"
+        alignItems="center"
+        textAlign="center"
+      >
+        <Container maxWidth="sm">
+          <Alert variant="filled" severity="info" style={{ marginTop: "20px" }}>
+            Для наглядной работы калькулятора, поля были заблаговременно
+            заполнены, нажмите добавить хмель
+          </Alert>
+        </Container>
+        <Typography variant="h4" component="h1">
+        Калькулятор IBU
+      </Typography>
+        <Wort />
+        <HopList />
+      </Grid>
+      {/* <div style={{ textAlign: "center" }}>
         <Container maxWidth="sm">
           <Alert variant="filled" severity="info" style={{ marginTop: "20px" }}>
             Для наглядной работы калькулятора, поля были заблаговременно
@@ -105,6 +127,9 @@ const CalculatorIBU: React.FC = () => {
             >
               Добавить hopstand
             </HopsButton>
+            <SplitButton/>
+              
+             
           </div>
           <HopList />
           <HopStandList />
@@ -115,8 +140,8 @@ const CalculatorIBU: React.FC = () => {
             fontFamily: "roboto"
           }}>Общее IBU: {ReduxValueWort.reduceIBU}</h1>
         </Container>
-      </div>
-    </div>
+      </div> */}
+    </React.Fragment>
   );
 };
 

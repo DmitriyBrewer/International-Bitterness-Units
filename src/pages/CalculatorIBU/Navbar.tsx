@@ -1,19 +1,34 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
+//MUI
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import cl from "./Navbar.module.css";
+//MUI
+//component
 import Logo from "./Logo";
+import AvatarMenu from '../../components/UI/navbar/AvatarMenu'
+//component
+//redux
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from "../../../store/store";
-import { logout } from '../../../store/reducer/userSlice';
-import AvatarMenu from './AvatarMenu'
+import { RootState } from "../../store/store";
+import { logout } from '../../store/reducer/userSlice';
+//redux
+//styles
+import cl from "./Navbar.module.css";
+//styles
+//switch color element
+import SwitchTheme from "./SwitchTheme";
+//switch color element
 
 
 
-export default function Navbar() {
+interface INavbar {
+  onChangeTheme: any;
+}
+
+const Navbar: React.FC<INavbar> = ({ onChangeTheme }) => {
 
 
   const isAuth = useSelector((state:RootState) => state.user.isAuth)
@@ -33,7 +48,7 @@ export default function Navbar() {
               Пивная платформа
             </Link>
           </Typography>
-          
+          <SwitchTheme onChangeTheme={onChangeTheme} />
           <Link to="/calc" className={cl.header_text_content}>
             Калькулятор
           </Link>
@@ -63,3 +78,5 @@ export default function Navbar() {
     </Box>
   );
 }
+
+export default Navbar;
