@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { IHop } from "../../interface/IHop";
 import nextId from "react-id-generator";
 import { Calc } from "../../pages/CalculatorIBU/CalcFunc";
+import { CalcHopStand } from "../../pages/CalculatorIBU/CalcHopStand";
+
 
 export interface IHop {
   id?: any;
@@ -144,10 +146,10 @@ const HOPS = createSlice({
     },
     //wort
     //hops
-    addHop: (state) => {
+    addHop: (state, action: PayloadAction<string>) => {
       if (state.length < 6) {
-        var id = { id: nextId("hop-") };
-        state.push(id);
+        var pharamHop = { id: nextId("hop-"), hopType: action.payload };
+        state.push(pharamHop);
       } else return state;
     },
     deleteHop: (state, action: PayloadAction<any>) => {
@@ -245,22 +247,86 @@ const HOPS = createSlice({
     },
     //hops
     //hopsStand
-    addNameHopStand: (state, action: PayloadAction<any>) => {
+    addTimeHopStand: (state, action: PayloadAction<any>) => {
       state.map((element: any) => {
         if (element.selectedHop === element.id) {
-          return (element.nameHopStand = action.payload);
+          return (element.time = action.payload);
         } else return element;
       });
       return state;
     },
-    addAlphaHopStand: (state, action: PayloadAction<any>) => {
+    timeValidationHopStand: (state) => {
+      state.forEach((element: any) => {
+      if (element.selectedHop === element.id)
+      {
+        if (
+          // element.time &&
+          parseInt(element.time, 10) <= 100
+        ) {
+          element.timeValidation = true;
+        } else element.timeValidation = false;
+      }  else return element
+      });
+      return state;
+    },
+    addTemperature: (state, action: PayloadAction<any>) => {
       state.map((element: any) => {
         if (element.selectedHop === element.id) {
-          return (element.alphaHopStand = action.payload);
+          return (element.temperature = action.payload);
         } else return element;
       });
       return state;
     },
+    temperatureValidation: (state) => {
+      state.forEach((element: any) => {
+      if (element.selectedHop === element.id)
+      {
+        if (
+          // element.time &&
+          parseInt(element.temperature, 10) <= 100
+        ) {
+          element.temperatureValidation = true;
+        } else element.temperatureValidation = false;
+      }  else return element
+      });
+      return state;
+    },
+    calcIBUHopStand: (state) => {
+      state.map((element: any) => {
+        if (
+          (element.hopType === 'hopstand' && element.id === element.selectedHop && state[0].volume,
+          state[0].destiny&& state[0].boil)
+        ) {
+          return (element.ibuHopStand = CalcHopStand(
+            element.name,
+            element.alpha,
+            element.amount,
+            element.time,
+            element.temperature,
+            state[0].volume,
+            state[0].destiny,
+          ));
+        } else return (element.ibuHopStand = 0);
+      });
+      return state;
+    },
+    concatIBUHopStand: (state) => {
+      state.reduce((acc: any, element: any, index: any) => {
+        if (element.hopType === 'hopstand') {
+        element.concatIBUHopStand = acc.ibuHopStand + element.ibuHopStand;
+        if (index !== 0) {
+          if (acc.concatIBUHopStand) {
+            element.reduceIBUHopStand = acc.concatIBUHopStand + element.ibuHopStand;
+            return element;
+          }
+          element.reduceIBUHopStand = element.ibuHopStand; //если concatIBU нету или он NaN тогда reduce равен первому ibu
+        }
+      }//
+        return element;
+      }, 0);
+      return state;
+    },
+    
     //hopsStand
 
     addIBU: (state, action: PayloadAction<any>) => {
@@ -274,7 +340,7 @@ const HOPS = createSlice({
     calcIBU: (state) => {
       state.map((element: any) => {
         if (
-          (element.id === element.selectedHop && state[0].volume,
+          (element.hopType === 'boil' && element.id === element.selectedHop && state[0].volume,
           state[0].destiny && state[0].boil)
         ) {
           return (element.ibu = Calc(
@@ -292,6 +358,7 @@ const HOPS = createSlice({
     },
     concatIBU: (state) => {
       state.reduce((acc: any, element: any, index: any) => {
+        if (element.hopType === 'boil') {
         element.concatIBU = acc.ibu + element.ibu;
         if (index !== 0) {
           if (acc.concatIBU) {
@@ -300,10 +367,12 @@ const HOPS = createSlice({
           }
           element.reduceIBU = element.ibu; //если concatIBU нету или он NaN тогда reduce равен первому ibu
         }
+      }//
         return element;
-      }, 0);
+      }, 0)
+  
       return state;
-    }
+    },
   }
 });
 export default HOPS;

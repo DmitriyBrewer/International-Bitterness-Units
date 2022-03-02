@@ -8,11 +8,11 @@ import HopStand from "./HopStand";
 const HopStandList: React.FC = () => {
     const Hops = useSelector((state: AppState) => state.hopStand);  
     return (
-      <div>
+      <React.Fragment>
         {Hops.map((element: any, index: any) => {
      return <HopStand id={element.id} key={element.id} />;
         })}
-      </div>
+      </React.Fragment>
     );
 }
 

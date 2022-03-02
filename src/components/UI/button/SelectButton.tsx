@@ -32,7 +32,7 @@ interface Props {
   const handleClick = () => {
     console.info(`You clicked ${options[selectedIndex]}`);
     if (`${options[selectedIndex]}` === 'Добавить хмель на варку') {
-        dispatch(HOPS.actions.addHop());
+        // dispatch(HOPS.actions.addHop('boil'));
         dispatch(HOPS.actions.calcIBU());
         dispatch(HOPS.actions.concatIBU());
         dispatch(HOPS.actions.volumeValidation());
@@ -43,7 +43,7 @@ interface Props {
         dispatch(HOPS.actions.volumeValidation());
         dispatch(HOPS.actions.destinyValidation());
         dispatch(HOPS.actions.boilValidation());
-        dispatch(HOPSSTAND.actions.addHop())
+        // dispatch(HOPSSTAND.actions.addHop('hp'))
     }
   };
 

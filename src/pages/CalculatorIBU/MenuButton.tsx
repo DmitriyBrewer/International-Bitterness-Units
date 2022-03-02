@@ -4,7 +4,39 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 
+//redux
+import { useSelector, useDispatch } from "react-redux";
+import HOPS from "../../store/reducer/hopSlice";
+import HOPSSTAND from "../../store/reducer/hopStandSlice";
+import { AppDispatch, AppState, RootState } from "../../store/store";
+//redux
+
 export default function MenuButton() {
+  //Redux
+  const dispatch: AppDispatch = useDispatch();
+  const Hops = useSelector((state: AppState) => state.hops);
+  const HopsStand = useSelector((state: AppState) => state.hopStand);
+  console.log(Hops);
+  console.log(HopsStand);
+  //Redux
+  //wort redux
+  let ReduxValueWort = {
+    volume: "",
+    destiny: "",
+    boil: "",
+    concatIBU: "",
+    reduceIBU: ""
+  };
+  Hops.forEach((element: any) => {
+    ReduxValueWort = {
+      volume: element.volume,
+      destiny: element.destiny,
+      boil: element.boil,
+      concatIBU: element.concatIBU,
+      reduceIBU: element.reduceIBU
+    };
+  });
+  //wort redux
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -13,13 +45,35 @@ export default function MenuButton() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleBoil = () => {
+  const handleBoil = (event:any) => {
     console.log("boil");
     setAnchorEl(null);
+    //addHop
+    event.preventDefault()
+    dispatch(HOPS.actions.addHop('boil'));
+    //addHop
+    // dispatch(HOPS.actions.addIBU(IBU));
+    //Validation
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.volumeValidation());
+    dispatch(HOPS.actions.destinyValidation());
+    dispatch(HOPS.actions.boilValidation());
+    //Validation
   };
-  const handleHopStand = () => {
+  const handleHopStand = (event:any) => {
     console.log("HopStand");
     setAnchorEl(null);
+    event.preventDefault()
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    // dispatch(HOPSSTAND.actions.addHop('hopstand'))
+    dispatch(HOPS.actions.calcIBUHopStand());
+    // dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.addHop('hopstand'))
+    dispatch(HOPS.actions.volumeValidation());
+    dispatch(HOPS.actions.destinyValidation());
+    dispatch(HOPS.actions.boilValidation());
   };
   const handleDryHop = () => {
     console.log("HopStand");
@@ -50,7 +104,7 @@ export default function MenuButton() {
       >
         <MenuItem onClick={handleBoil}>На варку</MenuItem>
         <MenuItem onClick={handleHopStand}>На вирпул</MenuItem>
-        <MenuItem onClick={handleDryHop}>На сухое охмеление</MenuItem>
+        {/* <MenuItem onClick={handleDryHop}>На сухое охмеление</MenuItem> */}
       </Menu>
     </Stack>
   );

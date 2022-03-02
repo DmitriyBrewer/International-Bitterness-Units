@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+//MUI
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -11,6 +12,10 @@ import Grid from "@mui/material/Grid";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Switch, Slider } from "@mui/material";
 import BulletedList from "../components/UI/list/BulletedList";
+import { TextField } from "@mui/material";
+import Stack from "@mui/material/Stack";
+//MUI
+
 
 const About = () => {
   return (
@@ -24,7 +29,7 @@ const About = () => {
             </Typography>
           </div>
           <Typography variant="subtitle1" component="h3" gutterBottom>
-            Калькулятор IBU предназначен для калькуляции расчётной горечи пива.В
+            Калькулятор IBU предназначен для калькуляции расчётной горечи пива. В
             основу калькуляции заложена формула Тинсета.
           </Typography>
           <Typography variant="h4" component="h2" gutterBottom>
@@ -53,7 +58,7 @@ const About = () => {
           <Grid item xs={12} md={6}>
             <List>
               <BulletedList textContent="Получение расчётной горечи пива" />
-              <BulletedList textContent="Возможность добавлять до 5 хмелей на варку, каждый хмель имеет своё IBU" />
+              <BulletedList textContent="Возможность добавлять до 5 хмелей на варку/вирпул, каждый хмель имеет своё IBU" />
               <BulletedList textContent="Возможность редактировать IBU. С помощью инструмента Slider можно легко в  реальном времени изменить кол-во добавляемого хмеля, тем самым меняя горечь которую даст конкретный хмель и увидеть как хмель изменит общее IBU" />
               <BulletedList textContent="Возможность удалять хмель" />
               <BulletedList textContent="Возможность настраивать максимальное значение инструмента Slider" />
@@ -64,15 +69,14 @@ const About = () => {
             <Typography variant="h5" component="h2" gutterBottom>
               Состав полей
             </Typography>
-            <div style={{ background: "#d7d7d7", width: "70%" }}>
-              <Typography variant="subtitle1" component="h3" gutterBottom>
-                ⚠️ -Обязательное поле ввода
-              </Typography>
+            <div style={{ width: "70%" }}>
+              <TextField required={true} label='Обязательное поле ввода' sx={{width:"100%", margin:'10px'}} size="small"/>
             </div>
-            <div style={{ background: "#d7d7d7", width: "70%" }}>
-              <Typography variant="subtitle1" component="h3" gutterBottom>
-                ✅ -Необязательное поле ввода
-              </Typography>
+            <div style={{ width: "70%" }}>
+            <TextField label='Необязательное поле ввода' sx={{width:"100%", margin:'10px'}} size="small"/>
+            </div>
+            <div style={{ width: "70%" }}>
+            <TextField label='Ошибка ввода поля' sx={{width:"100%", margin:'10px'}} error size="small"/>
             </div>
             <Typography variant="subtitle1" component="h3" gutterBottom>
               Калькулятор разделён на две части:
@@ -81,18 +85,18 @@ const About = () => {
               1. Сусло:
             </Typography>
             <List>
-              <BulletedList textContent="Объём получаемого сусла, л ⚠️" />
-              <BulletedList textContent="Ожидаемая/расчётная плотность сусла, Plato ⚠️" />
-              <BulletedList textContent="Общее время кипячения сусла, мин ⚠️" />
+              <BulletedList textContent="Объём получаемого сусла, л" />
+              <BulletedList textContent="Ожидаемая/расчётная плотность сусла, Plato" />
+              <BulletedList textContent="Общее время кипячения сусла, мин" />
             </List>
             <Typography variant="subtitle1" component="h3" gutterBottom>
               2. Хмель:
             </Typography>
             <List>
-              <BulletedList textContent="Наименование хмеля ✅" />
-              <BulletedList textContent="Альфа кислота(см. на упаковке или уточняйте у производителя хмеля) ⚠️" />
-              <BulletedList textContent="Количество данного хмеля на варку, г ⚠️" />
-              <BulletedList textContent="Время внесения хмеля, от начала кипячения, мин ⚠️" />
+              <BulletedList textContent="Наименование хмеля" />
+              <BulletedList textContent="Альфа кислота(см. на упаковке или уточняйте у производителя хмеля)" />
+              <BulletedList textContent="Количество данного хмеля на варку, г" />
+              <BulletedList textContent="Время внесения хмеля, от начала кипячения, мин " />
             </List>
             <Typography variant="h5" component="h2" gutterBottom>
               Дополнительные поля:{" "}
@@ -102,16 +106,32 @@ const About = () => {
                 <ListItemIcon>
                   <CircleIcon style={{ width: "10px" }} />
                 </ListItemIcon>
-                <ListItemText primary="Поле Max-IBU позволяет вкл/выкл настройку максимального кол-во хмеля для поля Slider ✅" />
+                <ListItemText primary="Поле Max-IBU позволяет вкл/выкл настройку максимального кол-во хмеля для поля Slider " />
                 <Switch />
               </ListItem>
               <ListItem>
                 <ListItemIcon>
                   <CircleIcon style={{ width: "10px" }} />
                 </ListItemIcon>
-                <ListItemText primary="Поле Slider изменяет Количество данного хмеля на варку, г ✅" />
+                <ListItemText primary="Поле Slider изменяет Количество данного хмеля на варку, г " />
                 <Slider />
               </ListItem>
+            </List>
+            <Typography variant="h4" component="h2" gutterBottom>
+              Список обновлений
+            </Typography>
+            <Typography variant="subtitle1" component="h3" gutterBottom>
+              Февраль версия 2.1
+            </Typography>
+            <List>
+              <BulletedList textContent="Выбор вводимой плотности SG или Plato" />
+              <BulletedList textContent="Валидация полей" />
+              <BulletedList textContent="Расчёт горечи для Virpul/Hopstand" />
+              <BulletedList textContent="Частичное изменение дизайна" />
+              <BulletedList textContent="Возможность сворачивать/разворачивать хмель" />
+              <BulletedList textContent="Возможность менять тему светлая/тёмная" />
+              <BulletedList textContent="Исправлена ошибка ввода при переводе Plato в SG" />
+              <BulletedList textContent="Исправлена ошибка калькуляции при переводе введённой Plato в SG" />
             </List>
             <Typography variant="h4" component="h2" gutterBottom>
               Ожидаемые обновления
@@ -119,15 +139,6 @@ const About = () => {
             <Typography variant="subtitle1" component="h3" gutterBottom>
               Список и ориентировочные даты предстоящих обновлений приложения:
             </Typography>
-            <Typography variant="h5" component="h2" gutterBottom>
-              Февраль 2022:{" "}
-            </Typography>
-            <List>
-              <BulletedList textContent="Выбор вводимой плотности SG или Plato" />
-              <BulletedList textContent="Валидация полей" />
-              <BulletedList textContent="Расчёт горечи для Virpul/Hopstand" />
-              <BulletedList textContent="Расчёт горечи для DryHop" />
-            </List>
             <Typography variant="h5" component="h2" gutterBottom>
               Июль 2022:
             </Typography>

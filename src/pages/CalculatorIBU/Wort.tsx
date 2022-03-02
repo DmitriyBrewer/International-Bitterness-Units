@@ -93,6 +93,7 @@ const Wort: React.FC = () => {
 
     const boilHandler = (event: any) => {
       dispatch(HOPS.actions.addBoil(event.target.value));
+      dispatch(HOPS.actions.timeValidation());
     };
     const boilBlurValidation = () => {
       dispatch(HOPS.actions.calcIBU());
@@ -107,7 +108,7 @@ console.log(value);
 
   return (
     <Grid item>
-      <Paper>
+      <Paper elevation={3} sx={{ paddingTop: "20px", paddingBottom: "20px" }}>
         <Typography variant="h5" component="h2">
           Параметры сусла
         </Typography>
@@ -138,6 +139,7 @@ console.log(value);
             onChange={volumeHandler}
             onBlur={volumeBlurValidation}
             autoFocus={true}
+            required={true}
           />
           <TextField
             sx={{ margin: "10px" }}
@@ -157,6 +159,7 @@ console.log(value);
             value={ReduxValueWort.boil}
             onChange={boilHandler}
             onBlur={boilBlurValidation}
+            required={true}
           />
         </Stack>
         <Stack>
@@ -194,6 +197,7 @@ console.log(value);
             value={ReduxValueWort.destiny}
             onChange={destinyHandler}
             onBlur={destinyBlurValidation}
+            required={true}
           />
         </Stack>
         <Stack>
@@ -201,87 +205,6 @@ console.log(value);
         </Stack>
       </Paper>
     </Grid>
-    // <div>
-    //   <h1 style={{ textAlign: "center", fontFamily: "roboto" }}>
-    //     Калькулятор IBU
-    //   </h1>
-    //   <PharamInput
-    //     placeholder="Объем сусла, л"
-    //     id="wort"
-    //     type="number"
-    //     error={ReduxValueWort.volumeValidation===undefined?false:!ReduxValueWort.volumeValidation}
-    //     helperText={
-    //       ReduxValueWort.volumeValidation===undefined?
-    //       "Введите объём от 0 до 100 000, л"
-    //       :
-    //       !ReduxValueWort.volumeValidation? 
-    //        "❌ Объём от 0 до 100 000, л" :"✅ Верное значение" 
-    //     }
-    //     value={ReduxValueWort.volume}
-    //     onChange={volumeHandler}
-    //     onBlur={volumeBlurValidation}
-    //     autoFocus={true}
-    //   />
-    //   <PharamInput
-    //     placeholder="Время кипячения"
-    //     id="boil"
-    //     type="number"
-    //     error={ReduxValueWort.boilValidation===undefined?false:!ReduxValueWort.boilValidation}
-    //     helperText={
-    //       ReduxValueWort.boilValidation===undefined?
-    //       "Введите кипячение от 0 до 200 мин"
-    //       :
-    //       !ReduxValueWort.boilValidation?
-    //       "❌ Кипячение от 0 до 200 мин" : "✅ Верное значение"
-    //     }
-    //     value={ReduxValueWort.boil}
-    //     onChange={boilHandler}
-    //     onBlur={boilBlurValidation}
-    //   />
-    //   <FormControl component="fieldset" style={{ display:'flex', flexDirection:'column', justifyContent:'center'}}>
-    //     <FormLabel component="legend" style={{fontSize:'12px'}}>Выберите плотность</FormLabel>
-    //     <RadioGroup
-    //     row
-    //       aria-label="gravity"
-    //       name="controlled-radio-buttons-group"
-    //       value={value.radioButton}
-    //       onChange={radioHandler}
-    //       style={{marginRight:"35%",marginLeft:"35%"}}
-    //     >
-    //       <FormControlLabel 
-    //       style={{margin:'0px'}}
-    //       value="plato" 
-    //       control={<Radio  size="small"  />} label="Plato"
-    //       />
-    //       <FormControlLabel 
-    //       style={{margin:'0px'}}
-    //       value="sg" 
-    //       control={<Radio  size="small"/>} label="SG" 
-    //       />
-    //     </RadioGroup>
-    //   </FormControl>
-    //   <PharamInput
-    //     placeholder={'Плотность'}
-    //     id="destiny"
-    //     type="number"
-    //     error={ReduxValueWort.destinyValidation===undefined?false:!ReduxValueWort.destinyValidation}
-    //     helperText={
-    //       value.radioButton === 'plato' ?
-    //         ReduxValueWort.destinyValidation===undefined?
-    //           "Введите Plato от 0.5 до 40"
-    //           :
-    //           !ReduxValueWort.destinyValidation?"❌ Plato от 0.5 до 40":"✅ Верное значение"
-    //     :
-    //           ReduxValueWort.destinyValidation===undefined?
-    //           "Введите Plato от 1.002 до 1.179"
-    //           :
-    //           !ReduxValueWort.destinyValidation?"❌ Plato от 1.002 до 1.179":"✅ Верное значение"
-    //     }
-    //     value={ReduxValueWort.destiny}
-    //     onChange={destinyHandler}
-    //     onBlur={destinyBlurValidation}
-    //   />
-    // </div>
   );
 };
 

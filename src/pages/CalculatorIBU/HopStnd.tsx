@@ -71,7 +71,7 @@ export const Hop: React.FC<IHop> = ({id
   });
   //wort
   //hop
-  let ReduxValueHop = { name: "", alpha: "", amount: 0, time: "", ibu: "", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined, hopType:""  };
+  let ReduxValueHop = { name: "", alpha: "", amount: 0, time: "", ibu: "",ibuHopStand:"", temperature:"", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined, temperatureValidation:undefined, hopType:""  };
   Hops.forEach((element: any) => {
     if (element.id === id) {
       ReduxValueHop = {
@@ -83,7 +83,10 @@ export const Hop: React.FC<IHop> = ({id
         time: element.time,
         timeValidation: element.timeValidation,
         ibu: element.ibu,
-        hopType: element.hopType
+        temperature: element.temperature,
+        temperatureValidation: element.temperatureValidation,
+        hopType: element.hopType,
+        ibuHopStand: element.ibuHopStand
       };
     }
   });
@@ -102,25 +105,33 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.addAlpha(event.target.value));
   };
   const alphaBlurValidation = () => {
-    dispatch(HOPS.actions.calcIBU());
-    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.calcIBUHopStand());
+    dispatch(HOPS.actions.concatIBUHopStand());
     dispatch(HOPS.actions.alphaValidation());
   }
   const amountHandler = (event: any) => {
     dispatch(HOPS.actions.addAmount(event.target.value));
   };
   const amountBlurValidation = (e:any) => {
-    dispatch(HOPS.actions.calcIBU());
-    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.calcIBUHopStand());
+    dispatch(HOPS.actions.concatIBUHopStand());
     dispatch(HOPS.actions.amountValidation());
   }
   const timeHandler = (event: any) => {
-    dispatch(HOPS.actions.addTime(event.target.value));
+    dispatch(HOPS.actions.addTimeHopStand(event.target.value));
   };
   const timeBlurValidation = () => {
-    dispatch(HOPS.actions.calcIBU());
-    dispatch(HOPS.actions.concatIBU());
-    dispatch(HOPS.actions.timeValidation());
+    dispatch(HOPS.actions.calcIBUHopStand());
+    dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.timeValidationHopStand());
+  }
+  const temperatureHandler = (event: any) => {
+    dispatch(HOPS.actions.addTemperature(event.target.value));
+  };
+  const temperatureBlurValidation = () => {
+    dispatch(HOPS.actions.calcIBUHopStand());
+    dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.temperatureValidation());
   }
   //handlers
   //redux value
@@ -132,11 +143,10 @@ export const Hop: React.FC<IHop> = ({id
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Хмель на варку {ReduxValueHop.name} IBU: {ReduxValueHop.ibu}</Typography>
+            <Typography>Хмель на вирпул {ReduxValueHop.name} IBU: {ReduxValueHop.ibuHopStand}</Typography>
           </AccordionSummary>
 
           <Stack
-            // spacing={2}
             direction="row"
             sx={{
               display: "flex",
@@ -241,41 +251,73 @@ export const Hop: React.FC<IHop> = ({id
             <TextField
               sx={{ margin: "10px" }}
               id="outlined-basic"
-              label="Время внесения,м"
+              label="Время на вирпуле,м"
               variant="outlined"
               size="small"
               value={ReduxValueHop.time}
               onClick={selectHopId}
               onChange={timeHandler}
               onBlur={timeBlurValidation}
-              // onMouseUp={selectHopId}
               onMouseDown={selectHopId}
               type="number"
-              disabled={!boilValidation}
               error={ReduxValueHop.timeValidation===undefined?false:!ReduxValueHop.timeValidation}
               helperText={
                 ReduxValueHop.timeValidation===undefined?
-                "⚠️  от 0 до Время кипячения"
+                " от 0 до 100, м"
                 :
                 !ReduxValueHop.timeValidation? 
-                "❌ от 0 до Время кипячения" :"✅ Верное значение" 
+                "❌ от 0 до 100, м" : "✅ Верное значение" 
               }
               required={true}
             />
+           
+            </Stack>
+            <Stack
+            direction="row"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center"
+            }}
+          >
+               <TextField
+              sx={{ margin: "10px" }}
+              id="outlined-basic"
+              label="Температура HopStand"
+              variant="outlined"
+              size="small"
+              value={ReduxValueHop.temperature}
+              onClick={selectHopId}
+              onChange={temperatureHandler}
+              onBlur={temperatureBlurValidation}
+              // onMouseUp={selectHopId}
+              onMouseDown={selectHopId}
+              type="number"
+              // disabled={!boilValidation}
+              error={ReduxValueHop.temperatureValidation===undefined?false:!ReduxValueHop.temperatureValidation}
+              helperText={
+                ReduxValueHop.temperatureValidation===undefined?
+                " от 0 до 100, м"
+                :
+                !ReduxValueHop.temperatureValidation? 
+                "❌ от 0 до 100, м" :"✅ Верное значение" 
+              }
+              required={true}
+            />
+              </Stack>
             <Slider color="secondary" sx={{ width: "90%" }} 
             // valueLabelDisplay="auto"
             min={0.1}
             max={Number(amount?.AMOUNT)}
             value={ReduxValueHop.amount}
             onChange={(event: any) => {
-              dispatch(HOPS.actions.calcIBU());
+              dispatch(HOPS.actions.calcIBUHopStand());
               dispatch(HOPS.actions.concatIBU());
               dispatch(HOPS.actions.selectedHop(id));
               dispatch(HOPS.actions.addAmount(event.target.value));
               dispatch(HOPS.actions.amountValidation());
             }}
             />
-          </Stack>
         </Accordion>
       </Paper>
     </Grid>
