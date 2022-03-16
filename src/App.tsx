@@ -25,7 +25,7 @@ function App() {
         <CssBaseline />
         <Navbar onChangeTheme={colorMode.toggleColorMode}/>
         <AppRouter />
-        <Footer></Footer>
+        {/* <Footer></Footer> */}
       </BrowserRouter>
     </React.Fragment>
   );

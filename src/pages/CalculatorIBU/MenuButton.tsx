@@ -68,7 +68,7 @@ export default function MenuButton() {
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     // dispatch(HOPSSTAND.actions.addHop('hopstand'))
-    dispatch(HOPS.actions.calcIBUHopStand());
+    // dispatch(HOPS.actions.calcIBUHopStand());
     // dispatch(HOPS.actions.concatIBUHopStand());
     dispatch(HOPS.actions.addHop('hopstand'))
     dispatch(HOPS.actions.volumeValidation());

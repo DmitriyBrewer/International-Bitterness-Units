@@ -105,32 +105,34 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.addAlpha(event.target.value));
   };
   const alphaBlurValidation = () => {
-    dispatch(HOPS.actions.calcIBUHopStand());
-    dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.alphaValidation());
   }
   const amountHandler = (event: any) => {
     dispatch(HOPS.actions.addAmount(event.target.value));
   };
   const amountBlurValidation = (e:any) => {
-    dispatch(HOPS.actions.calcIBUHopStand());
-    dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.amountValidation());
   }
   const timeHandler = (event: any) => {
     dispatch(HOPS.actions.addTimeHopStand(event.target.value));
   };
   const timeBlurValidation = () => {
-    dispatch(HOPS.actions.calcIBUHopStand());
-    dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.timeValidationHopStand());
   }
   const temperatureHandler = (event: any) => {
     dispatch(HOPS.actions.addTemperature(event.target.value));
   };
   const temperatureBlurValidation = () => {
-    dispatch(HOPS.actions.calcIBUHopStand());
-    dispatch(HOPS.actions.concatIBUHopStand());
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
+    dispatch(HOPS.actions.calcIBU());
+    dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.temperatureValidation());
   }
   //handlers
@@ -143,7 +145,7 @@ export const Hop: React.FC<IHop> = ({id
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Хмель на вирпул {ReduxValueHop.name} IBU: {ReduxValueHop.ibuHopStand}</Typography>
+            <Typography>Хмель на вирпул {ReduxValueHop.name} IBU: {ReduxValueHop.ibu}</Typography>
           </AccordionSummary>
 
           <Stack
@@ -311,7 +313,7 @@ export const Hop: React.FC<IHop> = ({id
             max={Number(amount?.AMOUNT)}
             value={ReduxValueHop.amount}
             onChange={(event: any) => {
-              dispatch(HOPS.actions.calcIBUHopStand());
+              // dispatch(HOPS.actions.calcIBUHopStand());
               dispatch(HOPS.actions.concatIBU());
               dispatch(HOPS.actions.selectedHop(id));
               dispatch(HOPS.actions.addAmount(event.target.value));

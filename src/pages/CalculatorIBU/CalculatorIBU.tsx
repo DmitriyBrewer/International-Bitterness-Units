@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Wort from "./Wort";
 import HopList from "./HopList";
 import HopStandList from "./HopStandList";
+import ResultTextField from "./ResultTextField";
 //Components
 
 //MUI
@@ -34,22 +35,23 @@ const CalculatorIBU: React.FC = () => {
     volume: "",
     destiny: "",
     boil: "",
-    concatIBU: "",
     reduceIBU: "",
-    reduceIBUHopStand:""
+    reduceIbuHopsStand:"",
+    reduceIbuBoil:"",
   };
   Hops.forEach((element: any) => {
     ReduxValueWort = {
       volume: element.volume,
       destiny: element.destiny,
       boil: element.boil,
-      concatIBU: element.concatIBU,
       reduceIBU: element.reduceIBU,
-      reduceIBUHopStand:element.reduceIBUHopStand
+      reduceIbuHopsStand:element.reduceIbuHopsStand,
+      reduceIbuBoil:element.reduceIbuBoil
     };
   });
   //wort redux
-  console.log(ReduxValueWort.reduceIBUHopStand);
+  console.log(ReduxValueWort.reduceIbuBoil);
+  console.log(ReduxValueWort.reduceIbuHopsStand);
   console.log(ReduxValueWort.reduceIBU);
 
   
@@ -79,7 +81,7 @@ const CalculatorIBU: React.FC = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       <CssBaseline />
       <Grid
         container
@@ -98,16 +100,12 @@ const CalculatorIBU: React.FC = () => {
       </Typography>
         <Wort />
         <HopList />
-        {/* <Typography variant="h6" component="h1" sx={{ marginTop: "10px" }}>
-        варка IBU: {ReduxValueWort.reduceIBU}
-      </Typography>
-      <Typography variant="h6" component="h1" sx={{ marginTop: "10px" }}>
-        вирпул IBU: {ReduxValueWort.reduceIBUHopStand}
-      </Typography>
-      <Typography variant="h6" component="h1" sx={{ marginTop: "10px" }}>
-        общий IBU: {Number(ReduxValueWort.reduceIBUHopStand)+Number(ReduxValueWort.reduceIBU)}
-      </Typography> */}
-        {/* <HopStandList /> */}
+        {Hops.length !== 1 ?
+      <ResultTextField ibuValue={ReduxValueWort.reduceIBU} ibuBoil={ReduxValueWort.reduceIbuBoil} ibuHopStand={ReduxValueWort.reduceIbuHopsStand}/>
+      :
+      <span></span>
+        }
+            {/* <ResultTextField ibuValue={ReduxValueWort.reduceIBU} ibuBoil={ReduxValueWort.reduceIbuBoil} ibuHopStand={ReduxValueWort.reduceIbuHopsStand}/> */}
       </Grid>
     </React.Fragment>
   );

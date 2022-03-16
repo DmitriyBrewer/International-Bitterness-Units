@@ -1,3 +1,4 @@
+import inputBaseClasses from "@mui/base/InputUnstyled/inputUnstyledClasses";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import { IHop } from "../../interface/IHop";
 import nextId from "react-id-generator";
@@ -291,41 +292,6 @@ const HOPS = createSlice({
       });
       return state;
     },
-    calcIBUHopStand: (state) => {
-      state.map((element: any) => {
-        if (
-          (element.hopType === 'hopstand' && element.id === element.selectedHop && state[0].volume,
-          state[0].destiny&& state[0].boil)
-        ) {
-          return (element.ibuHopStand = CalcHopStand(
-            element.name,
-            element.alpha,
-            element.amount,
-            element.time,
-            element.temperature,
-            state[0].volume,
-            state[0].destiny,
-          ));
-        } else return (element.ibuHopStand = 0);
-      });
-      return state;
-    },
-    concatIBUHopStand: (state) => {
-      state.reduce((acc: any, element: any, index: any) => {
-        if (element.hopType === 'hopstand') {
-        element.concatIBUHopStand = acc.ibuHopStand + element.ibuHopStand;
-        if (index !== 0) {
-          if (acc.concatIBUHopStand) {
-            element.reduceIBUHopStand = acc.concatIBUHopStand + element.ibuHopStand;
-            return element;
-          }
-          element.reduceIBUHopStand = element.ibuHopStand; //если concatIBU нету или он NaN тогда reduce равен первому ibu
-        }
-      }//
-        return element;
-      }, 0);
-      return state;
-    },
     
     //hopsStand
 
@@ -337,10 +303,12 @@ const HOPS = createSlice({
       });
       return state;
     },
+
     calcIBU: (state) => {
       state.map((element: any) => {
+        if (element.hopType === 'boil') {
         if (
-          (element.hopType === 'boil' && element.id === element.selectedHop && state[0].volume,
+          (element.id === element.selectedHop && state[0].volume,
           state[0].destiny && state[0].boil)
         ) {
           return (element.ibu = Calc(
@@ -352,27 +320,53 @@ const HOPS = createSlice({
             state[0].destiny,
             state[0].boil
           ));
-        } else return (element.ibu = 0);
+        } 
+      }  if (element.hopType === 'hopstand') {
+        if (
+          (element.id === element.selectedHop && state[0].volume,
+          state[0].destiny&& state[0].boil)
+        ) {
+          return (element.ibu = CalcHopStand(
+            element.name,
+            element.alpha,
+            element.amount,
+            element.time,
+            element.temperature,
+            state[0].volume,
+            state[0].destiny,
+          ));
+        }
+      } else return (element.ibu = 0);
       });
       return state;
     },
     concatIBU: (state) => {
-      state.reduce((acc: any, element: any, index: any) => {
-        if (element.hopType === 'boil') {
-        element.concatIBU = acc.ibu + element.ibu;
-        if (index !== 0) {
-          if (acc.concatIBU) {
-            element.reduceIBU = acc.concatIBU + element.ibu;
-            return element;
+      var sum = 0
+      var sumBoil = 0
+      var sumHopStand = 0
+      for (var i = 1; i < state.length; i++) {
+        sum += state[i].ibu
+        state[i].reduceIBU = sum.toFixed(1)
+          if(state[i].hopType === 'boil') {
+            sumBoil += state[i].ibu
+            state[i].reduceIbuBoil = sumBoil
           }
-          element.reduceIBU = element.ibu; //если concatIBU нету или он NaN тогда reduce равен первому ibu
-        }
-      }//
-        return element;
-      }, 0)
-  
-      return state;
+          if(state[i].hopType === 'hopstand') {
+            sumHopStand += state[i].ibu
+            state[i].reduceIbuHopsStand = sumHopStand
+          }
+      }
+      console.log(sum);
+      return state
     },
+    // checkingError: (state) => {
+    //   state.map((element:any)=>{
+    //     if(element.boilValidation) {
+    //       return element.checkError = true
+    //     } else element.checkError = false
+    //   })
+    //   return state
+    // },
   }
 });
 export default HOPS;

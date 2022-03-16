@@ -134,7 +134,6 @@ export const Hop: React.FC<IHop> = ({id
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography>Хмель на варку {ReduxValueHop.name} IBU: {ReduxValueHop.ibu}</Typography>
           </AccordionSummary>
-
           <Stack
             // spacing={2}
             direction="row"
