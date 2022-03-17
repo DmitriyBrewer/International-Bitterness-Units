@@ -8,13 +8,13 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Typography } from "@mui/material";
+import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 //MUI
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
-import { UndoRounded } from '@mui/icons-material';
 //redux
 
 
@@ -41,7 +41,7 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
      boilValidation: undefined,
      destinyValidation: undefined,
      volumeValidation: undefined,
-     checkError:undefined
+     checkAllError:false
    };
    Hops.forEach((element: any) => {
      ReduxValueWort = {
@@ -54,7 +54,7 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
         boilValidation: element.boilValidation,
         destinyValidation: element.destinyValidation,
         volumeValidation: element.volumeValidation,
-        checkError: element.checkError
+        checkAllError: Hops[0].checkAllError
      };
    });
 
@@ -77,13 +77,14 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
     <Grid item >
       <Paper elevation={3}>
       <Accordion
-       disabled={false}
+       disabled={!ReduxValueWort.checkAllError? true : false}
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ fontWeight: 'bold', letterSpacing: 2  }} color='secondary'>Общее IBU : {ReduxValueWort.reduceIBU?ReduxValueWort.reduceIBU:'✍️'}
+            <Typography sx={{ fontWeight: 'bold', letterSpacing: 2  }} color='secondary'>Общее IBU : {ReduxValueWort.checkAllError?ReduxValueWort.reduceIBU:'✍️...Ввод'}
             </Typography>
+            {/* <HelpCenterIcon style={{marginLeft:'240px'}} onClick={()=>{setExpanded("panel1")}}/> */}
           </AccordionSummary>
           <Stack
             // spacing={2}

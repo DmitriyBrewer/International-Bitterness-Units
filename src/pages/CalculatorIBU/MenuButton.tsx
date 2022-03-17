@@ -1,8 +1,12 @@
 import * as React from "react";
+//MUI
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
+import Tooltip from '@mui/material/Tooltip';
+import Alert from '@mui/material/Alert';
+//MUI
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -22,7 +26,11 @@ export default function MenuButton() {
     destiny: "",
     boil: "",
     concatIBU: "",
-    reduceIBU: ""
+    reduceIBU: "", 
+    volumeValidation: undefined,
+    boilValidation: undefined,
+    checkError:undefined
+
   };
   Hops.forEach((element: any) => {
     ReduxValueWort = {
@@ -30,9 +38,16 @@ export default function MenuButton() {
       destiny: element.destiny,
       boil: element.boil,
       concatIBU: element.concatIBU,
-      reduceIBU: element.reduceIBU
+      reduceIBU: element.reduceIBU,
+      volumeValidation: element.volumeValidation,
+      boilValidation: element.boilValidation,
+      checkError: Hops[0].checkError
     };
   });
+
+  // const Error = Hops[0].boilValidation? Hops[0].checkError : 0
+
+  console.log(ReduxValueWort.volumeValidation)
   //wort redux
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -75,7 +90,10 @@ export default function MenuButton() {
 
   return (
     <Stack spacing={2} direction="row" sx={{ display: "block" }}>
+      <Tooltip title="Выбрать хмель">
+      <span>
       <Button
+      disabled={!ReduxValueWort.checkError? true : false}
         variant="contained"
         id="basic-button"
         aria-controls={open ? "Sbasic-menu" : undefined}
@@ -86,6 +104,8 @@ export default function MenuButton() {
       >
         Добавить хмель
       </Button>
+      </span>
+      </Tooltip>
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
@@ -99,6 +119,11 @@ export default function MenuButton() {
         <MenuItem onClick={handleHopStand}>На вирпул</MenuItem>
         {/* <MenuItem onClick={handleDryHop}>На сухое охмеление</MenuItem> */}
       </Menu>
+      {!ReduxValueWort.checkError? 
+      <Alert severity="error" style={{  justifyContent:'center', marginTop:'20px', marginLeft:'8px', marginRight:'8px' }}>Для продолжения корректно заполните поля !</Alert>
+      :
+      <span></span>
+    }
     </Stack>
   );
 }

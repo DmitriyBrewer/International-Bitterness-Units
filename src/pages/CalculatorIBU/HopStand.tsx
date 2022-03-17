@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
 import { Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
+import ReportIcon from '@mui/icons-material/Report';
 //MUI
 
 //redux
@@ -54,7 +55,7 @@ export const Hop: React.FC<IHop> = ({id
   //wort
   const boilValidation = Hops.length > 0 ? Hops[0].boilValidation : "";
 
-  let ReduxValueWort = { volume: "", destiny: "", boil: "", boilValidation:undefined, reduceIBU: "",concatIBU: ""
+  let ReduxValueWort = { volume: "", destiny: "", boil: "", boilValidation:undefined, reduceIBU: ""
 
 };
   Hops.forEach((element: any, index:any) => {
@@ -65,13 +66,12 @@ export const Hop: React.FC<IHop> = ({id
         boil: element.boil,
         boilValidation:undefined,
         reduceIBU: element.reduceIBU,
-        concatIBU: element.concatIBU
       };
     }
   });
   //wort
   //hop
-  let ReduxValueHop = { name: "", alpha: "", amount: 0, time: "", ibu: "",ibuHopStand:"", temperature:"", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined, temperatureValidation:undefined, hopType:""  };
+  let ReduxValueHop = { name: "", alpha: "", amount: 0, time: "", ibu: "",ibuHopStand:"", temperature:"", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined, temperatureValidation:undefined, hopType:"", checkHopStandError:false  };
   Hops.forEach((element: any) => {
     if (element.id === id) {
       ReduxValueHop = {
@@ -86,7 +86,8 @@ export const Hop: React.FC<IHop> = ({id
         temperature: element.temperature,
         temperatureValidation: element.temperatureValidation,
         hopType: element.hopType,
-        ibuHopStand: element.ibuHopStand
+        ibuHopStand: element.ibuHopStand,
+        checkHopStandError: element.checkHopStandError
       };
     }
   });
@@ -108,6 +109,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.alphaValidation());
+     //
+     dispatch(HOPS.actions.checkingHopError());
+     //
   }
   const amountHandler = (event: any) => {
     dispatch(HOPS.actions.addAmount(event.target.value));
@@ -116,6 +120,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.amountValidation());
+     //
+     dispatch(HOPS.actions.checkingHopError());
+     //
   }
   const timeHandler = (event: any) => {
     dispatch(HOPS.actions.addTimeHopStand(event.target.value));
@@ -124,6 +131,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.timeValidationHopStand());
+     //
+     dispatch(HOPS.actions.checkingHopError());
+     //
   }
   const temperatureHandler = (event: any) => {
     dispatch(HOPS.actions.addTemperature(event.target.value));
@@ -134,6 +144,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.temperatureValidation());
+     //
+     dispatch(HOPS.actions.checkingHopError());
+     //
   }
   //handlers
   //redux value
@@ -145,7 +158,8 @@ export const Hop: React.FC<IHop> = ({id
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Хмель на вирпул {ReduxValueHop.name} IBU: {ReduxValueHop.ibu}</Typography>
+            <Typography>Хмель на вирпул {ReduxValueHop.name} IBU: {ReduxValueHop.checkHopStandError?ReduxValueHop.ibu:''}</Typography>
+            {!ReduxValueHop.checkHopStandError?<ReportIcon style={{marginLeft:'5px'}} color='error'/>:<span></span>}
           </AccordionSummary>
 
           <Stack

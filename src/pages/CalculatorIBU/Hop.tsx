@@ -13,6 +13,7 @@ import Stack from "@mui/material/Stack";
 import { TextField } from "@mui/material";
 import { Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
+import ReportIcon from '@mui/icons-material/Report';
 //MUI
 
 //redux
@@ -54,8 +55,7 @@ export const Hop: React.FC<IHop> = ({id
   //wort
   const boilValidation = Hops.length > 0 ? Hops[0].boilValidation : "";
 
-  let ReduxValueWort = { volume: "", destiny: "", boil: "", boilValidation:undefined, reduceIBU: "",concatIBU: ""
-
+  let ReduxValueWort = { volume: "", destiny: "", boil: "", boilValidation:undefined, reduceIBU: ""
 };
   Hops.forEach((element: any, index:any) => {
     if (index===0)
@@ -64,14 +64,13 @@ export const Hop: React.FC<IHop> = ({id
         destiny: element.destiny,
         boil: element.boil,
         boilValidation:undefined,
-        reduceIBU: element.reduceIBU,
-        concatIBU: element.concatIBU
+        reduceIBU: element.reduceIBU
       };
     }
   });
   //wort
   //hop
-  let ReduxValueHop = { name: "", alpha: "", amount: 0, time: "", ibu: "", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined, hopType:""  };
+  let ReduxValueHop = { name: "", alpha: "", amount: 0, time: "", ibu: "", alphaValidation: undefined, timeValidation: undefined,amountValidation: undefined, hopType:"",checkBoilError:false };
   Hops.forEach((element: any) => {
     if (element.id === id) {
       ReduxValueHop = {
@@ -83,7 +82,8 @@ export const Hop: React.FC<IHop> = ({id
         time: element.time,
         timeValidation: element.timeValidation,
         ibu: element.ibu,
-        hopType: element.hopType
+        hopType: element.hopType,
+        checkBoilError: element.checkBoilError
       };
     }
   });
@@ -105,6 +105,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.alphaValidation());
+     //
+     dispatch(HOPS.actions.checkingHopError());
+     //
   }
   const amountHandler = (event: any) => {
     dispatch(HOPS.actions.addAmount(event.target.value));
@@ -113,6 +116,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.amountValidation());
+     //
+     dispatch(HOPS.actions.checkingHopError());
+     //
   }
   const timeHandler = (event: any) => {
     dispatch(HOPS.actions.addTime(event.target.value));
@@ -121,6 +127,9 @@ export const Hop: React.FC<IHop> = ({id
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
     dispatch(HOPS.actions.timeValidation());
+    //
+    dispatch(HOPS.actions.checkingHopError());
+    //
   }
   //handlers
   //redux value
@@ -132,7 +141,8 @@ export const Hop: React.FC<IHop> = ({id
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Хмель на варку {ReduxValueHop.name} IBU: {ReduxValueHop.ibu}</Typography>
+          <Typography>Хмель на варку {ReduxValueHop.name} IBU: {ReduxValueHop.checkBoilError?ReduxValueHop.ibu:''}</Typography>
+          {!ReduxValueHop.checkBoilError?<ReportIcon style={{marginLeft:'5px'}} color='error'/>:<span></span>}
           </AccordionSummary>
           <Stack
             // spacing={2}

@@ -349,24 +349,42 @@ const HOPS = createSlice({
         state[i].reduceIBU = sum.toFixed(1)
           if(state[i].hopType === 'boil') {
             sumBoil += state[i].ibu
-            state[i].reduceIbuBoil = sumBoil
+            state[i].reduceIbuBoil = sumBoil.toFixed(1)
           }
           if(state[i].hopType === 'hopstand') {
             sumHopStand += state[i].ibu
-            state[i].reduceIbuHopsStand = sumHopStand
+            state[i].reduceIbuHopsStand = sumHopStand.toFixed(1)
           }
       }
       console.log(sum);
       return state
     },
-    // checkingError: (state) => {
-    //   state.map((element:any)=>{
-    //     if(element.boilValidation) {
-    //       return element.checkError = true
-    //     } else element.checkError = false
-    //   })
-    //   return state
-    // },
+    checkingErrorWort: (state) => {
+      if(state[0].volumeValidation&&state[0].boilValidation&&state[0].destinyValidation) {
+        state[0].checkError = true
+      } else state[0].checkError = false
+      return state
+    },
+    checkingHopError: (state) => {
+       state.map((element:any)=>{
+         if(element.hopType==='boil') {
+          if(state[0].volumeValidation&&state[0].boilValidation&&state[0].destinyValidation&&element.alphaValidation&&element.amountValidation&&element.timeValidation) {
+            element.checkBoilError = true
+          }else 
+          element.checkBoilError = false
+         }
+         if(element.hopType==='hopstand') {
+          if(state[0].volumeValidation&&state[0].boilValidation&&state[0].destinyValidation&&element.alphaValidation&&element.amountValidation&&element.timeValidation&&element.temperatureValidation) {
+            element.checkHopStandError = true
+          }else 
+          element.checkHopStandError = false
+         }
+         if (element.checkBoilError===false ||element.checkHopStandError===false ) {
+          state[0].checkAllError = false
+         } else state[0].checkAllError = true
+       })
+       return state
+    },
   }
 });
 export default HOPS;

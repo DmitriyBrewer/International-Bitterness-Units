@@ -80,6 +80,9 @@ const Wort: React.FC = () => {
       dispatch(HOPS.actions.calcIBU());
       dispatch(HOPS.actions.concatIBU());
       dispatch(HOPS.actions.volumeValidation());
+      //
+      dispatch(HOPS.actions.checkingErrorWort());
+      //
     }
 
     const destinyHandler = (event: any) => {
@@ -89,6 +92,9 @@ const Wort: React.FC = () => {
       dispatch(HOPS.actions.calcIBU());
       dispatch(HOPS.actions.concatIBU());
       dispatch(HOPS.actions.destinyValidation());
+      //
+      dispatch(HOPS.actions.checkingErrorWort());
+      //
     }
 
     const boilHandler = (event: any) => {
@@ -99,6 +105,9 @@ const Wort: React.FC = () => {
       dispatch(HOPS.actions.calcIBU());
       dispatch(HOPS.actions.concatIBU());
       dispatch(HOPS.actions.boilValidation());
+      //
+      dispatch(HOPS.actions.checkingErrorWort());
+      //
     }
 
     //handlers
@@ -130,7 +139,7 @@ console.log(value);
             error={ReduxValueWort.volumeValidation===undefined?false:!ReduxValueWort.volumeValidation}
             helperText={
               ReduxValueWort.volumeValidation===undefined?
-              "Введите объём от 0 до 100 000, л"
+              "Объём от 0 до 100 000, л"
               :
               !ReduxValueWort.volumeValidation? 
               "❌ Объём от 0 до 100 000, л" :"✅ Верное значение" 
@@ -151,7 +160,7 @@ console.log(value);
             error={ReduxValueWort.boilValidation===undefined?false:!ReduxValueWort.boilValidation}
             helperText={
               ReduxValueWort.boilValidation===undefined?
-              "Введите кипячение от 0 до 200 мин"
+              "Кипячение от 0 до 200 мин"
               :
               !ReduxValueWort.boilValidation?
               "❌ Кипячение от 0 до 200 мин" : "✅ Верное значение"
