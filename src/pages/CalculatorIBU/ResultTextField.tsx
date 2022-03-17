@@ -13,7 +13,6 @@ import { Typography } from "@mui/material";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
-import HOPSSTAND from "../../store/reducer/hopStandSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 import { UndoRounded } from '@mui/icons-material';
 //redux
@@ -29,9 +28,7 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
    //Redux
    const dispatch: AppDispatch = useDispatch();
    const Hops = useSelector((state: AppState) => state.hops);
-   const HopsStand = useSelector((state: AppState) => state.hopStand);
    console.log(Hops);
-   console.log(HopsStand);
    //Redux
    //wort redux
    let ReduxValueWort = {
@@ -48,25 +45,25 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
    };
    Hops.forEach((element: any) => {
      ReduxValueWort = {
-       volume: element.volume,
-       destiny: element.destiny,
-       boil: element.boil,
-       reduceIBU: element.reduceIBU,
-       reduceIbuHopsStand:element.reduceIbuHopsStand,
-       reduceIbuBoil:element.reduceIbuBoil,
-       boilValidation: element.boilValidation,
+        volume: element.volume,
+        destiny: element.destiny,
+        boil: element.boil,
+        reduceIBU: element.reduceIBU,
+        reduceIbuHopsStand:element.reduceIbuHopsStand,
+        reduceIbuBoil:element.reduceIbuBoil,
+        boilValidation: element.boilValidation,
         destinyValidation: element.destinyValidation,
         volumeValidation: element.volumeValidation,
         checkError: element.checkError
      };
    });
+
    //wort redux
    console.log(ReduxValueWort.reduceIbuBoil);
    console.log(ReduxValueWort.reduceIbuHopsStand);
    console.log(ReduxValueWort.reduceIBU);
-     //accordion
+  //accordion
   const [expanded, setExpanded] = React.useState<string | false>(false);
-
   const handleChange = (panel: string) => (
     event: React.SyntheticEvent,
     isExpanded: boolean
@@ -78,9 +75,6 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
 
   return (
     <Grid item >
-      {/* <button onClick={()=>{
-                  dispatch(HOPS.actions.checkingError());
-            }}>esa</button> */}
       <Paper elevation={3}>
       <Accordion
        disabled={false}

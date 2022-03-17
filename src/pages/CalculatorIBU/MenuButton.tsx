@@ -7,7 +7,6 @@ import Stack from "@mui/material/Stack";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
-import HOPSSTAND from "../../store/reducer/hopStandSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 //redux
 
@@ -15,9 +14,7 @@ export default function MenuButton() {
   //Redux
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
-  const HopsStand = useSelector((state: AppState) => state.hopStand);
   console.log(Hops);
-  console.log(HopsStand);
   //Redux
   //wort redux
   let ReduxValueWort = {
@@ -46,13 +43,12 @@ export default function MenuButton() {
     setAnchorEl(null);
   };
   const handleBoil = (event:any) => {
-    console.log("boil");
+    // console.log("boil");
     setAnchorEl(null);
     //addHop
     event.preventDefault()
     dispatch(HOPS.actions.addHop('boil'));
     //addHop
-    // dispatch(HOPS.actions.addIBU(IBU));
     //Validation
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
@@ -62,14 +58,11 @@ export default function MenuButton() {
     //Validation
   };
   const handleHopStand = (event:any) => {
-    console.log("HopStand");
+    // console.log("HopStand");
     setAnchorEl(null);
     event.preventDefault()
     dispatch(HOPS.actions.calcIBU());
     dispatch(HOPS.actions.concatIBU());
-    // dispatch(HOPSSTAND.actions.addHop('hopstand'))
-    // dispatch(HOPS.actions.calcIBUHopStand());
-    // dispatch(HOPS.actions.concatIBUHopStand());
     dispatch(HOPS.actions.addHop('hopstand'))
     dispatch(HOPS.actions.volumeValidation());
     dispatch(HOPS.actions.destinyValidation());

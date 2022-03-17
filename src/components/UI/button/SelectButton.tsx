@@ -11,7 +11,6 @@ import MenuList from '@mui/material/MenuList';
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../../store/reducer/hopSlice";
-import HOPSSTAND from "../../../store/reducer/hopStandSlice";
 import { AppDispatch, AppState, RootState } from "../../../store/store";
 //redux
 

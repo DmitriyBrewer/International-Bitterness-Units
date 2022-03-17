@@ -1,6 +1,6 @@
 import React from "react";
 import Hop from "./Hop";
-import HopStnd from "./HopStnd";
+import HopStand from "./HopStand";
 
 //redux
 import {  useSelector } from "react-redux";
@@ -26,7 +26,7 @@ const HopList: React.FC = () => {
       }  if(element.hopType==='boil') {
       return <Hop id={element.id} key={element.id} />
     } if(element.hopType==='hopstand') {
-      return <HopStnd id={element.id} key={element.id}/>
+      return <HopStand id={element.id} key={element.id}/>
     }
       })}
     </React.Fragment>

@@ -3,7 +3,6 @@ import { useEffect } from "react";
 //Components
 import Wort from "./Wort";
 import HopList from "./HopList";
-import HopStandList from "./HopStandList";
 import ResultTextField from "./ResultTextField";
 //Components
 
@@ -18,7 +17,6 @@ import { Typography } from "@mui/material";
 //redux
 import { useSelector, useDispatch } from "react-redux";
 import HOPS from "../../store/reducer/hopSlice";
-import HOPSSTAND from "../../store/reducer/hopStandSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 //redux
 
@@ -26,9 +24,7 @@ const CalculatorIBU: React.FC = () => {
   //Redux
   const dispatch: AppDispatch = useDispatch();
   const Hops = useSelector((state: AppState) => state.hops);
-  const HopsStand = useSelector((state: AppState) => state.hopStand);
   console.log(Hops);
-  console.log(HopsStand);
   //Redux
   //wort redux
   let ReduxValueWort = {
