@@ -55,7 +55,10 @@ const Navbar: React.FC<INavbar> = ({ onChangeTheme }) => {
           <Link to="/about" className={cl.header_text_content}>
             About
           </Link>
-          {/* {!isAuth &&
+          <Link to="/test" className={cl.header_text_content}>
+            TestCalc
+          </Link>
+          {!isAuth &&
           <div>
           <Link to="/signup " className={cl.header_text_content}>
             Регистрация
@@ -72,7 +75,7 @@ const Navbar: React.FC<INavbar> = ({ onChangeTheme }) => {
           }
           {isAuth &&
           <div><AvatarMenu/></div>
-          } */}
+          }
         </Toolbar>
       </AppBar>
     </Box>

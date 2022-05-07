@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Main from "./pages/Main";
 import About from "./pages/About";
+import CalcTestVersion from "./pages/TestCalc/CalcTestVersion";
 
 
 
@@ -18,6 +19,8 @@ function AppRouter() {
       <Route path="/login" element={<Login />}/>
       <Route path="/main" element={<Main />}/>
       <Route path="/about" element={<About />}/>
+      <Route path="/test" element={<CalcTestVersion />}/>
+
       {/* <Route
         path="/lala"
         element={<Navigate to="/calc" />}

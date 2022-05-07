@@ -280,3 +280,16 @@ export const Calc = (
     return IBU;
   };
   
+
+  export const toSG = (destiny) => {
+    const sg = 1 + parseInt(destiny, 10) / (258.6 - (parseInt(destiny, 10) / 258.2) * 227.1);
+    return sg.toFixed(4).toString()
+  }
+
+  export const toPlato = (destiny) => {
+   const plato = Math.round(
+          -1 * 616.868 + 1111.14 * Number(destiny) -
+          630.272 * Math.pow(Number(destiny), 2) + 135.997 * Math.pow(Number(destiny), 3));
+          console.log(plato);
+          return plato.toString()
+  }

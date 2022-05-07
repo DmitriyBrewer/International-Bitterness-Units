@@ -46,9 +46,9 @@ const CalculatorIBU: React.FC = () => {
     };
   });
   //wort redux
-  console.log(ReduxValueWort.reduceIbuBoil);
-  console.log(ReduxValueWort.reduceIbuHopsStand);
-  console.log(ReduxValueWort.reduceIBU);
+  // console.log(ReduxValueWort.reduceIbuBoil);
+  // console.log(ReduxValueWort.reduceIbuHopsStand);
+  // console.log(ReduxValueWort.reduceIBU);
 
   
   const ibuAddHopAndValidation = (event:any) => {
@@ -101,7 +101,6 @@ const CalculatorIBU: React.FC = () => {
       :
       <span></span>
         }
-            {/* <ResultTextField ibuValue={ReduxValueWort.reduceIBU} ibuBoil={ReduxValueWort.reduceIbuBoil} ibuHopStand={ReduxValueWort.reduceIbuHopsStand}/> */}
       </Grid>
     </React.Fragment>
   );

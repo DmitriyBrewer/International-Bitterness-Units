@@ -1,13 +1,15 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import hops from "./reducer/hopSlice";
 import userReducer from './reducer/userSlice';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
+import hop from './reducer/hopPharamSlice';
 
 
 
 const rootReducer = combineReducers({
   hops: hops.reducer,
   user: userReducer,
+  hop: hop.reducer
 });
 
 const store = configureStore({

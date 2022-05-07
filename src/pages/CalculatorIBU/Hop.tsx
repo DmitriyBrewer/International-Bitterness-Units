@@ -161,6 +161,8 @@ export const Hop: React.FC<IHop> = ({id
               <HopSetting value={amount?.AMOUNT}
               onChange={amountHandlerSlider}/>
               <DeleteButton onClick={()=>{
+                console.log(id);
+                
                 dispatch(HOPS.actions.deleteHop(id))
               }} />
             </Stack>
