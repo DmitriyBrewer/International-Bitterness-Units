@@ -97,9 +97,11 @@ const ValidationBoil = () => {
     <main>
     <h1>Введите параметры сусла</h1>
     
-     <PharamInput name='volume' value={pharam.volume} onChange={handleChange} onBlur={ValidationVolume} validation={pharam.volumeValidation}/>
+     <PharamInput name='volume' value={pharam.volume} placeholder='Объём сусла, л' onChange={handleChange} onBlur={ValidationVolume} validation={pharam.volumeValidation} initialHelperText='Объём от 0 до 100 000, л'
+          errorValidationHelperText='❌ Объём от 0 до 100 000, л'
+          trueValidationHelperText='✅ Верное значение'/>
 
-     <PharamInput name='destiny' value={pharam.destiny} onChange={handleChange} onBlur={ValidationDestiny} validation={pharam.destinyValidation}/>
+     <PharamInput name='destiny' value={pharam.destiny} onChange={handleChange} onBlur={ValidationDestiny} validation={pharam.destinyValidation} />
 
      <PharamInput name='boil' value={pharam.boil} onChange={handleChange} onBlur={ValidationBoil} validation={pharam.boilValidation}/>
 

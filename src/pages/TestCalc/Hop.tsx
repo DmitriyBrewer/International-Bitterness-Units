@@ -15,11 +15,11 @@ import {alphaValidations, amountValidations, timeValidations, timeHopValidations
 interface IHop {
     hopElement:{
         id:string;
-        nameHop:string;
-        alpha:string;
-        amount:string;
-        time:string;
-        hopStand:string;
+        nameHop:string | undefined;
+        alpha:string | undefined;
+        amount:string | undefined;
+        time:string | undefined;
+        hopStand:string | undefined;
         alphaValidation: boolean | undefined;
         amountValidation: boolean | undefined;
         timeValidation: boolean | undefined;

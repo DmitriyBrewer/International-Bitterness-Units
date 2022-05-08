@@ -11,57 +11,14 @@ import { Typography } from "@mui/material";
 import HelpCenterIcon from '@mui/icons-material/HelpCenter';
 //MUI
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
-import HOPS from "../../store/reducer/hopSlice";
-import { AppDispatch, AppState, RootState } from "../../store/store";
-//redux
-
-
 interface IPropsIBU {
-    ibuValue:any;
-    ibuBoil:any;
-    ibuHopStand:any;
+    ibuValue?:any;
+    ibuBoil?:any;
+    ibuHopStand?:any;
 }
 
 const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) => {
-   //Redux
-   const dispatch: AppDispatch = useDispatch();
-   const Hops = useSelector((state: AppState) => state.hops);
-   console.log(Hops);
-   //Redux
-   //wort redux
-   let ReduxValueWort = {
-     volume: "",
-     destiny: "",
-     boil: "",
-     reduceIBU: "",
-     reduceIbuHopsStand:"",
-     reduceIbuBoil:"",
-     boilValidation: undefined,
-     destinyValidation: undefined,
-     volumeValidation: undefined,
-     checkAllError:false
-   };
-   Hops.forEach((element: any) => {
-     ReduxValueWort = {
-        volume: element.volume,
-        destiny: element.destiny,
-        boil: element.boil,
-        reduceIBU: element.reduceIBU,
-        reduceIbuHopsStand:element.reduceIbuHopsStand,
-        reduceIbuBoil:element.reduceIbuBoil,
-        boilValidation: element.boilValidation,
-        destinyValidation: element.destinyValidation,
-        volumeValidation: element.volumeValidation,
-        checkAllError: Hops[0].checkAllError
-     };
-   });
 
-   //wort redux
-   console.log(ReduxValueWort.reduceIbuBoil);
-   console.log(ReduxValueWort.reduceIbuHopsStand);
-   console.log(ReduxValueWort.reduceIBU);
   //accordion
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const handleChange = (panel: string) => (
@@ -77,12 +34,13 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
     <Grid item >
       <Paper elevation={3}>
       <Accordion
-       disabled={!ReduxValueWort.checkAllError? true : false}
+      //  disabled={!ReduxValueWort.checkAllError? true : false}
           expanded={expanded === "panel1"}
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography sx={{ fontWeight: 'bold', letterSpacing: 2  }} color='secondary'>Общее IBU : {ReduxValueWort.checkAllError?ReduxValueWort.reduceIBU:'✍️...Ввод'}
+            <Typography sx={{ fontWeight: 'bold', letterSpacing: 2  }} 
+            color='secondary'>Общее IBU : {'✍️...Ввод'}
             </Typography>
             {/* <HelpCenterIcon style={{marginLeft:'240px'}} onClick={()=>{setExpanded("panel1")}}/> */}
           </AccordionSummary>
@@ -116,7 +74,7 @@ const ResultTextField:React.FC<IPropsIBU> = ({ibuValue, ibuBoil, ibuHopStand}) =
           InputProps={{
             readOnly: true,
           }}
-          value={ReduxValueWort.reduceIBU? ReduxValueWort.reduceIBU:'' }
+          // value={ReduxValueWort.reduceIBU? ReduxValueWort.reduceIBU:'' }
           color='secondary'
           size='small'
         />

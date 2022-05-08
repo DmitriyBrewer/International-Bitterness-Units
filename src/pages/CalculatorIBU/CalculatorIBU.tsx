@@ -14,67 +14,7 @@ import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
 //MUI
 
-//redux
-import { useSelector, useDispatch } from "react-redux";
-import HOPS from "../../store/reducer/hopSlice";
-import { AppDispatch, AppState, RootState } from "../../store/store";
-//redux
-
 const CalculatorIBU: React.FC = () => {
-  //Redux
-  const dispatch: AppDispatch = useDispatch();
-  const Hops = useSelector((state: AppState) => state.hops);
-  console.log(Hops);
-  //Redux
-  //wort redux
-  let ReduxValueWort = {
-    volume: "",
-    destiny: "",
-    boil: "",
-    reduceIBU: "",
-    reduceIbuHopsStand:"",
-    reduceIbuBoil:"",
-  };
-  Hops.forEach((element: any) => {
-    ReduxValueWort = {
-      volume: element.volume,
-      destiny: element.destiny,
-      boil: element.boil,
-      reduceIBU: element.reduceIBU,
-      reduceIbuHopsStand:element.reduceIbuHopsStand,
-      reduceIbuBoil:element.reduceIbuBoil
-    };
-  });
-  //wort redux
-  // console.log(ReduxValueWort.reduceIbuBoil);
-  // console.log(ReduxValueWort.reduceIbuHopsStand);
-  // console.log(ReduxValueWort.reduceIBU);
-
-  
-  const ibuAddHopAndValidation = (event:any) => {
-    //addHop
-    event.preventDefault()
-    // dispatch(HOPS.actions.addHop());
-    //addHop
-    // dispatch(HOPS.actions.addIBU(IBU));
-    //Validation
-    dispatch(HOPS.actions.calcIBU());
-    dispatch(HOPS.actions.concatIBU());
-    dispatch(HOPS.actions.volumeValidation());
-    dispatch(HOPS.actions.destinyValidation());
-    dispatch(HOPS.actions.boilValidation());
-    //Validation
-  };
-
-  useEffect(() => {
-    dispatch(
-      HOPS.actions.mountWort({
-        plato: true,
-        sg: false,
-        id: "wort"
-      })
-    );
-  }, []);
 
   return (
     <React.Fragment >
@@ -96,11 +36,11 @@ const CalculatorIBU: React.FC = () => {
       </Typography>
         <Wort />
         <HopList />
-        {Hops.length !== 1 ?
-      <ResultTextField ibuValue={ReduxValueWort.reduceIBU} ibuBoil={ReduxValueWort.reduceIbuBoil} ibuHopStand={ReduxValueWort.reduceIbuHopsStand}/>
-      :
-      <span></span>
-        }
+      <ResultTextField 
+      // ibuValue={ReduxValueWort.reduceIBU} 
+      // ibuBoil={ReduxValueWort.reduceIbuBoil} 
+      // ibuHopStand={ReduxValueWort.reduceIbuHopsStand}
+      />
       </Grid>
     </React.Fragment>
   );

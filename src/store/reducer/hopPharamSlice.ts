@@ -13,13 +13,13 @@ interface HopState {
 
 interface State {
   wort: {
-    volume:string, 
-    destiny:string, 
-    boil:string,
-    destinyType:string | undefined,
-    volumeValidation: boolean | undefined,
-    destinyValidation: boolean | undefined,
-    boilValidation: boolean | undefined,
+    volume?:string | undefined, 
+    destiny?:string | undefined, 
+    boil?:string | undefined,
+    destinyType?:string | undefined,
+    volumeValidation?: boolean | undefined,
+    destinyValidation?: boolean | undefined,
+    boilValidation?: boolean | undefined,
   }
   hopBoil: []
   hopStand: []
@@ -27,7 +27,8 @@ interface State {
 }
 
 const initialState:State =  {
-  wort:{volume:'1000', destiny: '14', boil:'60', destinyType:'plato', volumeValidation: undefined, destinyValidation: undefined, boilValidation: undefined},
+  // wort:{volume:'', destiny: '14', boil:'60', destinyType:'plato', volumeValidation: undefined, destinyValidation: undefined, boilValidation: undefined},
+  wort:{},
       hopBoil: []  ,
       hopStand: [],
       IBU: {ibu:'', ibuHopBoil:'', ibuHopStand:''}

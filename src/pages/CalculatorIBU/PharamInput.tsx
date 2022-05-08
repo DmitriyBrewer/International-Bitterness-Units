@@ -1,24 +1,21 @@
 import React from 'react'
 import { TextField } from "@mui/material";
 
-
 interface IProps {
     name: string,
     value: string | undefined,
-    placeholder?: string,
     onChange: (e: any)=>void,
-    onBlur?: (e:any)=>void,
+    onBlur: (e:any)=>void,
     validation?: boolean,
     types?: string,
-    initialHelperText?: string,
-    errorValidationHelperText?: string,
-    trueValidationHelperText?: string
+    initialHelperText: string,
+    errorValidationHelperText: string,
+    trueValidationHelperText: string
 }
 
 
 
-
-const PharamInput: React.FC<IProps> = ({name, value,placeholder,onChange,onBlur, validation, types, initialHelperText, errorValidationHelperText, trueValidationHelperText}) => {
+const PharamInput: React.FC<IProps> = ({name, value,onChange,onBlur, validation, types, initialHelperText, errorValidationHelperText, trueValidationHelperText}) => {
 
     const Validation = ()=>{
         if (validation === false) {
@@ -34,14 +31,10 @@ const PharamInput: React.FC<IProps> = ({name, value,placeholder,onChange,onBlur,
 
     return (
         <React.Fragment>
-        {/* <label htmlFor="">
-        {Validation()}
-            <input type={types? types:'number'} name={name} value={value} onChange={onChange} onBlur={onBlur}/>
-        </label> */}
         <TextField
             sx={{ margin: "10px" }}
             id="outlined-basic"
-            label={placeholder}
+            label="Объём сусла, л"
             variant="outlined"
             size="small"
             type={types? types:'number'}
@@ -49,7 +42,7 @@ const PharamInput: React.FC<IProps> = ({name, value,placeholder,onChange,onBlur,
             value={value}
             onChange={onChange}
             onBlur={onBlur}
-            // error={validation === undefined ? false: !validation}
+            error={validation === undefined ? false: !validation}
             helperText={Validation()}
             autoFocus={true}
             required={true}

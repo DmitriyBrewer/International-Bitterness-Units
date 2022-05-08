@@ -27,10 +27,7 @@ const ResultCalculations = () => {
         ibuHopBoil: caclHopBoil.toFixed(1),
         ibuHopStand:caclHopStand.toFixed(1)
     })
-    },[value])
-
-        console.log(value);
-
+    },[])
 
 
     

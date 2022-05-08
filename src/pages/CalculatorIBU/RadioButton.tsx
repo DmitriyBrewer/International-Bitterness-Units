@@ -6,8 +6,8 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
 interface IRadio {
-  value: any;
-  onChange:any;
+  value?: any;
+  onChange?:any;
 }
 
 const RadioButtonsGroup: React.FC<IRadio> = ({value, onChange}) => {
