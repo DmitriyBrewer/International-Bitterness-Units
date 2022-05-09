@@ -1,21 +1,22 @@
-import React, {useState} from 'react'
-import Slider from "@mui/material/Slider";
-import PharamInput from './PharamInput';
+import React, { useState } from "react";
+import PharamInput from "./PharamInput";
 import nextId from "react-id-generator";
 
-import {toSG} from '../CalculatorIBU/CalcFunc'
-import {toPlato} from '../CalculatorIBU/CalcFunc'
-import {destinyValidations, volumeValidations, boilValidations} from './ValidationPharam'
+import { toSG } from "../CalculatorIBU/CalcFunc";
+import { toPlato } from "../CalculatorIBU/CalcFunc";
+import {
+  destinyValidations,
+  volumeValidations,
+  boilValidations
+} from "./ValidationPharam";
+import RadioButtonsGroup from "./RadioButtonGroup";
+import MenuButton from "./MenuButton";
 
 //radioButton MUI
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
-import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Tooltip from '@mui/material/Tooltip';
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
 //radioButton MUI
 
 //redux
@@ -25,7 +26,6 @@ import { AppDispatch, AppState, RootState } from "../../store/store";
 //redux
 
 const Wort = () => {
-  
   //Redux
   const dispatch: AppDispatch = useDispatch();
   const Hop = useSelector((state: AppState) => state.hop);
@@ -34,122 +34,127 @@ const Wort = () => {
   const [pharam, setPharam] = React.useState(Hop.wort);
   // const { volume, destiny } = pharam;//деструктуризация для более простого чтения
 
-  //open/close menu-button
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  //open/close menu-button
-
-  React.useMemo(()=>{
+  React.useMemo(() => {
     // dispatch(HOP.actions.changeDestiny(pharam.destinyType))
-    setTimeout(()=>{
-      dispatch(HOP.actions.getPharamWort(pharam))
-    },0)
-  },[pharam])
+    setTimeout(() => {
+      dispatch(HOP.actions.getPharamWort(pharam));
+    }, 0);
+  }, [pharam]);
 
-  function handleChange (e:any) {
-    const {name, value} = e.target
-    setPharam((prevState:any)=>{
-      return {...prevState, [name]: value}
-    })
-}
+  function handleChange(e: any) {
+    const { name, value } = e.target;
+    setPharam((prevState: any) => {
+      return { ...prevState, [name]: value };
+    });
+  }
 
-const ValidationVolume = () => {
-  setPharam({...pharam, volumeValidation:volumeValidations(pharam.volume)})
-}
+  const ValidationVolume = () => {
+    setPharam({
+      ...pharam,
+      volumeValidation: volumeValidations(pharam.volume)
+    });
+  };
 
-const ValidationDestiny = () => {
-  setPharam({...pharam, destinyValidation:destinyValidations(pharam.destiny, pharam.destinyType)})
-}
+  const ValidationDestiny = () => {
+    setPharam({
+      ...pharam,
+      destinyValidation: destinyValidations(pharam.destiny, pharam.destinyType)
+    });
+  };
 
-const ValidationBoil = () => {
-  setPharam({...pharam, boilValidation:boilValidations(pharam.boil)})
-}
+  const ValidationBoil = () => {
+    setPharam({ ...pharam, boilValidation: boilValidations(pharam.boil) });
+  };
 
-    //handlers
-    const radioHandler = (event: any) => {
-      setPharam({...pharam, destinyType:event.target.value})
-      if (pharam.destinyType !== 'sg') {
-        setPharam({...pharam, destiny:toSG(pharam.destiny), destinyType:event.target.value})
-      }
-      if (pharam.destinyType !== 'plato') {
-        setPharam({...pharam, destiny:toPlato(pharam.destiny), destinyType:event.target.value})
-      }
+  //handlers
+  const radioHandler = (event: any) => {
+    setPharam({ ...pharam, destinyType: event.target.value });
+    if (pharam.destinyType !== "sg") {
+      setPharam({
+        ...pharam,
+        destiny: toSG(pharam.destiny),
+        destinyType: event.target.value
+      });
     }
-
-  const addHopBoil = () => {
-    setAnchorEl(null);
-    dispatch(HOP.actions.addHopBoil(nextId("hop-")))
-  }
-
-  const addHopStand = () => {
-    setAnchorEl(null);
-    dispatch(HOP.actions.addHopStand(nextId("hop-")))
-  }
+    if (pharam.destinyType !== "plato") {
+      setPharam({
+        ...pharam,
+        destiny: toPlato(pharam.destiny),
+        destinyType: event.target.value
+      });
+    }
+  };
 
   return (
     <React.Fragment>
-    <main>
-    <h1>Введите параметры сусла</h1>
-    
-     <PharamInput name='volume' value={pharam.volume} placeholder='Объём сусла, л' onChange={handleChange} onBlur={ValidationVolume} validation={pharam.volumeValidation} initialHelperText='Объём от 0 до 100 000, л'
-          errorValidationHelperText='❌ Объём от 0 до 100 000, л'
-          trueValidationHelperText='✅ Верное значение'/>
-
-     <PharamInput name='destiny' value={pharam.destiny} onChange={handleChange} onBlur={ValidationDestiny} validation={pharam.destinyValidation} />
-
-     <PharamInput name='boil' value={pharam.boil} onChange={handleChange} onBlur={ValidationBoil} validation={pharam.boilValidation}/>
-
-    </main>
-    <Slider color="secondary" sx={{ width: "90%" }} 
-            min={0}
-            max={Number(50)}
-            value={Number(pharam.destiny)}
-            onChange={handleChange}
-            name='destiny'
+      <Grid item>
+        <Paper elevation={3} sx={{ paddingTop: "20px", paddingBottom: "20px" }}>
+          <Typography variant="h5" component="h2">
+            Параметры сусла
+          </Typography>
+          <Stack
+            direction="row"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center"
+            }}
+          >
+            <PharamInput
+              name="volume"
+              value={pharam.volume}
+              placeholder="Объём сусла, л"
+              onChange={handleChange}
+              onBlur={ValidationVolume}
+              validation={pharam.volumeValidation}
+              initialHelperText="Объём от 0 до 100 000, л"
+              errorValidationHelperText="❌ Объём от 0 до 100 000, л"
+              trueValidationHelperText="✅ Верное значение"
             />
 
-            <RadioGroup
-              defaultValue={pharam.destinyType}
-              onChange={radioHandler}
-              name='destinyType'
+            <PharamInput
+              name="boil"
+              value={pharam.boil}
+              placeholder="Время кипячения, мин"
+              onChange={handleChange}
+              onBlur={ValidationBoil}
+              validation={pharam.boilValidation}
+              initialHelperText="Кипячение от 0 до 200 мин"
+              errorValidationHelperText="❌ Кипячение от 0 до 200 мин"
+              trueValidationHelperText="✅ Верное значение"
+            />
+          </Stack>
+          <Stack>
+            <RadioButtonsGroup
               value={pharam.destinyType}
-            >
-              <FormControlLabel value='plato' control={<Radio />} label="Plato"/>
-              <FormControlLabel value='sg' control={<Radio />} label="SG" />
-            </RadioGroup>
-
-            <Tooltip title="Выбрать хмель">
-            <Button
-      disabled={false}
-        variant="contained"
-        id="basic-button"
-        aria-controls={open ? "Sbasic-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        color="secondary"
-      >
-        Добавить хмель
-      </Button>
-      </Tooltip>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button"
-        }}
-      >
-        <MenuItem onClick={addHopBoil}>На варку</MenuItem>
-        <MenuItem onClick={addHopStand}>На вирпул</MenuItem>
-      </Menu>
+              onChange={radioHandler}
+            />
+          </Stack>
+          <Stack
+            direction="row"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center"
+            }}
+          >
+            <PharamInput
+              name="destiny"
+              value={pharam.destiny}
+              placeholder="Плотность сусла"
+              onChange={handleChange}
+              onBlur={ValidationDestiny}
+              validation={pharam.destinyValidation}
+              initialHelperText={pharam.destinyType==='plato'?"Введите Plato от 0.5 до 40":'Введите SG'}
+              errorValidationHelperText={pharam.destinyType==='plato'?"❌ Plato от 0.5 до 40":'❌'}
+              trueValidationHelperText="✅ Верное значение"
+            />
+          </Stack>
+          <Stack>
+            <MenuButton />
+          </Stack>
+        </Paper>
+      </Grid>
     </React.Fragment>
   );
 };

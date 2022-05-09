@@ -28,7 +28,7 @@ interface State {
 
 const initialState:State =  {
   // wort:{volume:'', destiny: '14', boil:'60', destinyType:'plato', volumeValidation: undefined, destinyValidation: undefined, boilValidation: undefined},
-  wort:{},
+  wort:{destinyType:'plato'},
       hopBoil: []  ,
       hopStand: [],
       IBU: {ibu:'', ibuHopBoil:'', ibuHopStand:''}

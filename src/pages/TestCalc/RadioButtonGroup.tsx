@@ -18,7 +18,7 @@ const RadioButtonsGroup: React.FC<IRadio> = ({value, onChange}) => {
       </FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
-        defaultValue="Plato"
+        defaultValue={value}
         name="radio-buttons-group"
         row
         sx={{ justifyContent: "center" }} // radio по центру Paper
