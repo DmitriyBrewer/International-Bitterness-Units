@@ -1,5 +1,6 @@
 import React from "react";
 import { TextField } from "@mui/material";
+import {helperTextValidations} from './ValidationPharam'
 
 interface IProps {
   name: string;
@@ -9,13 +10,11 @@ interface IProps {
   onBlur?: (e: any) => void;
   validation?: boolean;
   types?: string;
-  initialHelperText?: string;
-  errorValidationHelperText?: string;
-  trueValidationHelperText?: string;
   requireds?:boolean;
   labelProps?: any;
   helperText?:any;
   disable?: boolean;
+  
 }
 
 const PharamInput: React.FC<IProps> = ({
@@ -27,23 +26,16 @@ const PharamInput: React.FC<IProps> = ({
   onBlur,
   validation,
   types,
-  initialHelperText,
-  errorValidationHelperText,
-  trueValidationHelperText,
   labelProps,
-  disable
+  disable,
+  helperText
 }) => {
-  const Validation = () => {
-    if (validation === true) {
-      return errorValidationHelperText;
-    }
-    if (validation === false) {
-      return trueValidationHelperText;
-    }
-    if (value === undefined || value === '0' || value === '') {
-      return initialHelperText;
-    }
-  };
+  const errorHelperText =  helperText? helperText.errorText:'x'
+  const validHelperText =  helperText? helperText.validText:'x'
+  const initialHelperText =  helperText? helperText.initialText:'x'
+
+  const helpText = helperTextValidations(validation, value, errorHelperText, validHelperText, initialHelperText)
+  
 
   return (
     <React.Fragment>
@@ -59,7 +51,7 @@ const PharamInput: React.FC<IProps> = ({
         onChange={onChange}
         onBlur={onBlur}
         error={validation}
-        helperText={Validation()}
+        helperText={helpText}
         required={requireds === false? requireds : true}
         InputLabelProps={{shrink: labelProps}}
         disabled={disable? disable : false}

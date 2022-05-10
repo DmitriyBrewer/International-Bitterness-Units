@@ -1,6 +1,6 @@
-export const volumeValidations = (volume: string | undefined) => {
+export const volumeValidations = (volume: string | undefined):boolean|undefined => {
   if(volume === undefined) {
-    return true
+    return false
   } 
   if (volume !== undefined) {
     if (parseInt(volume, 10) < 100000 && parseInt(volume, 10) !== 0 && parseInt(volume, 10) >=0 ) {
@@ -14,7 +14,7 @@ export const destinyValidations = (
   destinyType: string | undefined
 ) => {
   if(destiny === undefined) {
-    return true
+    return false
   }
   if (destiny !== undefined) {
     if (destinyType === "plato") {
@@ -40,19 +40,24 @@ export const destinyValidations = (
 
 export const boilValidations = (boil: string | undefined) => {
   if(boil === undefined) {
-    return true
+    return false
   }
   if (boil !== undefined) {
     if (parseFloat(boil) <= 200 && parseFloat(boil) >=0) {
       return false;
     } else return true;
   }
-
 };
+
+export const wortValidations = (volumeValidation:any, destinyValidation:any, boilValidation:any, volume:string|undefined, destiny:string|undefined, boil:string|undefined) => {
+  if(volumeValidation===undefined||destinyValidation===undefined||boilValidation===undefined||volume===undefined||destiny===undefined||boil===undefined ) {
+    return true
+  } else return volumeValidation||destinyValidation||boilValidation
+}
 
 export const alphaValidations = (alpha: string | undefined) => {
   if(alpha === undefined) {
-    return true
+    return false
   }
   if (alpha !== undefined) {
     if (parseFloat(alpha) >= parseFloat("0.1")) {
@@ -63,7 +68,7 @@ export const alphaValidations = (alpha: string | undefined) => {
 
 export const amountValidations = (amount: string | undefined) => {
   if(amount === undefined) {
-    return true
+    return false
   }
   if (amount !== undefined) {
     if (parseFloat(amount) >= 0) {
@@ -88,7 +93,7 @@ export const timeValidations = (
 
 export const timeHopValidations = (time: string | undefined) => {
   if(time === undefined) {
-    return true
+    return false
   }
   if (time !== undefined) {
     if (parseInt(time, 10) <= 100 && parseInt(time, 10) >= 0) {
@@ -99,7 +104,7 @@ export const timeHopValidations = (time: string | undefined) => {
 
 export const temperatureValidations = (temperature: string | undefined) => {
   if(temperature === undefined) {
-    return true
+    return false
   }
   if (temperature !== undefined) {
     if (parseInt(temperature, 10) <= 100 && parseInt(temperature, 10) >= 0) {
@@ -109,13 +114,29 @@ export const temperatureValidations = (temperature: string | undefined) => {
 };
 
 export const ibuValidations = (
-  validation: boolean | undefined,
+  error: boolean | undefined,
   IBU: number | undefined
 ) => {
-  if (validation === true) {
+  if (error === true) {
     return "Введите корректные данные";
   }
-  if (validation === false || validation === undefined) {
-    return IBU || "Введите данные";
+  if ( error === undefined) {
+    return "Введите данные";
+  }
+  if (error === false ) {
+    return IBU
   }
 };
+
+
+export const helperTextValidations = (error: boolean | undefined, value: string | undefined, errorText:string, validText:string, initialText:string) => {
+  if (error === true) {
+    return errorText;
+  }
+  if (error === false && value !== undefined) {
+    return validText;
+  }
+  if (value === undefined && error === false || value === '0' || value === '') {
+    return initialText;
+  }
+}

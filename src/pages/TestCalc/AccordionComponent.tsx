@@ -12,22 +12,23 @@ import { Typography } from "@mui/material";
 import Slider from "@mui/material/Slider";
 //MUI
 
+import {StackAccordion} from './StackAccordion'
+
 interface IProps {
-    childrenText:any
-    H1: string
-    stack1:any
-    stack2:any
-    stack3?:any
+    title:any
+    subtitle: string
+    stackColumn1:any
+    stackColumn2:any
+    stackColumn3?:any
     deleteHop?:any
-    amountP?:string | undefined
+    sliderAmount?:string | undefined
     handleChange?:(event:any)=>void
-    menu?:boolean
-    slider?: boolean
+    menuSetting?:boolean
+    sliderVision?: boolean
     disable?:boolean
 }
 
-
-const AccordionComponent: React.FC<IProps> = ({childrenText, H1,menu,slider, stack1, stack2, deleteHop,amountP,handleChange,stack3,disable}) => {
+const AccordionComponent: React.FC<IProps> = ({title, subtitle, menuSetting, sliderVision, stackColumn1, stackColumn2, deleteHop, sliderAmount, handleChange, stackColumn3, disable}) => {
 
   //accordion
   const [expanded, setExpanded] = React.useState<string | false>(false);
@@ -39,25 +40,25 @@ const AccordionComponent: React.FC<IProps> = ({childrenText, H1,menu,slider, sta
     setExpanded(isExpanded ? panel : false);
   };
   //accordion
+
   //setting
   const [amount, setAmount] = React.useState({ AMOUNT: "4000" });
-
   const amountHandlerSlider = (event: React.ChangeEvent<HTMLInputElement>) => {
     setAmount({ ...amount, AMOUNT: event.target.value });
   };
   //setting
-
+  
     return (
     <React.Fragment>
       <Grid item>
         <Paper elevation={3}>
           <Accordion
-          disabled={disable || false}
+            disabled={disable }
             expanded={expanded === "panel1"}
             onChange={handleChangeAccordion("panel1")}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                {childrenText}
+                {title}
             </AccordionSummary>
             <Stack
               direction="row"
@@ -69,10 +70,10 @@ const AccordionComponent: React.FC<IProps> = ({childrenText, H1,menu,slider, sta
               }}
             >
               <Typography variant="h5" component="h2">
-              {H1}
+                  {subtitle}
               </Typography>
               <Stack direction="row">
-                {!menu?
+                  {!menuSetting?
                 <React.Fragment>
                 <HopSetting
                   value={amount?.AMOUNT}
@@ -82,46 +83,20 @@ const AccordionComponent: React.FC<IProps> = ({childrenText, H1,menu,slider, sta
                 </React.Fragment>
                 :<React.Fragment></React.Fragment>
             }
-                
               </Stack>
               </Stack>
-            <Stack
-              direction="row"
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center"
-              }}
-            >
-                {stack1}
-            </Stack>
-            <Stack
-              direction="row"
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center"
-              }}
-            >
-                {stack2}
-            </Stack>
-            <Stack
-              direction="row"
-              sx={{
-                display: "flex",
-                flexWrap: "wrap",
-                justifyContent: "center"
-              }}
-            >
-            {stack3}
-            </Stack>
-            {!slider?
+
+            <StackAccordion content={stackColumn1} typeStack='secondary'/>
+            <StackAccordion content={stackColumn2} typeStack='secondary'/>
+            <StackAccordion content={stackColumn3} typeStack='secondary'/>
+            
+            {!sliderVision?
             <Slider
                 color="secondary"
                 sx={{ width: "90%" }}
                 min={0.1}
                 max={Number(amount?.AMOUNT)}
-                value={Number(amountP)}
+                value={Number(sliderAmount)}
                 onChange={handleChange}
                 name="amount"
               />

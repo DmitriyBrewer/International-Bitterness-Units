@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import HOP from "../../store/reducer/hopPharamSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 //redux
+
 interface IMenuButton {
   validWort:any;
 }
@@ -50,7 +51,8 @@ export const MenuButton: React.FC<IMenuButton> = ({validWort}) => {
       <Tooltip title="Выбрать хмель">
       <span>
       <Button
-      disabled={validWort===undefined? true : validWort}
+      // disabled={validWort===undefined? true : validWort}
+      disabled={validWort}
         variant="contained"
         id="basic-button"
         aria-controls={open ? "Sbasic-menu" : undefined}

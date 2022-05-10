@@ -35,25 +35,34 @@ const ResultCalculations = () => {
 
   },[reduceIBU])
 
-  const validPharam = Hop.IBU.ibu > 0? false : true
-  const validPharamBoil = Hop.IBU.ibuHopBoil > 0? false : true
-  const validPharamHopstand = Hop.IBU.ibuHopStand > 0? false : true
+  const validPharam = (Hop.IBU.ibu > 0? false : true) || false
+  const validPharamBoil = (Hop.IBU.ibuHopBoil > 0? false : true) || false
+  const validPharamHopstand = (Hop.IBU.ibuHopStand > 0? false : true) || false
   const ibu = reduceIBU.calcIbu>0? reduceIBU.calcIbu:"✍️...Ввод параметров"
+  const visionResult = () =>{
+    if(Hop.hopBoil.length>0) {
+      return true
+    }
+    if(Hop.hopStand.length>0) {
+      return true
+    } else return false
+  }
   
 
   return (
     <React.Fragment>
+      {/* {visionResult()?
       <AccordionComponent
       disable={validPharam}
-      H1='Параметры горечи'
-      menu={true}
-      slider={true}
-      childrenText={(
+      subtitle='Параметры горечи'
+      menuSetting={true}
+      sliderVision={true}
+      title={(
         <Typography>
           Общее IBU : {ibu}
         </Typography>
       )}
-      stack1 ={(
+      stackColumn1 ={(
         <React.Fragment>
         <PharamInput
                 value={reduceIBU.calcIbu}
@@ -68,22 +77,25 @@ const ResultCalculations = () => {
                 placeholder="boil IBU"
                 name="hopstand"
                 onChange={() => {}}
-                disable={validPharam}
+                disable={validPharamBoil}
                 validation={validPharamBoil}
               />
         </React.Fragment>
       )}
-      stack2={(
+      stackColumn2={(
         <PharamInput
                 value={reduceIBU.caclHopStand}
                 placeholder="HopStand IBU"
                 name="hopstand"
                 onChange={() => {}}
-                disable={validPharam}
+                disable={validPharamHopstand}
                 validation={validPharamHopstand}
               />
       )}
       />
+      :
+    <React.Fragment></React.Fragment>
+  } */}
     </React.Fragment>
   );
 };

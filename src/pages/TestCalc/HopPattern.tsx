@@ -59,7 +59,7 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
       Hop.wort.destiny,
       Hop.wort.boil
     );
-  
+    
     const allValidation =
       pharam.alphaValidation &&
       pharam.amountValidation &&
@@ -67,12 +67,14 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
       Hop.wort.volumeValidation &&
       Hop.wort.destinyValidation &&
       Hop.wort.boilValidation;
-  
+      
     const ibuValidation = ibuValidations(allValidation, hopIBU);
+
+
   
-    React.useEffect(() => {
-      ibuCalc();
-    }, [ibuValidation]);
+  //   React.useEffect(() => {
+  //     ibuCalc();
+  //   }, [ibuValidation]);
   
     React.useMemo(() => {
         if(hopStand === true) {
@@ -91,6 +93,15 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
       });
     }
   
+    React.useEffect(()=>{
+      setPharam({ ...pharam, 
+        alphaValidation: alphaValidations(pharam.alpha),
+        amountValidation:amountValidations(pharam.amount),
+        timeValidation: hopStand===true? timeHopValidations(pharam.time) : timeValidations(pharam.time, Hop.wort.boil),
+        hopStandValidation: temperatureValidations(pharam.hopStand)
+      });
+  },[])
+
     const deleteHopStand = () => {
     if(hopStand === true) {
         dispatch(HOP.actions.deleteHopStand(pharam.id));
@@ -130,19 +141,47 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
     };
 
     const nameTypeHop = !hopStand? 'варку':'вирпул'
+
+    const helperTextHop = {
+      name:{
+        initialText:'',
+        errorText:'',
+        validText:''
+      },
+      alpha:{
+        initialText:'Введите от 0.1 до ∞',
+        errorText:'❌ от 0.1 до ∞',
+        validText:'✅ Верное значение'
+      },
+      amount:{
+        initialText:'Введите от 0 до ∞',
+        errorText:'❌ от 0 до ∞',
+        validText:'✅ Верное значение'
+      },
+      time:{
+        initialText:'⚠️ от 0 до Время кипячения',
+        errorText:'❌ от 0 до Время кипячения',
+        validText:'✅ Верное значение'
+      },
+      hopStand:{
+        initialText:'от 0 до 100, м',
+        errorText:'❌ от 0 до 100, м',
+        validText:'✅ Верное значение'
+      },
+    }
   
     return (
       <React.Fragment>
         <AccordionComponent
-        H1='Параметры хмеля'
-        childrenText={(
+        subtitle='Параметры хмеля'
+        title={(
           <Typography>
             Хмель на {nameTypeHop} {pharam.nameHop} IBU: {ibuValidation}{" "}
           </Typography>
         )}
-        amountP={pharam.amount}
+        sliderAmount={pharam.amount}
         handleChange={handleChange}
-        stack1 ={(
+        stackColumn1 ={(
           <React.Fragment>
             <PharamInput
                   onChange={handleChange}
@@ -159,13 +198,11 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
                   name="alpha"
                   onBlur={ValidationAlpha}
                   validation={pharam.alphaValidation}
-                  initialHelperText="Введите от 0.1 до ∞"
-                  errorValidationHelperText="❌ от 0.1 до ∞"
-                  trueValidationHelperText="✅ Верное значение"
+                  helperText={helperTextHop.alpha}
                 />
           </React.Fragment>
         )}
-        stack2 ={(
+        stackColumn2 ={(
           <React.Fragment>
             <PharamInput
                   onChange={handleChange}
@@ -174,10 +211,8 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
                   name="amount"
                   onBlur={ValidationAmount}
                   validation={pharam.amountValidation}
-                  initialHelperText="Введите от 0 до ∞"
-                  errorValidationHelperText="❌ от 0 до ∞"
-                  trueValidationHelperText="✅ Верное значение"
                   labelProps={pharam.amount ? true : false}
+                  helperText={helperTextHop.amount}
                 />
                 <PharamInput
                   onChange={handleChange}
@@ -186,14 +221,12 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
                   name="time"
                   onBlur={ValidationTime}
                   validation={pharam.timeValidation}
-                  initialHelperText="⚠️ от 0 до Время кипячения"
-                  errorValidationHelperText="❌ от 0 до Время кипячения"
-                  trueValidationHelperText="✅ Верное значение"
                   disable={Hop.wort.boilValidation}
+                  helperText={helperTextHop.time}
                 />
           </React.Fragment>
         )}
-        stack3={hopStand?(
+        stackColumn3={hopStand?(
           <PharamInput
                   onChange={handleChange}
                   value={pharam.hopStand}
@@ -201,9 +234,7 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
                   name="hopStand"
                   onBlur={ValidationHopStand}
                   validation={pharam.hopStandValidation}
-                  initialHelperText="от 0 до 100, м"
-                  errorValidationHelperText="❌ от 0 до 100, м"
-                  trueValidationHelperText="✅ Верное значение"
+                  helperText={helperTextHop.hopStand}
                 />
         ):<React.Fragment></React.Fragment>}
         deleteHop={deleteHopStand}
