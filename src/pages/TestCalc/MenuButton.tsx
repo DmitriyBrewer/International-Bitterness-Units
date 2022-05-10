@@ -14,8 +14,11 @@ import { useSelector, useDispatch } from "react-redux";
 import HOP from "../../store/reducer/hopPharamSlice";
 import { AppDispatch, AppState, RootState } from "../../store/store";
 //redux
+interface IMenuButton {
+  validWort:any;
+}
 
-export default function MenuButton() {
+export const MenuButton: React.FC<IMenuButton> = ({validWort}) => {
 //Redux
   const dispatch: AppDispatch = useDispatch();
   const Hop = useSelector((state: AppState) => state.hop);
@@ -47,7 +50,7 @@ export default function MenuButton() {
       <Tooltip title="Выбрать хмель">
       <span>
       <Button
-      disabled={false}
+      disabled={validWort===undefined? true : validWort}
         variant="contained"
         id="basic-button"
         aria-controls={open ? "Sbasic-menu" : undefined}
@@ -72,7 +75,11 @@ export default function MenuButton() {
         <MenuItem onClick={addHopBoil}>На варку</MenuItem>
         <MenuItem onClick={addHopStand}>На вирпул</MenuItem>
       </Menu>
+      {validWort?
       <Alert severity="error" style={{  justifyContent:'center', marginTop:'20px', marginLeft:'8px', marginRight:'8px' }}>Для продолжения корректно заполните поля !</Alert>
+      :
+      <React.Fragment></React.Fragment>
+      }
     </Stack>
   );
 }

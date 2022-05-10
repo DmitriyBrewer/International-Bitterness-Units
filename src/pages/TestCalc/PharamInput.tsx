@@ -12,28 +12,35 @@ interface IProps {
   initialHelperText?: string;
   errorValidationHelperText?: string;
   trueValidationHelperText?: string;
+  requireds?:boolean;
+  labelProps?: any;
+  helperText?:any;
+  disable?: boolean;
 }
 
 const PharamInput: React.FC<IProps> = ({
   name,
   value,
   placeholder,
+  requireds,
   onChange,
   onBlur,
   validation,
   types,
   initialHelperText,
   errorValidationHelperText,
-  trueValidationHelperText
+  trueValidationHelperText,
+  labelProps,
+  disable
 }) => {
   const Validation = () => {
-    if (validation === false) {
+    if (validation === true) {
       return errorValidationHelperText;
     }
-    if (validation === true) {
+    if (validation === false) {
       return trueValidationHelperText;
     }
-    if (value === undefined) {
+    if (value === undefined || value === '0' || value === '') {
       return initialHelperText;
     }
   };
@@ -51,9 +58,11 @@ const PharamInput: React.FC<IProps> = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        // error={validation === undefined ? false: !validation}
+        error={validation}
         helperText={Validation()}
-        required={true}
+        required={requireds === false? requireds : true}
+        InputLabelProps={{shrink: labelProps}}
+        disabled={disable? disable : false}
       />
     </React.Fragment>
   );

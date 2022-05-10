@@ -28,7 +28,7 @@ interface State {
 
 const initialState:State =  {
   // wort:{volume:'', destiny: '14', boil:'60', destinyType:'plato', volumeValidation: undefined, destinyValidation: undefined, boilValidation: undefined},
-  wort:{destinyType:'plato'},
+  wort:{destinyType:'plato', volumeValidation:undefined, destinyValidation:undefined},
       hopBoil: []  ,
       hopStand: [],
       IBU: {ibu:'', ibuHopBoil:'', ibuHopStand:''}
@@ -45,7 +45,8 @@ const HOP = createSlice({
       let amount = '2500'
       let time= '25'
       state.hopBoil.push({
-        nameHop:name, id: action.payload, alpha:alpha, amount:amount, time:time, alphaValidation: undefined, 
+        nameHop:name, id: action.payload , amount: amount
+        // nameHop:name, id: action.payload, alpha:alpha, amount:amount, time:time, alphaValidation: undefined, 
       // ibu: Calc(name, alpha, amount, time, state.wort.volume, state.wort.destiny, state.wort.boil)
     });
       },
@@ -102,7 +103,9 @@ const HOP = createSlice({
       return state
       },
       reduceIBU: (state, action) => {
-        return state
+        state.IBU.ibu = action.payload.calcIbu
+        state.IBU.ibuHopBoil = action.payload.caclHopBoil
+        state.IBU.ibuHopStand = action.payload.caclHopStand
         },
   }
 });

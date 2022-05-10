@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import PharamInput from "./PharamInput";
-import nextId from "react-id-generator";
 
 import { toSG } from "../CalculatorIBU/CalcFunc";
 import { toPlato } from "../CalculatorIBU/CalcFunc";
-import {
-  destinyValidations,
-  volumeValidations,
-  boilValidations
-} from "./ValidationPharam";
+import {destinyValidations,volumeValidations,boilValidations} from "./ValidationPharam";
 import RadioButtonsGroup from "./RadioButtonGroup";
-import MenuButton from "./MenuButton";
+import {MenuButton} from "./MenuButton";
 
-//radioButton MUI
+// MUI
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-//radioButton MUI
+// MUI
 
 //redux
 import { useSelector, useDispatch } from "react-redux";
@@ -35,7 +30,6 @@ const Wort = () => {
   // const { volume, destiny } = pharam;//деструктуризация для более простого чтения
 
   React.useMemo(() => {
-    // dispatch(HOP.actions.changeDestiny(pharam.destinyType))
     setTimeout(() => {
       dispatch(HOP.actions.getPharamWort(pharam));
     }, 0);
@@ -73,17 +67,21 @@ const Wort = () => {
       setPharam({
         ...pharam,
         destiny: toSG(pharam.destiny),
-        destinyType: event.target.value
+        destinyType: event.target.value,
+        destinyValidation: destinyValidations(pharam.destiny, pharam.destinyType)
       });
     }
     if (pharam.destinyType !== "plato") {
       setPharam({
         ...pharam,
         destiny: toPlato(pharam.destiny),
-        destinyType: event.target.value
+        destinyType: event.target.value,
+        destinyValidation: destinyValidations(pharam.destiny, pharam.destinyType)
       });
     }
   };
+
+  const wortValidation = pharam.volumeValidation||pharam.destinyValidation||pharam.boilValidation
 
   return (
     <React.Fragment>
@@ -107,11 +105,10 @@ const Wort = () => {
               onChange={handleChange}
               onBlur={ValidationVolume}
               validation={pharam.volumeValidation}
-              initialHelperText="Объём от 0 до 100 000, л"
-              errorValidationHelperText="❌ Объём от 0 до 100 000, л"
-              trueValidationHelperText="✅ Верное значение"
+              initialHelperText={"Объём от 0 до 100 000, л"}
+              errorValidationHelperText={"❌ Объём от 0 до 100 000, л"}
+              trueValidationHelperText={"✅ Верное значение"}
             />
-
             <PharamInput
               name="boil"
               value={pharam.boil}
@@ -145,13 +142,13 @@ const Wort = () => {
               onChange={handleChange}
               onBlur={ValidationDestiny}
               validation={pharam.destinyValidation}
-              initialHelperText={pharam.destinyType==='plato'?"Введите Plato от 0.5 до 40":'Введите SG'}
-              errorValidationHelperText={pharam.destinyType==='plato'?"❌ Plato от 0.5 до 40":'❌'}
-              trueValidationHelperText="✅ Верное значение"
+              initialHelperText={pharam.destinyType==='plato'?"Введите Plato от 0.5 до 40":"Введите SG от 1.002 до 1.179"}
+              errorValidationHelperText={pharam.destinyType==='plato'?"❌ Plato от 0.5 до 40":'❌ SG от 1.002 до 1.179'}
+              trueValidationHelperText={pharam.destinyType==='plato'?"✅ Верное значение":"Верное значение"}
             />
           </Stack>
           <Stack>
-            <MenuButton />
+            <MenuButton validWort={wortValidation}/>
           </Stack>
         </Paper>
       </Grid>
