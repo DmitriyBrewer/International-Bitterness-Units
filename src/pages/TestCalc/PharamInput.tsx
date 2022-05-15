@@ -54,7 +54,8 @@ const PharamInput: React.FC<IProps> = ({
         helperText={helpText}
         required={requireds === false? requireds : true}
         InputLabelProps={{shrink: labelProps}}
-        disabled={disable? disable : false}
+        // disabled={disable? disable : false}
+        disabled={disable}
       />
     </React.Fragment>
   );

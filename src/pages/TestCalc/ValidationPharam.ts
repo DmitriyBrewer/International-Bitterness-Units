@@ -53,7 +53,7 @@ export const wortValidations = (volumeValidation:any, destinyValidation:any, boi
   if(volumeValidation===undefined||destinyValidation===undefined||boilValidation===undefined||volume===undefined||destiny===undefined||boil===undefined ) {
     return true
   } else return volumeValidation||destinyValidation||boilValidation
-}
+};
 
 export const alphaValidations = (alpha: string | undefined) => {
   if(alpha === undefined) {
@@ -81,14 +81,28 @@ export const timeValidations = (
   time: string | undefined,
   boil: string | undefined
 ) => {
-  if(boil === undefined&& time === undefined) {
-    return true
+  if(boil === undefined || time === undefined) {
+    return false
   }
   if (boil !== undefined && time !== undefined) {
     if (boil !== "" && parseInt(time, 10) <= parseInt(boil, 10)) {
       return false;
-    } else return true;
+    }
+    else return true;
   }
+};
+
+export const disableTimeInput = (boil: string | undefined, hopStand: boolean) => {
+  if (hopStand === false) {
+    if(boil === undefined) {
+      return true
+    }
+    if (boil !== undefined) {
+      if (parseFloat(boil) <= 200 && parseFloat(boil) >=0) {
+        return false;
+      } else return true;
+    }
+  } else return false
 };
 
 export const timeHopValidations = (time: string | undefined) => {
@@ -118,16 +132,15 @@ export const ibuValidations = (
   IBU: number | undefined
 ) => {
   if (error === true) {
-    return "Введите корректные данные";
+    return 0;
   }
   if ( error === undefined) {
-    return "Введите данные";
+    return 0;
   }
   if (error === false ) {
-    return IBU
+    return IBU;
   }
 };
-
 
 export const helperTextValidations = (error: boolean | undefined, value: string | undefined, errorText:string, validText:string, initialText:string) => {
   if (error === true) {
@@ -139,4 +152,4 @@ export const helperTextValidations = (error: boolean | undefined, value: string 
   if (value === undefined && error === false || value === '0' || value === '') {
     return initialText;
   }
-}
+};

@@ -31,10 +31,12 @@ const initialState:State =  {
   wort:{destinyType:'plato', volumeValidation:undefined, destinyValidation:undefined, 
   volume:'1000', 
   destiny: '14',
-   boil:'60',
+  //  boil:'60',
 },
       hopBoil: [{}] ,
-      hopStand: [{nameHop:'Lemondrop', id: 2, alpha:'17',amount:'3100', time:'40'}],
+      hopStand: [{nameHop:'Lemondrop', id: 2, alpha:'17',amount:'3100', 
+      time:'40'
+    }],
       IBU: {ibu:'', ibuHopBoil:'', ibuHopStand:''}
 }
 
