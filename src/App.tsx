@@ -1,7 +1,6 @@
 import * as React from "react";
 import { BrowserRouter } from "react-router-dom";
 //MUI
-import Box from "@mui/material/Box";
 import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { PaletteMode } from "@mui/material";

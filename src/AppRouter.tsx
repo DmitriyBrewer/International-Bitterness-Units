@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route, Navigate   } from "react-router-dom";
-import CalculatorIBU from "./pages/CalculatorIBU/CalculatorIBU";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Main from "./pages/Main";
@@ -15,7 +14,7 @@ import CalcTestVersion from "./pages/TestCalc/CalcTestVersion";
 function AppRouter() {
   return (
     <Routes>
-      <Route path="/calc" element={<CalculatorIBU />} />
+      <Route path="/calc" element={<CalcTestVersion />} />
       <Route path="/login" element={<Login />}/>
       <Route path="/main" element={<Main />}/>
       <Route path="/about" element={<About />}/>
@@ -26,7 +25,7 @@ function AppRouter() {
         element={<Navigate to="/calc" />}
     /> */}
       <Route path="/signup" element={<Registration />} />
-      <Route path="/*" element={<CalculatorIBU />} />
+      <Route path="/*" element={<CalcTestVersion />} />
     </Routes>
   );
 }

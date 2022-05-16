@@ -166,6 +166,7 @@ export const textHopIBU = (volume:string|undefined, destiny:string|undefined, bo
   if(Error === true) {
     return '⛔'
   }
+  // else return 'Введите параметры'
   else return 'Введите параметры'
 };    
 

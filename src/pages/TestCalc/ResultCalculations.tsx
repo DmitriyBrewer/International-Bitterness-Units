@@ -26,7 +26,7 @@ const ResultCalculations = () => {
 
     caclHopStand:Hop.hopStand.reduce((prev: any, curr: any) => prev + curr.ibu, 0)
   };
-  
+
   React.useMemo(()=>{
       dispatch(HOP.actions.reduceIBU(reduceIBU))
   },[reduceIBU]);
@@ -35,7 +35,7 @@ const ResultCalculations = () => {
   const validPharamBoil = (Hop.IBU.ibuHopBoil > 0 ? false : true) || false
   const validPharamHopstand = (Hop.IBU.ibuHopStand > 0 ? false : true) || false
 
-  const ibu = reduceIBU.calcIbu>0? reduceIBU.calcIbu:"✍️...Ввод параметров"
+  const ibu = reduceIBU.calcIbu > 0 ? reduceIBU.calcIbu : "✍️...Ввод параметров"
 
   const visionResult = () =>{
     if(Hop.hopBoil.length>0) {

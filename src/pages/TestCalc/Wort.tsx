@@ -47,12 +47,17 @@ const Wort = () => {
   React.useMemo(() => {
     if(pharam.destinyValidation === false) {
       if (pharam.destinyType === 'sg') {
+        if (pharam.destiny!== undefined) {
         setPharam({ ...pharam, destiny: toSG(pharam.destiny) });
+        }
       }
       if (pharam.destinyType === 'plato') {
-        setPharam({ ...pharam, destiny: toPlato(pharam.destiny) });
+        if (pharam.destiny!== undefined) {
+          setPharam({ ...pharam, destiny: toPlato(pharam.destiny) });
+        }
       }
-    } else setPharam({ ...pharam, destiny: pharam.destiny });
+    }  
+    else setPharam({ ...pharam, destiny: pharam.destiny });
     
   }, [pharam.destinyType]);
 
