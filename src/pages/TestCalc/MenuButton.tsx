@@ -51,7 +51,6 @@ export const MenuButton: React.FC<IMenuButton> = ({validWort}) => {
       <Tooltip title="Выбрать хмель">
       <span>
       <Button
-      // disabled={validWort===undefined? true : validWort}
       disabled={validWort}
         variant="contained"
         id="basic-button"

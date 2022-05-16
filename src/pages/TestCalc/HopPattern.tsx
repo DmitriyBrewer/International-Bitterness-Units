@@ -20,9 +20,10 @@ import {
     timeHopValidations,
     temperatureValidations,
     ibuValidations,
-    disableTimeInput
+    textHopIBU,
+    disableTimeInput,
+    helperTextHop
   } from "./ValidationPharam";
-import { AnyAsyncThunk } from "@reduxjs/toolkit/dist/matchers";
 
 interface IHop {
     hopElement: {
@@ -48,7 +49,7 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
     //Redux
   
     const [pharam, setPharam] = React.useState(hopElement);
-    console.log(pharam);
+    // console.log(pharam);
     console.log(Hop);
     
     const hopIBU = Calc(
@@ -62,26 +63,32 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
     );
     
     const allValidation =
-      pharam.alphaValidation &&
-      pharam.amountValidation &&
-      pharam.timeValidation &&
-      Hop.wort.volumeValidation &&
-      Hop.wort.destinyValidation &&
+      pharam.alphaValidation ||
+      pharam.amountValidation ||
+      pharam.timeValidation ||
+      Hop.wort.volumeValidation ||
+      Hop.wort.destinyValidation ||
       Hop.wort.boilValidation;
       
     const ibuValidation = ibuValidations(allValidation, hopIBU);
 
-    const disableTimeInputHopBoil = disableTimeInput(Hop.wort.boil, hopStand)
+    const disableTimeInputHopBoil = disableTimeInput(Hop.wort.boil, hopStand);
+
+    const textHopsIBU = textHopIBU(Hop.wort.volume, Hop.wort.destiny, Hop.wort.boil, pharam.alpha, pharam.amount, pharam.time, pharam.hopStand, hopIBU, allValidation, pharam.hopStandValidation);
   
     React.useMemo(() => {
         if(hopStand === true) {
-      setTimeout(() => {
+
         dispatch(HOP.actions.getPharamHopStand(pharam));
-      }, 0);
+
     } if(hopStand === false) {
         dispatch(HOP.actions.getPharamHopBoil(pharam));
     }
     }, [pharam]);
+
+    React.useMemo(() => {
+     setPharam({...pharam, ibu:hopIBU})
+  }, [hopIBU]);
   
     function handleChange(e: any) {
       const { name, value } = e.target;
@@ -110,7 +117,7 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
     };
   
     const ValidationAlpha = () => {
-      setPharam({ ...pharam, alphaValidation: alphaValidations(pharam.alpha), ibu: ibuValidation });
+      setPharam({ ...pharam, alphaValidation: alphaValidations(pharam.alpha)});
     };
   
     const ValidationAmount = () => {
@@ -124,7 +131,6 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
         if(hopStand === true) {
       setPharam({ ...pharam, timeValidation: timeHopValidations(pharam.time) });
         } else setPharam({ ...pharam, timeValidation: timeValidations(pharam.time, Hop.wort.boil) });
-
     };
   
     const ValidationHopStand = () => {
@@ -136,41 +142,13 @@ export const HopPattern: React.FC<IHop> = ({ hopElement,hopStand }) => {
 
     const nameTypeHop = !hopStand? 'варку':'вирпул'
 
-    const helperTextHop = {
-      name:{
-        initialText:'',
-        errorText:'',
-        validText:''
-      },
-      alpha:{
-        initialText:'Введите от 0.1 до ∞',
-        errorText:'❌ от 0.1 до ∞',
-        validText:'✅ Верное значение'
-      },
-      amount:{
-        initialText:'Введите от 0 до ∞',
-        errorText:'❌ от 0 до ∞',
-        validText:'✅ Верное значение'
-      },
-      time:{
-        initialText:'⚠️ от 0 до Время кипячения',
-        errorText:'❌ от 0 до Время кипячения',
-        validText:'✅ Верное значение'
-      },
-      hopStand:{
-        initialText:'от 0 до 100, м',
-        errorText:'❌ от 0 до 100, м',
-        validText:'✅ Верное значение'
-      },
-    }
-
     return (
       <React.Fragment>
         <AccordionComponent
         subtitle='Параметры хмеля'
         title={(
           <Typography>
-            Хмель на {nameTypeHop} {pharam.nameHop} IBU: {hopIBU}
+            Хмель на {nameTypeHop} {pharam.nameHop} IBU: {textHopsIBU}
           </Typography>
         )}
         sliderAmount={pharam.amount}

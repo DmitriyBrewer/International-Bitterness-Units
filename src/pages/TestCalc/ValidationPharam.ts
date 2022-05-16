@@ -135,12 +135,40 @@ export const ibuValidations = (
     return 0;
   }
   if ( error === undefined) {
-    return 0;
+    return IBU;
   }
   if (error === false ) {
     return IBU;
   }
 };
+
+export const textHopIBU = (volume:string|undefined, destiny:string|undefined, boil:string|undefined, alpha:string|undefined, amount:string|undefined, time:string|undefined,hopStand:string|undefined, IBU:number|string, Error:boolean|undefined, hopStandError: boolean|undefined  ) => {
+  if (hopStandError) {
+    if (volume && destiny && boil && alpha && amount && time && hopStand) {
+      if(Error||hopStandError === true) {
+        return '⛔'
+      }
+      return IBU
+    }
+    if(Error||hopStandError === true) {
+      // return 'Введите корректные параметры'
+      return '⛔'
+    }
+    else return 'Введите параметры'
+  }
+
+  if (volume && destiny && boil && alpha && amount && time) {
+    if(Error === true) {
+      return '⛔'
+    }
+    return IBU
+  }
+  if(Error === true) {
+    return '⛔'
+  }
+  else return 'Введите параметры'
+};    
+
 
 export const helperTextValidations = (error: boolean | undefined, value: string | undefined, errorText:string, validText:string, initialText:string) => {
   if (error === true) {
@@ -152,4 +180,55 @@ export const helperTextValidations = (error: boolean | undefined, value: string 
   if (value === undefined && error === false || value === '0' || value === '') {
     return initialText;
   }
+};
+
+export const helperTextWort = {
+  volume:{
+    initialText:'Объём от 0 до 100 000, л',
+    errorText:'❌ Объём от 0 до 100 000, л',
+    validText:'✅ Верное значение'
+  },
+  destinyPlato:{
+    initialText:"Введите Plato от 0.5 до 40",
+    errorText:"❌ Plato от 0.5 до 40",
+    validText:"✅ Верное значение"
+  },
+  destinySG:{
+    initialText:"Введите SG от 1.002 до 1.179",
+    errorText:'❌ SG от 1.002 до 1.179',
+    validText:"✅ Верное значение"
+  },
+  boil:{
+    initialText:'Кипячение от 0 до 200 мин',
+    errorText:'❌ Кипячение от 0 до 200 мин',
+    validText:'✅ Верное значение'
+  },
+};
+
+export const helperTextHop = {
+  name:{
+    initialText:'',
+    errorText:'',
+    validText:''
+  },
+  alpha:{
+    initialText:'Введите от 0.1 до ∞',
+    errorText:'❌ от 0.1 до ∞',
+    validText:'✅ Верное значение'
+  },
+  amount:{
+    initialText:'Введите от 0 до ∞',
+    errorText:'❌ от 0 до ∞',
+    validText:'✅ Верное значение'
+  },
+  time:{
+    initialText:'⚠️ от 0 до Время кипячения',
+    errorText:'❌ от 0 до Время кипячения',
+    validText:'✅ Верное значение'
+  },
+  hopStand:{
+    initialText:'от 0 до 100, м',
+    errorText:'❌ от 0 до 100, м',
+    validText:'✅ Верное значение'
+  },
 };

@@ -3,7 +3,7 @@ import PharamInput from "./PharamInput";
 
 import { toSG } from "../CalculatorIBU/CalcFunc";
 import { toPlato } from "../CalculatorIBU/CalcFunc";
-import {destinyValidations,volumeValidations,boilValidations,wortValidations} from "./ValidationPharam";
+import {destinyValidations,volumeValidations,boilValidations,wortValidations,helperTextWort} from "./ValidationPharam";
 import RadioButtonsGroup from "./RadioButtonGroup";
 import {MenuButton} from "./MenuButton";
 
@@ -44,6 +44,18 @@ const Wort = () => {
     }, 0);
   }, [pharam]);
 
+  React.useMemo(() => {
+    if(pharam.destinyValidation === false) {
+      if (pharam.destinyType === 'sg') {
+        setPharam({ ...pharam, destiny: toSG(pharam.destiny) });
+      }
+      if (pharam.destinyType === 'plato') {
+        setPharam({ ...pharam, destiny: toPlato(pharam.destiny) });
+      }
+    } else setPharam({ ...pharam, destiny: pharam.destiny });
+    
+  }, [pharam.destinyType]);
+
   function handleChange(e: any) {
     const { name, value } = e.target;
     setPharam((prevState: any) => {
@@ -52,8 +64,9 @@ const Wort = () => {
   }
 
   const radioHandler = (event: any) => {
-    setPharam({ ...pharam, destinyType: event.target.value });
+      setPharam({ ...pharam, destinyType: event.target.value });
   };
+  
   const ValidationVolume = () => {
     setPharam({
       ...pharam,
@@ -74,26 +87,12 @@ const Wort = () => {
 
   const wortValidation = wortValidations(pharam.volumeValidation,pharam.destinyValidation,pharam.boilValidation, pharam.volume, pharam.destiny, pharam.boil)
 
+  const helperTextDestiny = pharam.destinyType === 'plato' ? helperTextWort.destinyPlato : helperTextWort.destinySG
+  const valueDestiny = pharam.destinyType === 'plato' ? pharam.destiny : toSG(pharam.destiny)
 
-  const helperTextWort = {
-    volume:{
-      initialText:'Объём от 0 до 100 000, л',
-      errorText:'❌ Объём от 0 до 100 000, л',
-      validText:'✅ Верное значение'
-    },
-    destiny:{
-      initialText:pharam.destinyType==='plato'?"Введите Plato от 0.5 до 40":"Введите SG от 1.002 до 1.179",
-      errorText:pharam.destinyType==='plato'?"❌ Plato от 0.5 до 40":'❌ SG от 1.002 до 1.179',
-      validText:pharam.destinyType==='plato'?"✅ Верное значение":"✅ Верное значение"
-    },
-    boil:{
-      initialText:'Кипячение от 0 до 200 мин',
-      errorText:'❌ Кипячение от 0 до 200 мин',
-      validText:'✅ Верное значение'
-    },
-  }
+  console.log(pharam);
+  
     
-
   return (
     <React.Fragment>
       <Grid item>
@@ -149,7 +148,7 @@ const Wort = () => {
               onChange={handleChange}
               onBlur={ValidationDestiny}
               validation={pharam.destinyValidation}
-              helperText ={helperTextWort.destiny}
+              helperText ={helperTextDestiny}
             />
           </Stack>
           <Stack>

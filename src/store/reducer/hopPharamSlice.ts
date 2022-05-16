@@ -30,13 +30,21 @@ const initialState:State =  {
   // wort:{volume:'', destiny: '14', boil:'60', destinyType:'plato', volumeValidation: undefined, destinyValidation: undefined, boilValidation: undefined},
   wort:{destinyType:'plato', volumeValidation:undefined, destinyValidation:undefined, 
   volume:'1000', 
-  destiny: '14',
-  //  boil:'60',
+  destiny: '12',
+   boil:'60',
 },
-      hopBoil: [{}] ,
-      hopStand: [{nameHop:'Lemondrop', id: 2, alpha:'17',amount:'3100', 
-      time:'40'
-    }],
+      hopBoil: [
+        {
+          nameHop:'cascade', id: 2, alpha:'17',amount:'3100', 
+        // time:'40'
+      }
+      ] ,
+      hopStand: [
+        {
+          nameHop:'Lemondrop', id: 2, alpha:'17',amount:'3100', 
+      // time:'40', hopStand:'20'
+    }
+  ],
       IBU: {ibu:'', ibuHopBoil:'', ibuHopStand:''}
 }
 
@@ -52,8 +60,6 @@ const HOP = createSlice({
       let time= '25'
       state.hopBoil.push({
         nameHop:name, id: action.payload , amount: amount, alpha:'12'
-        // nameHop:name, id: action.payload, alpha:alpha, amount:amount, time:time, alphaValidation: undefined, 
-      // ibu: Calc(name, alpha, amount, time, state.wort.volume, state.wort.destiny, state.wort.boil)
     });
       },
 

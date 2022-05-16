@@ -29,7 +29,6 @@ const HopSetting: React.FC<IProps> = ({value, onChange}) => {
   const handleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
-  console.log(checked);
   
   //checked
   const handleClickOpen = () => {

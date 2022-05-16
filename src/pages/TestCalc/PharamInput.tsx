@@ -14,7 +14,6 @@ interface IProps {
   labelProps?: any;
   helperText?:any;
   disable?: boolean;
-  
 }
 
 const PharamInput: React.FC<IProps> = ({
@@ -30,13 +29,12 @@ const PharamInput: React.FC<IProps> = ({
   disable,
   helperText
 }) => {
-  const errorHelperText =  helperText? helperText.errorText:'x'
-  const validHelperText =  helperText? helperText.validText:'x'
-  const initialHelperText =  helperText? helperText.initialText:'x'
+  const errorHelperText =  helperText? helperText.errorText:''
+  const validHelperText =  helperText? helperText.validText:''
+  const initialHelperText =  helperText? helperText.initialText:''
 
   const helpText = helperTextValidations(validation, value, errorHelperText, validHelperText, initialHelperText)
   
-
   return (
     <React.Fragment>
       <TextField
@@ -54,7 +52,6 @@ const PharamInput: React.FC<IProps> = ({
         helperText={helpText}
         required={requireds === false? requireds : true}
         InputLabelProps={{shrink: labelProps}}
-        // disabled={disable? disable : false}
         disabled={disable}
       />
     </React.Fragment>
