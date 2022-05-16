@@ -28,22 +28,26 @@ interface State {
 
 const initialState:State =  {
   // wort:{volume:'', destiny: '14', boil:'60', destinyType:'plato', volumeValidation: undefined, destinyValidation: undefined, boilValidation: undefined},
-  wort:{destinyType:'sg', volumeValidation:undefined, destinyValidation:undefined, 
-  volume:'1000', 
+  wort:{
+  destinyType:'plato', 
+  volumeValidation:undefined, 
+  destinyValidation:undefined,
+  boilValidation:undefined
+  // volume:'1000', 
   // destiny: '12',
-   boil:'60',
+  //  boil:'60',
 },
       hopBoil: [
-        {
-          nameHop:'cascade', id: 2, alpha:'17',amount:'3100', 
-        // time:'40'
-      }
+      //   {
+      //     nameHop:'cascade', id: 2, alpha:'17',amount:'3100', 
+      //   // time:'40'
+      // }
       ] ,
       hopStand: [
-        {
-          nameHop:'Lemondrop', id: 2, alpha:'17',amount:'3100', 
-      // time:'40', hopStand:'20'
-    }
+    //     {
+    //       nameHop:'Lemondrop', id: 2, alpha:'17',amount:'3100', 
+    //   // time:'40', hopStand:'20'
+    // }
   ],
       IBU: {ibu:'', ibuHopBoil:'', ibuHopStand:''}
 }

@@ -15,16 +15,16 @@ function AppRouter() {
   return (
     <Routes>
       <Route path="/calc" element={<CalcTestVersion />} />
-      <Route path="/login" element={<Login />}/>
-      <Route path="/main" element={<Main />}/>
+      {/* <Route path="/login" element={<Login />}/> */}
+      {/* <Route path="/main" element={<Main />}/> */}
       <Route path="/about" element={<About />}/>
-      <Route path="/test" element={<CalcTestVersion />}/>
+      {/* <Route path="/test" element={<CalcTestVersion />}/> */}
 
       {/* <Route
         path="/lala"
         element={<Navigate to="/calc" />}
     /> */}
-      <Route path="/signup" element={<Registration />} />
+      {/* <Route path="/signup" element={<Registration />} /> */}
       <Route path="/*" element={<CalcTestVersion />} />
     </Routes>
   );
